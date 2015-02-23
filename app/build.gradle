@@ -1,14 +1,36 @@
 group = "com.krischik"
 version = "1.0"
 
+buildscript {
+   repositories {
+      mavenCentral ()
+   }
+   dependencies {
+      classpath (
+         [group: 'com.android.tools.build', name: 'gradle', version: '1.0.0'],
+         [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.4'],
+         [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
+         [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: '0.10.195']
+      )
+   }
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'kotlin-android'
+
+repositories {
+   mavenCentral ()
+   mavenLocal ()
+}
 
 android {
    compileSdkVersion 21
    buildToolsVersion "20.0.0"
 
    defaultConfig {
-      applicationId "com.krischk.fit_import"
+      applicationId "com.krischik.fit_import"
       minSdkVersion 15
       targetSdkVersion 21
       versionCode 1
@@ -20,6 +42,9 @@ android {
          proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'proguard-rules.pro'
       }
    }
+   sourceSets {
+      main.java.srcDirs += 'src/main/kotlin'
+   }
    compileOptions {
       sourceCompatibility JavaVersion.VERSION_1_7
       targetCompatibility JavaVersion.VERSION_1_7
@@ -27,5 +52,30 @@ android {
 }
 
 dependencies {
-   compile 'com.android.support:appcompat-v7:21.0.3'
+   apt (
+      [group: 'org.androidannotations', name: 'androidannotations', version: '3.2']
+   )
+   compile (
+      project(':lib'),
+      [group: 'com.android.support', name: 'appcompat-v7', version: '21.0.3'],
+      [group: 'com.android.support', name: 'support-v4', version: '21.0.3'],
+      [group: 'org.androidannotations', name: 'androidannotations-api', version: '3.2'],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '0.10.195']
+   )
+}
+
+apt {
+   arguments {
+      androidManifestFile variant.outputs [0].processResources.manifestFile
+      // if you have multiple outputs (when using splits), you may want to have other index than 0
+
+      resourcePackageName 'com.krischik.fit_import'
+
+      // If you're using Android NBS flavors you should use the following line instead of hard-coded packageName
+      // resourcePackageName android.defaultConfig.packageName
+
+      // You can set optional annotation processing options here, like these commented options:
+      // logLevel 'INFO'
+      // logFile '/var/log/aa.log'
+   }
 }

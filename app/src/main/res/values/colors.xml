@@ -16,8 +16,11 @@
  –  You should have received a copy of the GNU General Public License
  –  along with this program.  If not, see http://www.gnu.org/licenses/
  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
-<resources>
-  <!-- Default screen margins, per the Android Design guidelines. -->
-  <dimen name = "activity_horizontal_margin">16dp</dimen>
-  <dimen name = "activity_vertical_margin">16dp</dimen>
+<resources xmlns:tools='http://schemas.android.com/tools'>
+  <color name='Background_Light'>#ffffbf80</color>
+  <color name='Primary'>#ffe91e63</color>
+  <color name='Primary_Dark'>#ffc2185b</color>
+  <color name='Accent'>#ff00bfa5</color>
 </resources>
+<!-- vim: set nowrap tabstop=8 shiftwidth=2 softtabstop=2 expandtab textwidth=96  :-->
+<!-- vim: set fileencoding=utf-8 filetype=xml foldmethod=marker spell spelllang=en_gb :-->

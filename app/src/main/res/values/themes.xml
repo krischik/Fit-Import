@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!-- ––––––––––––––––––––––––––––––––––––––––––––––––––––––– {{{1 ––––––––––
  –  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
  –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -17,7 +16,26 @@
  –  along with this program.  If not, see http://www.gnu.org/licenses/
  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
 <resources>
-  <!-- Default screen margins, per the Android Design guidelines. -->
-  <dimen name = "activity_horizontal_margin">16dp</dimen>
-  <dimen name = "activity_vertical_margin">16dp</dimen>
+  <style
+    name='MainStyle'
+    parent='Theme.AppCompat.Light.DarkActionBar'
+  >
+    <item
+      name='windowActionBar'
+    >true</item>
+    <item
+      name='colorPrimary'
+    >@color/Primary</item>
+    <item
+      name='colorPrimaryDark'
+    >@color/Primary_Dark</item>
+    <item
+      name='colorAccent'
+    >@color/Accent</item>
+    <item
+      name='android:windowBackground'
+    >@color/Background_Light</item>
+  </style>
 </resources>
+<!-- vim: set nowrap tabstop=8 shiftwidth=2 softtabstop=2 expandtab :-->
+<!-- vim: set textwidth=0 filetype=xml foldmethod=marker nospell :-->
