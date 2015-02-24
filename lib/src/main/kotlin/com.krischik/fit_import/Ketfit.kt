@@ -15,11 +15,11 @@ package com.krischik.fit_import
  */
 
 data class Ketfit(
-        val Datum: java.util.Date,
-        val Dauer: Int,
+        val Start: java.util.Date,
+        val End: java.util.Date,
         val Watt: Int,
         val Puls: Int,
-        val umin: Int,
-        val kcal: Int,
+        val Umin: Int,
+        val kCal: Int,
         val km: Int,
         val ω: Int)

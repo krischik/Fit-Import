@@ -86,6 +86,7 @@ dependencies {
       project (':lib'),
       [group: 'com.android.support', name: 'appcompat-v7', version: androidsupport_version],
       [group: 'com.android.support', name: 'support-v4', version: androidsupport_version],
+      [group: 'com.google.android.gms', name:'play-services', version:'6.1.+'],
       [group: 'org.androidannotations', name: 'androidannotations-api', version: androidannotations_version],
       [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version]
    )

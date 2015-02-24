@@ -18,6 +18,9 @@ package com.krischik.fit_import
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsNull.notNullValue
+import org.hamcrest.core.IsEqual.equalTo
+import org.exparity.hamcrest.date.IsSameInstant.sameInstant
+import org.exparity.hamcrest.date.Months
 
 /**
  * <p>
@@ -63,8 +66,17 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
                 val info = test.read();
 
                 test.close ()
+
                 it ("should return the expexed value") {
                     assertThat(info, notNullValue())
+                    assertThat(info.Start, sameInstant (2014, Months.FEBRUARY, 2, 18, 42, 11, 0))
+                    assertThat(info.End, sameInstant (2014, Months.FEBRUARY, 2, 19, 22, 0, 0))
+                    assertThat(info.Watt, equalTo(88))
+                    assertThat(info.Puls, equalTo(118))
+                    assertThat(info.Umin, equalTo(48))
+                    assertThat(info.kCal, equalTo(294))
+                    assertThat(info.km, equalTo(6))
+                    assertThat(info.ω, equalTo(0))
                 } // if
             } // on
         } // given
