@@ -27,6 +27,7 @@ proguard/
 *.log
 
 #vim
+.DS_Store
 .backups/
 *.swp
 .idea/

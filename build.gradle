@@ -1,6 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+group = "com.krischik"
+version = "1.0.0"
+description = "Import KetFit and Withings exports into Google Fit"
 
 buildscript {
+   ext.kotlin_version = '0.10.770'
+   ext.androidannotations_version = '3.2'
+   ext.androidsupport_version = '21.0.3'
+
    repositories {
       jcenter ()
    }
@@ -17,3 +24,4 @@ allprojects {
       jcenter ()
    }
 }
+

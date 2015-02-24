@@ -1,5 +1,6 @@
 group = "com.krischik"
-version = "1.0"
+version = "1.0.0"
+description = "Import KetFit and Withings exports into Google Fit — Android App"
 
 buildscript {
    repositories {
@@ -10,14 +11,14 @@ buildscript {
          [group: 'com.android.tools.build', name: 'gradle', version: '1.0.0'],
          [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.4'],
          [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
-         [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: '0.10.195']
+         [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version]
       )
    }
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'android-apt'
 apply plugin: 'kotlin-android'
 
 repositories {
@@ -29,15 +30,41 @@ android {
    compileSdkVersion 21
    buildToolsVersion "20.0.0"
 
+   applicationVariants.all { variant ->
+      variant.outputs.each { output ->
+         def name = output.outputFile.name
+            .replace (".apk", "-${variant.versionName}.apk")
+            .replace (project.name, "Fit-Import")
+
+         output.outputFile = new File (output.outputFile.parent, name)
+      }
+   }
+
+   signingConfigs {
+      debug {
+         storeFile file (System.getenv ("KEY_STORE"))
+         storePassword System.getenv ("KEY_STOREPASS")
+         keyAlias System.getenv ("KEY_ALIAS")
+         keyPassword System.getenv ("KEY_KEYPASS")
+      }
+      release {
+         storeFile file (System.getenv ("KEY_STORE"))
+         storePassword System.getenv ("KEY_STOREPASS")
+         keyAlias System.getenv ("KEY_ALIAS")
+         keyPassword System.getenv ("KEY_KEYPASS")
+      }
+   }
+
    defaultConfig {
       applicationId "com.krischik.fit_import"
       minSdkVersion 15
       targetSdkVersion 21
-      versionCode 1
-      versionName "1.0"
+      versionCode 10000
+      versionName "1.0.0"
    }
    buildTypes {
       release {
+         signingConfig signingConfigs.release
          minifyEnabled false
          proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'proguard-rules.pro'
       }
@@ -53,14 +80,14 @@ android {
 
 dependencies {
    apt (
-      [group: 'org.androidannotations', name: 'androidannotations', version: '3.2']
+      [group: 'org.androidannotations', name: 'androidannotations', version: androidannotations_version]
    )
    compile (
-      project(':lib'),
-      [group: 'com.android.support', name: 'appcompat-v7', version: '21.0.3'],
-      [group: 'com.android.support', name: 'support-v4', version: '21.0.3'],
-      [group: 'org.androidannotations', name: 'androidannotations-api', version: '3.2'],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '0.10.195']
+      project (':lib'),
+      [group: 'com.android.support', name: 'appcompat-v7', version: androidsupport_version],
+      [group: 'com.android.support', name: 'support-v4', version: androidsupport_version],
+      [group: 'org.androidannotations', name: 'androidannotations-api', version: androidannotations_version],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version]
    )
 }
 

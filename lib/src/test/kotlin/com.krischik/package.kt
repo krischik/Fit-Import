@@ -14,32 +14,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  ********************************************************** }}}1 **********/
-
-package com.krischik.fit_import;
+package com.krischik.fit_import
 
 /**
- * <p> </p>
- * <p/>
- * ${tags}
- *
- * @author martin
- * @version 1.0
- * @since 1.0
+ * initialize the logger framework. Do not use on Android as you won't have logging.properties there.
  */
-@org.androidannotations.annotations.EApplication
-public class Application
-   extends android.app.Application
+fun Init_Logger()
 {
-   /**
-    * <p> TAG as class name for logging </p>
-    */
-   private final static String TAG;
+    java.io.File (" build/test-results").mkdirs()
 
-   static
-   {
-      TAG = Application.class.getName ();
-   } // static
-} // Application
+    val manager = java.util.logging.LogManager.getLogManager ()
+    val properties = javaClass<ReadKetfit_Test>() getResourceAsStream "/logging.properties"
+
+    // Read log properties so that the class which we test can write to a log
+    // file
+    manager readConfiguration properties
+} // Init_Logger
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
-// vim: set fileencoding=utf-8 filetype=java foldmethod=syntax spell spelllang=en_gb :
+// vim: set fileencoding=utf-8 filetype=kotlin foldmethod=syntax spell spelllang=en_gb :

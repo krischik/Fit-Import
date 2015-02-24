@@ -34,8 +34,6 @@ public class MainActivity
    @org.androidannotations.annotations.AfterViews
    public void afterViews ()
    {
-      final ReadKetfit test = new ReadKetfit (new java.io.File ("Test"));
-
       return;
    }
 } // MainActivity
