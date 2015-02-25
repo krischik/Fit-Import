@@ -17,19 +17,25 @@
 package com.krischik.fit_import
 
 /**
- * initialize the logger framework. Do not use on Android as you won't have logging.properties there.
+ * <p>
+ * </p>
+ *
+ * <pre>
+ * "Date","Gewicht (kg)","Fettmasse (kg)","Fettfreier Anteil (kg)","Kommentare"
+ * "2014-02-13 6:04 Uhr","94.34","26.81","68.43",""
+ * "2014-02-12 6:09 Uhr","94.89","27.43","67.36",""
+ * </pre>
+ * @author martin
+ * @version 1.0
+ * @since 1.0
  */
-fun Init_Logger()
-{
-    java.io.File (" build/test-results").mkdirs()
 
-    val manager = java.util.logging.LogManager.getLogManager ()
-    val properties = javaClass<ReadKetfit_Test>() getResourceAsStream "/logging.properties"
+data class Withings(
+   val Time: java.util.Date,
+   val Weight: Float,
+   val Fat: Float,
+   val No_Fat: Float,
+   val Comment: String)
 
-    // Read log properties so that the class which we test can write to a log
-    // file
-    manager readConfiguration properties
-} // Init_Logger
-
-// vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
-// vim: set fileencoding=utf-8 filetype=kotlin foldmethod=marker spell spelllang=en_gb :
+// vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
+// vim: set textwidth=0 filetype=kotlin foldmethod=marker spell spelllang=en_gb :

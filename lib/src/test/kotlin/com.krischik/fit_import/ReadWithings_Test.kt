@@ -16,29 +16,28 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsNull.notNullValue
+import org.hamcrest.number.IsCloseTo.closeTo
+import org.hamcrest.core.IsEqual.equalTo
 import org.exparity.hamcrest.date.IsSameInstant.sameInstant
 import org.exparity.hamcrest.date.Months
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.beans.HasPropertyWithValue.hasProperty
-import org.hamcrest.core.AllOf.allOf
-import org.hamcrest.core.IsEqual.equalTo
-import org.hamcrest.core.IsNull.notNullValue
 
 /**
  * <p>
- *     Read ketfit file.
+ *     Read ketfit file.:
  * </p>
  *
  * @author martin
  * @version 1.0
  * @since 1.0
  */
-public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
+public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
 {
    /**
     * <p>logging tag</p>
     */
-   private val TAG = javaClass<ReadKetfit_Test>().getName ()
+   private val TAG = javaClass<ReadWithings_Test>().getName ()
    /**
     * <p>logger</p>
     */
@@ -48,10 +47,10 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
       Init_Logger ()
 
       given ("a stream with header") {
-	 val testData = javaClass<ReadKetfit_Test>() getResourceAsStream "/kettfit.csv"
+	 val testData = javaClass<ReadWithings_Test>() getResourceAsStream "/Withings.csv"
 
 	 on ("opening and closing the file") {
-	    val test = ReadKetfit (testData)
+	    val test = ReadWithings (testData)
 
 	    test.close ()
 	    it ("should cause no error") {
@@ -60,30 +59,37 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
       } // given
 
       given ("a stream with test data") {
-	 val testData = javaClass<ReadKetfit_Test>() getResourceAsStream "/kettfit.csv"
+	 val testData = javaClass<ReadWithings_Test>() getResourceAsStream "/Withings.csv"
+	 val test = ReadWithings (testData)
 
-	 on ("reading first data") {
-	    val test = ReadKetfit (testData)
-
+	 on ("reading 1st data") {
 	    val info = test.read();
-
-	    test.close ()
 
 	    it ("should return the expexed value") {
 	       assertThat(info, notNullValue())
-	       assertThat(info.Start, sameInstant (2014, Months.FEBRUARY, 2, 18, 42, 0, 0))
-	       assertThat(info.End, sameInstant (2014, Months.FEBRUARY, 2, 19, 22, 0, 0))
-	       assertThat(info.Watt, equalTo(88))
-	       assertThat(info.Puls, equalTo(118))
-	       assertThat(info.Umin, equalTo(48))
-	       assertThat(info.kCal, equalTo(294))
-	       assertThat(info.km, equalTo(6))
-	       assertThat(info.ω, equalTo(0))
+	       assertThat(info.Time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
+	       assertThat(info.Weight.toDouble(), closeTo(94.34, 0.001))
+	       assertThat(info.Fat.toDouble(), closeTo(26.81, 0.001))
+	       assertThat(info.No_Fat.toDouble(), closeTo(68.43, 0.001))
+	       assertThat(info.Comment, equalTo(""))
 	    } // if
 	 } // on
+	 on ("reading 2nd data") {
+	    val info = test.read();
+
+	    it ("should return the expexed value") {
+	       assertThat(info, notNullValue())
+	       assertThat(info.Time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
+	       assertThat(info.Weight.toDouble(), closeTo(96.77, 0.001))
+	       assertThat(info.Fat.toDouble(), closeTo(0.0, 0.001))
+	       assertThat(info.No_Fat.toDouble(), closeTo(0.0, 0.001))
+	       assertThat(info.Comment, equalTo(""))
+	    } // if
+	 } // on
+	 // test.close ()
       } // given
    }
-} // ReadKetfit_Test
+} // ReadWithigns_Test
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
 // vim: set fileencoding=utf-8 filetype=kotlin foldmethod=syntax spell spelllang=en_gb :
