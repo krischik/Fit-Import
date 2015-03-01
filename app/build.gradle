@@ -13,8 +13,9 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
- ********************************************************** }}}1 **********/group = "com.krischik"
+ ********************************************************** }}}1 **********/
 
+group = "com.krischik"
 version = "1.0.0"
 description = "Import KetFit and Withings exports into Google Fit — Android App"
 
@@ -83,6 +84,9 @@ android {
          signingConfig signingConfigs.release
          minifyEnabled false
          proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'proguard-rules.pro'
+      }
+      debug {
+         signingConfig signingConfigs.debug
       }
    }
    sourceSets {

@@ -28,7 +28,7 @@ setopt Err_Exit;
 setopt No_X_Trace;
 
 "${INTELLIJ_HOME}/Contents/MacOS/idea"		    \
-    "${Workspace}"				    \
+    "${PROJECT_HOME}"				    \
     1>~/Library/Logs/${PROJECT_NAME}-${0:t:r}.out   \
     2>~/Library/Logs/${PROJECT_NAME}-${0:t:r}.err   &
 

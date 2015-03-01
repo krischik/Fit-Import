@@ -35,6 +35,13 @@ public interface IMainFragment
     */
    public abstract void doConnect (boolean connected);
 
+   /**
+    * <p>the activity</p>
+    * @return actvivity
+    */
+   public android.support.v4.app.FragmentActivity getActivity();
+
+
 } // IMainFragment
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

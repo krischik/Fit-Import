@@ -17,7 +17,6 @@
 
 package com.krischik.fit_import;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -37,12 +36,7 @@ public class MainFragment
    /**
     * <p> TAG as class name for logging </p>
     */
-   private final static String TAG;
-
-   static
-   {
-      TAG = MainFragment.class.getName ();
-   } // static
+   //private final static String TAG = MainFragment.class.getName ();
 
    /**
     * <p>Import Ketfit CVS button</p>

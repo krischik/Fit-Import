@@ -32,40 +32,6 @@ public class MainActivity
    extends android.support.v7.app.ActionBarActivity
    implements IMainFragment
 {
-   private static class Connect_To_Google
-      implements com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks
-   {
-      @hugo.weaving.DebugLog
-      @Override
-      public void onConnected (android.os.Bundle bundle)
-      {
-         android.util.Log.i (TAG, "LOG00010: Connected to Google-Fit!");
-         // Now you can make calls to the Fitness APIs.
-         // Put application specific code here.
-
-         return;
-      }
-
-      @hugo.weaving.DebugLog
-      @Override
-      public void onConnectionSuspended (int i)
-      {
-         // If your connection to the sensor gets lost at some point,
-         // you'll be able to determine the reason and react to it here.
-         if (i == com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST)
-         {
-            android.util.Log.e (TAG, "LOG00020: Google-Fit connection lost.  Cause: Network Lost.");
-         }
-         else if (i ==
-            com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED)
-         {
-            android.util.Log.e (TAG, "LOG00030: Google-Fit Connection lost.  Reason: Service Disconnected");
-         } // if
-
-         return;
-      } // onConnectionSuspended
-   } // Connect_To_Google
-
    private class Connect_To_Google_Failed
       implements com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener
    {
@@ -143,12 +109,12 @@ public class MainActivity
       final com.google.android.gms.common.api.GoogleApiClient.Builder Google_API_Builder =
          new com.google.android.gms.common.api.GoogleApiClient.Builder (this);
       final com.google.android.gms.common.api.Scope Scope = new com.google.android.gms.common.api.Scope (
-         com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ);
+         com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ_WRITE);
 
       Google_API_Builder.addApi (com.google.android.gms.fitness.Fitness.API);
       Google_API_Builder.addScope (Scope);
       Google_API_Builder.addConnectionCallbacks (googleFit);
-      Google_API_Builder.addOnConnectionFailedListener (new Connect_To_Google_Failed ());
+      Google_API_Builder.addOnConnectionFailedListener (googleFit);
       Google_API_Client = Google_API_Builder.build ();
 
       return;
@@ -233,6 +199,16 @@ public class MainActivity
 
       return;
    } // onStart
+   /**
+    * <p>the activity</p>
+    * @return actvivity
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public android.support.v4.app.FragmentActivity getActivity()
+   {
+      return this;
+   }
 
    @hugo.weaving.DebugLog
    @Override
