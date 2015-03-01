@@ -1,4 +1,19 @@
-group = "com.krischik"
+/********************************************************** {{{1 ***********
+ *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ ***************************************************************************
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ ********************************************************** }}}1 **********/group = "com.krischik"
 version = "1.0.0"
 description = "Import KetFit and Withings exports into Google Fit — Library"
 
@@ -37,3 +52,6 @@ dependencies {
       [group: 'org.jetbrains.spek', name: 'spek', version: '0.1.145']
    )
 } // dependencies
+
+// vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
+// vim: set textwidth=0 filetype=groovy foldmethod=marker nospell :

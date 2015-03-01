@@ -16,8 +16,6 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
-import java.util.Calendar
-
 /**
  * <p>
  *     Read ketfit file.

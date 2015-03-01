@@ -1,4 +1,20 @@
-group = "com.krischik"
+/********************************************************** {{{1 ***********
+ *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ ***************************************************************************
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ ********************************************************** }}}1 **********/group = "com.krischik"
+
 version = "1.0.0"
 description = "Import KetFit and Withings exports into Google Fit — Android App"
 
@@ -28,7 +44,7 @@ repositories {
 
 android {
    compileSdkVersion 21
-   buildToolsVersion "20.0.0"
+   buildToolsVersion "21.1.2"
 
    applicationVariants.all { variant ->
       variant.outputs.each { output ->
@@ -71,6 +87,7 @@ android {
    }
    sourceSets {
       main.java.srcDirs += 'src/main/kotlin'
+      androidTest.java.srcDirs += 'src/androidTest/kotlin'
    }
    compileOptions {
       sourceCompatibility JavaVersion.VERSION_1_7
@@ -86,9 +103,13 @@ dependencies {
       project (':lib'),
       [group: 'com.android.support', name: 'appcompat-v7', version: androidsupport_version],
       [group: 'com.android.support', name: 'support-v4', version: androidsupport_version],
-      [group: 'com.google.android.gms', name:'play-services', version:'6.1.+'],
+      [group: 'com.google.android.gms', name: 'play-services', version: '6.1.+'],
       [group: 'org.androidannotations', name: 'androidannotations-api', version: androidannotations_version],
       [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version]
+   )
+   androidTestCompile (
+      [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.2.1'],
+      [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9']
    )
 }
 
@@ -107,3 +128,5 @@ apt {
       // logFile '/var/log/aa.log'
    }
 }
+// vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
+// vim: set textwidth=0 filetype=groovy foldmethod=marker nospell :

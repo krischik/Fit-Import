@@ -17,9 +17,6 @@
 
 package com.krischik.fit_import;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 /**
  * <p> </p>
  * <p/>
@@ -29,55 +26,16 @@ import org.jetbrains.annotations.Nullable;
  * @version 1.0
  * @since 1.0
  */
-@org.androidannotations.annotations.EFragment (R.layout.main_fragment)
-public class MainFragment
-   extends android.support.v4.app.Fragment
-   implements IMainFragment
+public interface IMainFragment
 {
-   /**
-    * <p> TAG as class name for logging </p>
-    */
-   private final static String TAG;
-
-   static
-   {
-      TAG = MainFragment.class.getName ();
-   } // static
-
-   /**
-    * <p>Import Ketfit CVS button</p>
-    */
-   @org.androidannotations.annotations.ViewById
-   @Nullable
-   protected android.widget.Button Ketfit_Button;
-   /**
-    * <p>Import Withings CVS button</p>
-    */
-   @org.androidannotations.annotations.ViewById
-   @Nullable
-   protected android.widget.Button Withings_Button;
-
    /**
     * <p>we are connected to Google Fit (or not);
     *
-    * @param connected
-    *    true when we are connected
+    * @param connected true when we are connected
     */
-   @hugo.weaving.DebugLog
-   @Override
-   public void doConnect (boolean connected)
-   {
-      if (Ketfit_Button != null)
-      {
-         Ketfit_Button.setEnabled (connected);
-      }
-      if (Withings_Button != null)
-      {
-         Withings_Button.setEnabled (connected);
-      }
-      return;
-   } // doConnect
-} // MainFragment
+   public abstract void doConnect (boolean connected);
+
+} // IMainFragment
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
 // vim: set fileencoding=utf-8 filetype=java foldmethod=syntax spell spelllang=en_gb :

@@ -30,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 @org.androidannotations.annotations.EActivity (R.layout.main_activity)
 public class MainActivity
    extends android.support.v7.app.ActionBarActivity
+   implements IMainFragment
 {
    private static class Connect_To_Google
       implements com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks
@@ -115,9 +116,15 @@ public class MainActivity
    private static final String AUTH_PENDING = "auth_state_pending";
    private static final int REQUEST_OAUTH = 1;
    private final static String TAG = MainActivity.class.getName ();
-   private boolean authInProgress = false;
    @Nullable
    private com.google.android.gms.common.api.GoogleApiClient Google_API_Client = null;
+   private boolean authInProgress = false;
+   /**
+    * <p> Calculator fragment </p>
+    */
+   @org.androidannotations.annotations.FragmentById
+   @Nullable
+   protected MainFragment Main_Fragment;
 
    /**
     * Build a {@link com.google.android.gms.common.api.GoogleApiClient} that will authenticate the user and allow the
@@ -131,6 +138,8 @@ public class MainActivity
    @org.androidannotations.annotations.AfterViews
    protected void buildFitnessClient ()
    {
+      final GoogleFit googleFit = new GoogleFit (this);
+
       final com.google.android.gms.common.api.GoogleApiClient.Builder Google_API_Builder =
          new com.google.android.gms.common.api.GoogleApiClient.Builder (this);
       final com.google.android.gms.common.api.Scope Scope = new com.google.android.gms.common.api.Scope (
@@ -138,12 +147,30 @@ public class MainActivity
 
       Google_API_Builder.addApi (com.google.android.gms.fitness.Fitness.API);
       Google_API_Builder.addScope (Scope);
-      Google_API_Builder.addConnectionCallbacks (new Connect_To_Google ());
+      Google_API_Builder.addConnectionCallbacks (googleFit);
       Google_API_Builder.addOnConnectionFailedListener (new Connect_To_Google_Failed ());
       Google_API_Client = Google_API_Builder.build ();
 
       return;
    } // buildFitnessClient
+
+   /**
+    * <p>we are connected to Google Fit (or not);
+    *
+    * @param connected
+    *    true when we are connected
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public void doConnect (boolean connected)
+   {
+      if (Main_Fragment != null)
+      {
+         Main_Fragment.doConnect (connected);
+      } // if
+
+      return;
+   } // doConnect
 
    @hugo.weaving.DebugLog
    @Override
@@ -196,6 +223,8 @@ public class MainActivity
       super.onStart ();
       // Connect to the Fitness API
       android.util.Log.i (TAG, "LOG00070: Connecting to Google-Fit…");
+
+      doConnect (false);
 
       if (Google_API_Client != null)
       {

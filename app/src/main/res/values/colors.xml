@@ -17,7 +17,7 @@
  –  along with this program.  If not, see http://www.gnu.org/licenses/
  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
 <resources xmlns:tools='http://schemas.android.com/tools'>
-  <color name='Background_Light'>#ffffbf80</color>
+  <color name='Background_Light'>#fff4f4f4</color>
   <color name='Primary'>#ffe91e63</color>
   <color name='Primary_Dark'>#ffc2185b</color>
   <color name='Accent'>#ff00bfa5</color>
