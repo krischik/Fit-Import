@@ -43,7 +43,6 @@ class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainAct
     */
    private var Solo: com.robotium.solo.Solo? = null
 
-
    /**
     * get the activity and the text view to test
     *
@@ -86,7 +85,6 @@ class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainAct
       android.util.Log.d (TAG, "- tearDown")
    } // tearDown
 
-
    /**
     * Test opening the main activity (smoke test / release compatible version)
     */
@@ -100,6 +98,7 @@ class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainAct
 
       android.util.Log.d (TAG, "- test_00_Open")
    } // test_00_Open
+
 }
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

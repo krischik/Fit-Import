@@ -32,93 +32,21 @@ public class MainActivity
    extends android.support.v7.app.ActionBarActivity
    implements IMainFragment
 {
-   private class Connect_To_Google_Failed
-      implements com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener
-   {
-      // Called whenever the API client fails to connect.
-      @hugo.weaving.DebugLog
-      @Override
-      public void onConnectionFailed (@NotNull com.google.android.gms.common.ConnectionResult result)
-      {
-         android.util.Log.e (TAG, "LOG00040: Connection to Google-Fit failed. Cause: " + result.toString ());
-
-         if (!result.hasResolution ())
-         {
-            // Show the localized error dialog
-            final android.app.Dialog errorDialog = com.google.android.gms.common.GooglePlayServicesUtil.getErrorDialog (
-               result.getErrorCode (),
-               com.krischik.fit_import.MainActivity.this, 0);
-            errorDialog.show ();
-         }
-         else if (!authInProgress)
-         {
-            // The failure has a resolution. Resolve it.
-            // Called typically when the app is not yet authorized, and an
-            // authorization dialog is displayed to the user.
-
-            try
-            {
-               android.util.Log.i (TAG, "LOG00050: Attempting to resolve failed connection");
-               authInProgress = true;
-               result.startResolutionForResult (MainActivity.this, REQUEST_OAUTH);
-            }
-            catch (android.content.IntentSender.SendIntentException e)
-            {
-               android.util.Log.e (
-                  TAG,
-                  "LOG00060: Exception while starting resolution activity", e);
-            } // try
-         } // if
-
-         return;
-      } // onConnectionFailed
-   } // Connect_To_Google_Failed
 
    /**
-    * Track whether an authorization activity is stacking over the current activity, i.e. when a known auth error is
-    * being resolved, such as showing the account chooser or presenting a consent dialog. This avoids common
-    * duplications as might happen on screen rotations, etc.
+    * Logging tag
     */
-   private static final String AUTH_PENDING = "auth_state_pending";
-   private static final int REQUEST_OAUTH = 1;
-   private final static String TAG = MainActivity.class.getName ();
-   @Nullable
-   private com.google.android.gms.common.api.GoogleApiClient Google_API_Client = null;
-   private boolean authInProgress = false;
+   // private final static String TAG = MainActivity.class.getName ();
+   /**
+    * <p>Google FIT Model</p>
+    */
+   protected GoogleFit googleFit;
    /**
     * <p> Calculator fragment </p>
     */
    @org.androidannotations.annotations.FragmentById
    @Nullable
    protected MainFragment Main_Fragment;
-
-   /**
-    * Build a {@link com.google.android.gms.common.api.GoogleApiClient} that will authenticate the user and allow the
-    * application to connect to Fitness APIs. The scopes included should match the scopes your app needs (see
-    * documentation for details). Authentication will occasionally fail intentionally, and in those cases, there will be
-    * a known resolution, which the OnConnectionFailedListener() can address. Examples of this include the user never
-    * having signed in before, or having multiple accounts on the device and needing to specify which account to use,
-    * etc.
-    */
-   @hugo.weaving.DebugLog
-   @org.androidannotations.annotations.AfterViews
-   protected void buildFitnessClient ()
-   {
-      final GoogleFit googleFit = new GoogleFit (this);
-
-      final com.google.android.gms.common.api.GoogleApiClient.Builder Google_API_Builder =
-         new com.google.android.gms.common.api.GoogleApiClient.Builder (this);
-      final com.google.android.gms.common.api.Scope Scope = new com.google.android.gms.common.api.Scope (
-         com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ_WRITE);
-
-      Google_API_Builder.addApi (com.google.android.gms.fitness.Fitness.API);
-      Google_API_Builder.addScope (Scope);
-      Google_API_Builder.addConnectionCallbacks (googleFit);
-      Google_API_Builder.addOnConnectionFailedListener (googleFit);
-      Google_API_Client = Google_API_Builder.build ();
-
-      return;
-   } // buildFitnessClient
 
    /**
     * <p>we are connected to Google Fit (or not);
@@ -135,25 +63,34 @@ public class MainActivity
          Main_Fragment.doConnect (connected);
       } // if
 
+      if (connected)
+      {
+         googleFit.insertWeight (new Withings (new java.util.Date (), 80.0f, 0.0f, 0.0f, ""));
+      }
+
       return;
    } // doConnect
+
+   /**
+    * <p>the activity</p>
+    *
+    * @return actvivity
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public android.support.v4.app.FragmentActivity getActivity ()
+   {
+      return this;
+   } // getActivity
 
    @hugo.weaving.DebugLog
    @Override
    protected void onActivityResult (int requestCode, int resultCode, android.content.Intent data)
    {
-      if (requestCode == REQUEST_OAUTH)
+      if (requestCode == GoogleFit.REQUEST_OAUTH)
       {
-         authInProgress = false;
-         if (resultCode == RESULT_OK)
-         {
-            // Make sure the app is not already connected or attempting to connect
-            if (Google_API_Client != null && !Google_API_Client.isConnecting () && !Google_API_Client.isConnected ())
-            {
-               Google_API_Client.connect ();
-            }
-         }
-      }
+         googleFit.doConnect (resultCode);
+      } // if
 
       return;
    } // onActivityResult
@@ -164,10 +101,11 @@ public class MainActivity
    {
       super.onCreate (savedInstanceState);
 
-      if (savedInstanceState != null)
-      {
-         authInProgress = savedInstanceState.getBoolean (AUTH_PENDING);
-      }
+      boolean authInProgress;
+
+      authInProgress = savedInstanceState != null && savedInstanceState.getBoolean (GoogleFit.AUTH_PENDING);
+
+      googleFit = new GoogleFit (this, authInProgress);
 
       return;
    } // onCreate
@@ -177,7 +115,7 @@ public class MainActivity
    protected void onSaveInstanceState (@NotNull android.os.Bundle outState)
    {
       super.onSaveInstanceState (outState);
-      outState.putBoolean (AUTH_PENDING, authInProgress);
+      outState.putBoolean (GoogleFit.AUTH_PENDING, googleFit.getAuthentication_In_Progress ());
 
       return;
    } // onSaveInstanceState
@@ -188,27 +126,12 @@ public class MainActivity
    {
       super.onStart ();
       // Connect to the Fitness API
-      android.util.Log.i (TAG, "LOG00070: Connecting to Google-Fit…");
 
       doConnect (false);
-
-      if (Google_API_Client != null)
-      {
-         Google_API_Client.connect ();
-      }
+      googleFit.connect ();
 
       return;
    } // onStart
-   /**
-    * <p>the activity</p>
-    * @return actvivity
-    */
-   @hugo.weaving.DebugLog
-   @Override
-   public android.support.v4.app.FragmentActivity getActivity()
-   {
-      return this;
-   }
 
    @hugo.weaving.DebugLog
    @Override
@@ -216,10 +139,7 @@ public class MainActivity
    {
       super.onStop ();
 
-      if (Google_API_Client != null && Google_API_Client.isConnected ())
-      {
-         Google_API_Client.disconnect ();
-      } // if
+      googleFit.disconnect ();
 
       return;
    } // onStop
