@@ -30,7 +30,7 @@ IFF NOT DIREXIST "%[LOCALAPPDATA]\Logs" THEN
     MKDIR /C "%[LOCALAPPDATA]\Logs"
 ENDIFF
 
-TITLE UIQ3
+TITLE Fit-Import
 
 SET		opt=%@if[DEFINED opt,%[opt],C:\opt]
 SET	       Work=%@if[DEFINED Work,%[Work],C:\Work]
@@ -44,7 +44,7 @@ SET	   ANT_HOME=%[opt]\apache\ant\1.8.3
 SET	   JDK_HOME=%[opt]\Java\jdk\1.7.0
 SET	   SVN_HOME=%[opt]\Subversion\1.8
 SET	  JAVA_HOME=%[opt]\Java\jdk\1.7.0
-SET	  Workspace=%[Work]\workspaces\UIQ3
+SET	  Workspace=%[Work]\workspaces\Fit-Import
 SET	 SCALA_HOME=%[opt]\scala\2.11.4
 SET	 VIMRUNTIME=%[opt]\vim\vim74
 SET	GRADLE_HOME=%[opt]\gradle\2.2.1
@@ -58,15 +58,10 @@ SET	 MAVEN_OPTS=-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms128m -Xmx512m
 SET	GRADLE_OPTS=-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms128m -Xmx512m -XX:MaxPermSize=250m
 SET	       LANG=C.UTF-8
 
-SET	     UIQ3_DEMO="false";
-SET	  PROJECT_NAME="UIQ3"
-SET	  HP45_VERSION=6.7.1
-SET	  UIQ3_VERSION=6.7.1
-SET	FX602P_VERSION=6.7.1
-SET	FX603P_VERSION=5.3.1
-SET	NIMBUS_VERSION=6.7.1
-SET   INFORMER_VERSION=6.7.1
-SET CALCULATOR_VERSION=6.7.1
+SET	  PROJECT_NAME="Fit-Import"
+SET        FIT_VERSION=1.0.0
+SET	  UIQ3_VERSION=6.7.5
+
 
 SET MAVEN_DEPLOY=file:///Work/HomePage/uiq3/htdocs/Repository
 
@@ -74,36 +69,34 @@ SET PATH=%[JDK_HOME]\bin;%[PATH]
 SET PATH=%[ANDROID_HOME]\tools;%[PATH]
 SET PATH=%[ANDROID_HOME]\platform-tools;%[PATH]
 
-DO I IN /T"; " /L FX-602P; FX-602P-Applet; FX-602P-Desktop; FX-602P-Droid; FX-603P; FX-603P-Droid; HP45; HP45-Droid; Informer
-    IFF EXIST "%[PROJECT_HOME]\%[I]\src\main\scripts\Build.cmd" THEN
-	ALIAS Build-%[I]=CALL "%[PROJECT_HOME]\%[I]\src\main\scripts\Build.cmd"
-    ENDIFF
-    IFF EXIST "%[PROJECT_HOME]\%[I]\src\main\scripts\Start.cmd" THEN
-	ALIAS Start-%[I]=CALL "%[PROJECT_HOME]\%[I]\src\main\scripts\Start.cmd"
-    ENDIFF
-    IFF EXIST "%[PROJECT_HOME]\%[I]\src\main\scripts\Deploy.cmd" THEN
-	ALIAS Deploy-%[I]=CALL "%[PROJECT_HOME]\%[I]\src\main\scripts\Deploy.cmd"
-    ENDIFF
-    IFF EXIST "%[PROJECT_HOME]\%[I]\src\main\scripts\Upload.cmd" THEN
-	ALIAS Upload-%[I]=CALL "%[PROJECT_HOME]\%[I]\src\main\scripts\Upload.cmd"
-    ENDIFF
-    IFF EXIST "%[PROJECT_HOME]\%[I]\src\main\scripts\Start-Device.cmd" THEN
-	ALIAS Start-Device-%[I]=CALL "%[PROJECT_HOME]\%[I]\src\main\scripts\Start-Device.cmd"
-    ENDIFF
-    IFF EXIST "%[PROJECT_HOME]\%[I]\src\main\scripts\Start-Emulator.cmd" THEN
-	ALIAS Start-Emulator-%[I]=CALL "%[PROJECT_HOME]\%[I]\src\main\scripts\Start-Emulator.cmd"
-    ENDIFF
-    IFF EXIST "%[PROJECT_HOME]\%[I]\src\main\scripts\Debug-Device.cmd" THEN
-	ALIAS Debug-Device-%[I]=CALL "%[PROJECT_HOME]\%[I]\src\main\scripts\Debug-Device.cmd"
-    ENDIFF
-ENDDO
+IFF EXIST "%[PROJECT_HOME]\src\main\scripts\Build.cmd" THEN
+    ALIAS Build=CALL "%[PROJECT_HOME]\src\main\scripts\Build.cmd"
+ENDIFF
+IFF EXIST "%[PROJECT_HOME]\src\main\scripts\Start.cmd" THEN
+    ALIAS Start=CALL "%[PROJECT_HOME]\src\main\scripts\Start.cmd"
+ENDIFF
+IFF EXIST "%[PROJECT_HOME]\src\main\scripts\Deploy.cmd" THEN
+    ALIAS Deploy=CALL "%[PROJECT_HOME]\src\main\scripts\Deploy.cmd"
+ENDIFF
+IFF EXIST "%[PROJECT_HOME]\src\main\scripts\Upload.cmd" THEN
+    ALIAS Upload=CALL "%[PROJECT_HOME]\src\main\scripts\Upload.cmd"
+ENDIFF
+IFF EXIST "%[PROJECT_HOME]\src\main\scripts\Start-Device.cmd" THEN
+    ALIAS Start-Device=CALL "%[PROJECT_HOME]\src\main\scripts\Start-Device.cmd"
+ENDIFF
+IFF EXIST "%[PROJECT_HOME]\src\main\scripts\Start-Emulator.cmd" THEN
+    ALIAS Start-Emulator=CALL "%[PROJECT_HOME]\src\main\scripts\Start-Emulator.cmd"
+ENDIFF
+IFF EXIST "%[PROJECT_HOME]\src\main\scripts\Debug-Device.cmd" THEN
+    ALIAS Debug-Device=CALL "%[PROJECT_HOME]\src\main\scripts\Debug-Device.cmd"
+ENDIFF
 
 ALIAS	    PP=CALL "%[PROJECT_HOME]\src\main\scripts\Pretty_Print.cmd"
 ALIAS	   mvn=CALL "%[M2_HOME]\bin\mvn.bat"
 ALIAS	 Maven=CALL "%[PROJECT_HOME]\src\main\scripts\Maven.cmd"
-ALIAS	Commit=CALL "%[WORK]\UIQ3\Utilities\Exec" "Svn-Commit"
+ALIAS	Commit=CALL "%[WORK]\Fit-Import\Utilities\Exec" "Svn-Commit"
 ALIAS	gradle=CALL "%[GRADLE_HOME]\bin\gradle.bat"
-ALIAS Fix-Mime=CALL "%[WORK]\UIQ3\Utilities\Exec" "Svn-Mime"
+ALIAS Fix-Mime=CALL "%[WORK]\Fit-Import\Utilities\Exec" "Svn-Mime"
 
 CALL "X:\Google Drive\Secure\.keystore.cmd"
 
