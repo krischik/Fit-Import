@@ -29,7 +29,7 @@ import java.util.Calendar
  */
 public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
 {
-   class object
+   companion object
    {
       /**
        * <p>logging tag</p>
@@ -62,7 +62,7 @@ public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
     */
    val reader = java.io.BufferedReader (inputStream);
 
-   {
+   init {
       logger.entering(TAG, "ReadKetfit", dataStream)
 
       // Skip the fist 2 line. They are just the header.

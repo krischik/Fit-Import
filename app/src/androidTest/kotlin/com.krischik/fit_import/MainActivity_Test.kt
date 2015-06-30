@@ -88,8 +88,8 @@ class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainAct
    /**
     * Test opening the main activity (smoke test / release compatible version)
     */
-   [android.test.suitebuilder.annotation.Smoke]
-   [android.test.suitebuilder.annotation.SmallTest]
+   @android.test.suitebuilder.annotation.Smoke
+   @android.test.suitebuilder.annotation.SmallTest
    fun test_00_Open()
    {
       android.util.Log.d (TAG, "+ test_00_Open")

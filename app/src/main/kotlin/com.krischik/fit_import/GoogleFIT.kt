@@ -34,7 +34,7 @@ class GoogleFit (
    com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener
 {
 
-   class object
+   companion object
    {
       /**
        * Logging tag
@@ -59,7 +59,7 @@ class GoogleFit (
     */
    private val Google_API_Client: com.google.android.gms.common.api.GoogleApiClient
 
-   {
+   init {
       val Google_API_Builder = com.google.android.gms.common.api.GoogleApiClient.Builder (owner.getActivity())
       val Scope = com.google.android.gms.common.api.Scope (
 	 com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ_WRITE)
@@ -69,10 +69,9 @@ class GoogleFit (
       Google_API_Builder.addConnectionCallbacks (this)
       Google_API_Builder.addOnConnectionFailedListener (this)
       Google_API_Client = Google_API_Builder.build ()
+   } // init
 
-   }
-
-   [hugo.weaving.DebugLog]
+   @hugo.weaving.DebugLog
    override fun onConnected(bundle: android.os.Bundle?)
    {
       android.util.Log.i (TAG, "LOG00010: Connected to Google-Fit!")
@@ -84,17 +83,18 @@ class GoogleFit (
       return
    } // onConnected
 
-   [hugo.weaving.DebugLog]
+   @hugo.weaving.DebugLog
    public fun doConnect(resultCode: Int)
    {
       Authentication_In_Progress = false
+
       if (resultCode == android.app.Activity.RESULT_OK)
       {
 	 // Make sure the app is not already connected or attempting to connect
 	 if (!Google_API_Client.isConnecting () && !Google_API_Client.isConnected ())
 	 {
 	    Google_API_Client.connect ()
-	 } // iuf
+	 } // if
       } // if
 
       return
@@ -103,7 +103,7 @@ class GoogleFit (
    /**
     * <p>connect to service</p>
     */
-   [hugo.weaving.DebugLog]
+   @hugo.weaving.DebugLog
    public fun connect()
    {
       android.util.Log.i (TAG, "LOG00070: Connecting to Google-Fit…")
@@ -114,10 +114,10 @@ class GoogleFit (
    /**
     * <p>disconnect from service</p>
     */
-   [hugo.weaving.DebugLog]
+   @hugo.weaving.DebugLog
    public fun disconnect()
    {
-      android.util.Log.i (TAG, "LOG00080: Disonnecting from Google-Fit…")
+      android.util.Log.i (TAG, "LOG00080: Disconnecting from Google-Fit…")
 
       if (Google_API_Client.isConnected ())
       {
@@ -125,7 +125,7 @@ class GoogleFit (
       } // if
    } // disconnect
 
-   [hugo.weaving.DebugLog]
+   @hugo.weaving.DebugLog
    override fun onConnectionSuspended(i: Int)
    {
       // If your connection to the sensor gets lost at some point,
@@ -143,10 +143,9 @@ class GoogleFit (
    } // onConnectionSuspended
 
    /**
-    *
-   Called whenever the API client fails to connect.
+    * <p>Called whenever the API client fails to connect.</p>
     */
-   [hugo.weaving.DebugLog]
+   @hugo.weaving.DebugLog
    override fun onConnectionFailed(result: com.google.android.gms.common.ConnectionResult)
    {
       android.util.Log.e (TAG, "LOG00040: Connection to Google-Fit failed. Cause: " + result.toString ())
@@ -184,7 +183,7 @@ class GoogleFit (
    /**
     * <p>store withings weight</p>
     */
-   [hugo.weaving.DebugLog]
+   @hugo.weaving.DebugLog
    public fun insertWeight(withings: Withings)
    {
       val Data_Source_Builder = com.google.android.gms.fitness.data.DataSource.Builder()
