@@ -50,18 +50,19 @@ SET	 VIMRUNTIME=%[opt]\vim\vim74
 SET	GRADLE_HOME=%[opt]\gradle\2.2.1
 SET    ANDROID_HOME=%[opt]\android-sdk-windows
 SET    ECLIPSE_HOME=%[opt]\eclipse\luna
+SET    PROJECT_HOME=%[Work]\Fit-Import
 SET   INTELLIJ_HOME=%[opt]\JetBrains\IDEA\14.0
 SET   PROGUARD_HOME=%[opt]\Proguard\4.11
 
+SET	       LANG=C.UTF-8
+SET	       TERM=msys
 SET	  JAVA_OPTS=-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms128m -Xmx512m -XX:MaxPermSize=250m
 SET	 MAVEN_OPTS=-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms128m -Xmx512m -XX:MaxPermSize=250m
 SET	GRADLE_OPTS=-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms128m -Xmx512m -XX:MaxPermSize=250m
-SET	       LANG=C.UTF-8
 
 SET	  PROJECT_NAME="Fit-Import"
-SET        FIT_VERSION=1.0.0
+SET	   FIT_VERSION=1.0.0
 SET	  UIQ3_VERSION=6.7.5
-
 
 SET MAVEN_DEPLOY=file:///Work/HomePage/uiq3/htdocs/Repository
 

@@ -27,13 +27,12 @@ package com.krischik.fit_import
  * @param Authentication_In_Progress: true when authentication is currently on progress. Used to prevent double authentication
  */
 
-class GoogleFit (
+class GoogleFit(
    val owner: IMainFragment,
    var Authentication_In_Progress: Boolean) :
    com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks,
    com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener
 {
-
    companion object
    {
       /**
@@ -59,10 +58,11 @@ class GoogleFit (
     */
    private val Google_API_Client: com.google.android.gms.common.api.GoogleApiClient
 
-   init {
+   init
+   {
       val Google_API_Builder = com.google.android.gms.common.api.GoogleApiClient.Builder (owner.getActivity())
       val Scope = com.google.android.gms.common.api.Scope (
-	 com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ_WRITE)
+         com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ_WRITE)
 
       Google_API_Builder.addApi (com.google.android.gms.fitness.Fitness.API)
       Google_API_Builder.addScope (Scope)
@@ -90,11 +90,11 @@ class GoogleFit (
 
       if (resultCode == android.app.Activity.RESULT_OK)
       {
-	 // Make sure the app is not already connected or attempting to connect
-	 if (!Google_API_Client.isConnecting () && !Google_API_Client.isConnected ())
-	 {
-	    Google_API_Client.connect ()
-	 } // if
+         // Make sure the app is not already connected or attempting to connect
+         if (!Google_API_Client.isConnecting () && !Google_API_Client.isConnected ())
+         {
+            Google_API_Client.connect ()
+         } // if
       } // if
 
       return
@@ -121,7 +121,7 @@ class GoogleFit (
 
       if (Google_API_Client.isConnected ())
       {
-	 Google_API_Client.disconnect ()
+         Google_API_Client.disconnect ()
       } // if
    } // disconnect
 
@@ -132,11 +132,11 @@ class GoogleFit (
       // you'll be able to determine the reason and react to it here.
       if (i == com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST)
       {
-	 android.util.Log.e (TAG, "LOG00020: Google-Fit connection lost.  Cause: Network Lost.")
+         android.util.Log.e (TAG, "LOG00020: Google-Fit connection lost.  Cause: Network Lost.")
       }
       else if (i == com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED)
       {
-	 android.util.Log.e (TAG, "LOG00030: Google-Fit Connection lost.  Reason: Service Disconnected")
+         android.util.Log.e (TAG, "LOG00030: Google-Fit Connection lost.  Reason: Service Disconnected")
       } // if
 
       return
@@ -152,29 +152,29 @@ class GoogleFit (
 
       if (!result.hasResolution ())
       {
-	 // Show the localized error dialog
-	 val errorDialog = com.google.android.gms.common.GooglePlayServicesUtil.getErrorDialog (
-	    result.getErrorCode (),
-	    owner.getActivity(),
-	    0)
-	 errorDialog.show ()
+         // Show the localized error dialog
+         val errorDialog = com.google.android.gms.common.GooglePlayServicesUtil.getErrorDialog (
+            result.getErrorCode (),
+            owner.getActivity(),
+            0)
+         errorDialog.show ()
       }
       else if (!Authentication_In_Progress)
       {
-	 // The failure has a resolution. Resolve it.
-	 // Called typically when the app is not yet authorized, and an
-	 // authorization dialog is displayed to the user.
+         // The failure has a resolution. Resolve it.
+         // Called typically when the app is not yet authorized, and an
+         // authorization dialog is displayed to the user.
 
-	 try
-	 {
-	    android.util.Log.i (TAG, "LOG00050: Attempting to resolve failed connection")
-	    Authentication_In_Progress = true
-	    result.startResolutionForResult (owner.getActivity(), REQUEST_OAUTH)
-	 }
-	 catch (exception: android.content.IntentSender.SendIntentException)
-	 {
-	    android.util.Log.e (TAG, "LOG00060: Exception while starting resolution activity", exception)
-	 } // try
+         try
+         {
+            android.util.Log.i (TAG, "LOG00050: Attempting to resolve failed connection")
+            Authentication_In_Progress = true
+            result.startResolutionForResult (owner.getActivity(), REQUEST_OAUTH)
+         }
+         catch (exception: android.content.IntentSender.SendIntentException)
+         {
+            android.util.Log.e (TAG, "LOG00060: Exception while starting resolution activity", exception)
+         } // try
       } // if
 
       return
@@ -190,17 +190,18 @@ class GoogleFit (
 
       Data_Source_Builder.setAppPackageName(owner.getActivity())
       Data_Source_Builder.setDataType(com.google.android.gms.fitness.data.DataType.TYPE_WEIGHT)
-      Data_Source_Builder.setName(TAG + " – Withings weigth")
+      Data_Source_Builder.setName(TAG + " – Withings weight")
       Data_Source_Builder.setType(com.google.android.gms.fitness.data.DataSource.TYPE_RAW)
+
       val Data_Source = Data_Source_Builder.build()
       val Data_Set = com.google.android.gms.fitness.data.DataSet.create(Data_Source)
       val Data_Point = Data_Set.createDataPoint()
       val Weight_Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_WEIGHT)
 
       Data_Point.setTimeInterval(
-	 /* startTime => */withings.Time.getTime(),
-	 /* endTime   => */withings.Time.getTime(),
-	 /* timeUnit  => */java.util.concurrent.TimeUnit.MILLISECONDS)
+         /* startTime => */withings.Time.getTime(),
+         /* endTime   => */withings.Time.getTime(),
+         /* timeUnit  => */java.util.concurrent.TimeUnit.MILLISECONDS)
 
       Weight_Field.setFloat(withings.Weight)
 

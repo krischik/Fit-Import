@@ -114,6 +114,7 @@ repositories {
       url "http://uiq3.sourceforge.net/Repository"
    }
 } // repositories
+
 dependencies {
    apt (
       [group: 'org.androidannotations', name: 'androidannotations', version: androidannotations_version]

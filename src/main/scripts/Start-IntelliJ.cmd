@@ -22,19 +22,19 @@
 :: $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Start-IntelliJ.cmd $
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: }}}1 :::::::::::
 
-@ECHO OFF
+@ECHO O
 
 IF NOT "%@Eval[2 + 2]%" == "4" (ECHO ^e[42mYou need TakeCommand [http://www.jpsoft.com] to execute this batch file.^e[m & EXIT /B 1)
 
 SETLOCAL
     CALL %@Path[%_BatchName]\Setup.cmd
 
-    SET IDEA_PROPERTIES=%[Workspace]\idea.properties
+    SET ScriptName=%@Name[%_BATCHNAME]
 
     START				^
 	"UIQ3 - IntelliJ"		^
 	%[INTELLIJ_HOME]\bin\idea64.exe	^
-	%[Workspace]
+	    %[PROJECT_HOME]
 
 ENDLOCAL
 EXIT 0
