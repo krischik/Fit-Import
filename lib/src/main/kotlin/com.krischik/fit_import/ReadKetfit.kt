@@ -29,7 +29,7 @@ import java.util.Calendar
  */
 public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
 {
-   class object
+   companion object
    {
       /**
        * <p>logging tag</p>

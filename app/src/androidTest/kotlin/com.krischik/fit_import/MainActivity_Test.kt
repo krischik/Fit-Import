@@ -29,7 +29,7 @@ class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainAct
    /**
     * Logging tag
     */
-   private val TAG = javaClass<Main_Activity_Test>().getName()
+   private val TAG = Main_Activity_Test::class.java.getName()
    /**
     * Activity to test.
     */

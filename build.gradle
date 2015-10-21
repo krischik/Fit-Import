@@ -21,26 +21,27 @@ version = "1.0.0"
 description = "Import KetFit and Withings exports into Google Fit"
 
 buildscript {
-   ext.kotlin_version = '0.10.770'
+   ext.kotlin_version = '0.14.451'
    ext.androidannotations_version = '3.2'
    ext.androidsupport_version = '21.0.3'
 
    repositories {
       jcenter ()
-   }
+   } // repositories
    dependencies {
-      classpath 'com.android.tools.build:gradle:1.0.0'
-
+      classpath (
+         [group: 'com.android.tools.build', name: 'gradle', version: '1.1.1']
+      )
       // NOTE: Do not place your application dependencies here; they belong
       // in the individual module build.gradle files
-   }
-}
+   } // dependencies
+} // buildscript
 
 allprojects {
    repositories {
       jcenter ()
-   }
-}
+   } // repositories
+} // allprojects
 
 // vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
 // vim: set textwidth=0 filetype=groovy foldmethod=marker nospell :

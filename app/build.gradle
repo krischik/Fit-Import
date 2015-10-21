@@ -22,10 +22,11 @@ description = "Import KetFit and Withings exports into Google Fit — Android Ap
 buildscript {
    repositories {
       mavenCentral ()
+      mavenCentral ()
    }
    dependencies {
       classpath (
-         [group: 'com.android.tools.build', name: 'gradle', version: '1.0.0'],
+         [group: 'com.android.tools.build', name: 'gradle', version: '1.1.0'],
          [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.4'],
          [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
          [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version]
@@ -41,6 +42,7 @@ apply plugin: 'kotlin-android'
 repositories {
    mavenCentral ()
    mavenLocal ()
+   mavenCentral ()
 }
 
 android {
@@ -112,7 +114,7 @@ dependencies {
       [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version]
    )
    androidTestCompile (
-      [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.2.1'],
+      [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.3.1'],
       [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9']
    )
 }

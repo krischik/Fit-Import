@@ -39,7 +39,7 @@ class GoogleFit (
       /**
        * Logging tag
        */
-      private val TAG = javaClass<GoogleFit>().getName()
+      private val TAG = GoogleFit::class.java.getName()
 
       /**
        * <p>Request Authentication message id</p>
@@ -58,7 +58,6 @@ class GoogleFit (
     * <p>The underlying api client</p>
     */
    private val Google_API_Client: com.google.android.gms.common.api.GoogleApiClient
-
    {
       val Google_API_Builder = com.google.android.gms.common.api.GoogleApiClient.Builder (owner.getActivity())
       val Scope = com.google.android.gms.common.api.Scope (
