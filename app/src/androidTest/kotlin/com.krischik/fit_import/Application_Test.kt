@@ -35,9 +35,9 @@ public class Application_Test : android.test.ApplicationTestCase<Application_>(j
    /**
     * Test the zip file name
     */
-   [hugo.weaving.DebugLog]
-   [android.test.suitebuilder.annotation.Smoke]
-   [android.test.suitebuilder.annotation.SmallTest]
+   @hugo.weaving.DebugLog
+   @android.test.suitebuilder.annotation.Smoke
+   @android.test.suitebuilder.annotation.SmallTest
    fun test_02_Configuration()
    {
       val API = android.os.Build.VERSION.SDK_INT

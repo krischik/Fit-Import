@@ -19,8 +19,6 @@ package com.krischik.fit_import;
 
 /**
  * <p> </p>
- * <p/>
- * ${tags}
  *
  * @author martin
  * @version 1.0

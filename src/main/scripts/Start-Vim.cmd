@@ -16,26 +16,29 @@
 ::  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: $Author: krischik $
-:: $Revision: 6750 $
-:: $Date: 2015-01-15 11:49:50 +0100 (Do, 15. Jan 2015) $
-:: $Id: Start-IntelliJ.cmd 6750 2015-01-15 10:49:50Z krischik $
-:: $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Start-IntelliJ.cmd $
+:: $Revision: 6766 $
+:: $Date: 2015-02-10 10:07:44 +0100 (Di, 10 Feb 2015) $
+:: $Id: Start-Vim.cmd 6766 2015-02-10 09:07:44Z krischik $
+:: $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Start-Vim.cmd $
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: }}}1 :::::::::::
 
-@ECHO O
+@ECHO ON
 
 IF NOT "%@Eval[2 + 2]%" == "4" (ECHO ^e[42mYou need TakeCommand [http://www.jpsoft.com] to execute this batch file.^e[m & EXIT /B 1)
 
 SETLOCAL
+    ON CONDITION ERRORLEVEL NE 0    CANCEL
+    ON BREAK                        CANCEL
+    ON ERRORMSG                     CANCEL
+
     CALL %@Path[%_BatchName]\Setup.cmd
 
-    SET ScriptName=%@Name[%_BATCHNAME]
+    DETACH gvim --servername "UIQ3" 
 
-    START				^
-	"UIQ3 - IntelliJ"		^
-	%[INTELLIJ_HOME]\bin\idea64.exe	^
-	    %[PROJECT_HOME]
+    DELAY /B 2
 
+    gvim --servername "UIQ3" --remote-send ":source src/main/scripts/Functions.vim<CR>"
+    gvim --servername "UIQ3" --remote-send ":TlistToggle<CR>"
 ENDLOCAL
 EXIT 0
 

@@ -13,12 +13,23 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
- ********************************************************** }}}1 **********/
+ **********************************************************}}}1 **********/
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 group = "com.krischik"
 version = "1.0.0"
 description = "Import KetFit and Withings exports into Google Fit"
+
+repositories {
+   mavenLocal ()
+   mavenCentral ()
+   maven {
+      url "http://repository.jetbrains.com/all/"
+   }
+   maven {
+      url "http://uiq3.sourceforge.net/Repository"
+   }
+} // repositories
 
 buildscript {
    ext.kotlin_version = '0.14.451'
@@ -27,6 +38,8 @@ buildscript {
 
    repositories {
       jcenter ()
+      mavenLocal ()
+      mavenCentral ()
    } // repositories
    dependencies {
       classpath (
@@ -40,8 +53,16 @@ buildscript {
 allprojects {
    repositories {
       jcenter ()
+      mavenLocal ()
+      mavenCentral ()
+      maven {
+         url "http://repository.jetbrains.com/all/"
+      }
+      maven {
+         url "http://uiq3.sourceforge.net/Repository"
+      }
    } // repositories
 } // allprojects
 
-// vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
+// vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :
 // vim: set textwidth=0 filetype=groovy foldmethod=marker nospell :

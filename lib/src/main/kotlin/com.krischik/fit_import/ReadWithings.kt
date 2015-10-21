@@ -27,7 +27,7 @@ package com.krischik.fit_import
  */
 public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
 {
-   class object
+   companion object
    {
       /**
        * <p>logging tag</p>
@@ -50,7 +50,7 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
     */
    val reader = java.io.BufferedReader (inputStream);
 
-   {
+   init {
       logger.entering(TAG, "ReadWithigns", dataStream)
 
       // Skip the fist line. They are just the header.

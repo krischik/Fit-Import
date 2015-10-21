@@ -24,7 +24,7 @@ package com.krischik.fit_import
  * @version 1.0
  * @since 1.0
  */
-class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainActivity_>(javaClass<MainActivity_>())
+class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java())
 {
    /**
     * Logging tag
@@ -88,8 +88,8 @@ class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainAct
    /**
     * Test opening the main activity (smoke test / release compatible version)
     */
-   [android.test.suitebuilder.annotation.Smoke]
-   [android.test.suitebuilder.annotation.SmallTest]
+   @android.test.suitebuilder.annotation.Smoke
+   @android.test.suitebuilder.annotation.SmallTest
    fun test_00_Open()
    {
       android.util.Log.d (TAG, "+ test_00_Open")

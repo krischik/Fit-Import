@@ -34,7 +34,7 @@ public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
       /**
        * <p>logging tag</p>
        */
-      private val TAG = javaClass<ReadKetfit>().getName ()
+      private val TAG = ReadKetfit::class.java.getName ()
       /**
        * <p>logger</p>
        */
@@ -62,7 +62,7 @@ public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
     */
    val reader = java.io.BufferedReader (inputStream);
 
-   {
+   init {
       logger.entering(TAG, "ReadKetfit", dataStream)
 
       // Skip the fist 2 line. They are just the header.

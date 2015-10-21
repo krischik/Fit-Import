@@ -43,7 +43,7 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
     */
    private val logger = java.util.logging.Logger.getLogger (TAG);
 
-   {
+   init {
       Init_Logger ()
 
       given ("a stream with header") {
@@ -88,7 +88,7 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
 	 } // on
 	 // test.close ()
       } // given
-   }
+   } // init
 } // ReadWithigns_Test
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
