@@ -24,8 +24,8 @@
 
 tell application "Terminal"
 	set |Tab| to do script "
-cd \"/Volumes/Daten/Developer/Fit-Import\";
-source \"src/main/scripts/Setup.command\""
+cd \"/Users/krma1/Work/Projects/Fit-Import\";
+source \"src/main/scripts/Setup-KonyMac01.local.command\""
 	set background color of |Tab| to {65535, 61768, 58000}
 end tell
 
