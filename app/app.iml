@@ -13,8 +13,11 @@
         <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
         <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
         <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleDebugAndroidTest" />
-        <option name="SOURCE_GEN_TASK_NAME" value="generateDebugSources" />
-        <option name="TEST_SOURCE_GEN_TASK_NAME" value="generateDebugAndroidTestSources" />
+        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileDebugAndroidTestSources" />
+        <afterSyncTasks>
+          <task>generateDebugAndroidTestSources</task>
+          <task>generateDebugSources</task>
+        </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
@@ -23,7 +26,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/androidTest/debug" />
     <exclude-output />
@@ -87,22 +90,24 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
+      <excludeFolder url="file://$MODULE_DIR$/build/test-results" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="kotlin-runtime-0.14.451" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="robotium-solo-5.3.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="hugo-runtime-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="androidannotations-api-3.2" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="android-screenshot-celebrity-1.9" level="project" />
     <orderEntry type="library" exported="" name="hugo-annotations-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="aspectjrt-1.8.5" level="project" />
-    <orderEntry type="library" exported="" name="kotlin-stdlib-0.14.451" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-stdlib-1.0.0-beta-3595" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-runtime-1.0.0-beta-3595" level="project" />
+    <orderEntry type="library" exported="" name="androidannotations-api-3.2" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="android-screenshot-celebrity-1.9" level="project" />
     <orderEntry type="library" exported="" name="play-services-6.1.71" level="project" />
+    <orderEntry type="library" exported="" name="aspectjrt-1.8.5" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="robotium-solo-5.3.1" level="project" />
+    <orderEntry type="library" exported="" name="hugo-runtime-1.2.1" level="project" />
     <orderEntry type="module" module-name="lib" exported="" />
   </component>
 </module>

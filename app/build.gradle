@@ -53,8 +53,8 @@ repositories {
 
 
 android {
-   compileSdkVersion 22
-   buildToolsVersion "21.1.2"
+   compileSdkVersion 23
+   buildToolsVersion "23.0.1"
 
    applicationVariants.all { variant ->
       variant.outputs.each { output ->
@@ -83,11 +83,11 @@ android {
 
    defaultConfig {
       applicationId "com.krischik.fit_import"
-      minSdkVersion 15
-      targetSdkVersion 22
+      testApplicationId 'com.krischik.fit_import.test'
+      minSdkVersion 19
+      targetSdkVersion 23
       versionCode 10000
       versionName "1.0.0"
-      testApplicationId 'com.krischik.fit_import.test'
    }
    buildTypes {
       release {
@@ -125,13 +125,13 @@ dependencies {
       [group: 'com.android.support', name: 'support-v4', version: androidsupport_version],
       [group: 'com.google.android.gms', name: 'play-services', version: '6.1.+'],
       [group: 'org.androidannotations', name: 'androidannotations-api', version: androidannotations_version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version]
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: kotlin_version]
    )
    androidTestCompile (
       [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.3.1'],
       [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9']
    )
-   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 apt {

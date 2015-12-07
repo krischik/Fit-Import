@@ -32,7 +32,7 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
       /**
        * <p>logging tag</p>
        */
-      private val TAG = javaClass<ReadWithings>().getName ()
+      private val TAG = ReadWithings::class.qualifiedName
       /**
        * <p>logger</p>
        */
@@ -76,13 +76,13 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
     */
    private fun parseFloat(inText: String): Float
    {
-      return if (inText.length() > 0)
+      return if (inText.length > 0)
       {
-	 java.lang.Float.parseFloat (inText)
+         java.lang.Float.parseFloat (inText)
       }
       else
       {
-	 0.0f
+         0.0f
       }
    }
 
@@ -95,7 +95,7 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
 
       val line = reader.readLine()
       val rawFields = line.split(',')
-      val fields = rawFields.map { field -> field.trim("\"") }
+      val fields = rawFields.map { field -> field.trim('"') }
       val Date = Date_Format.parse(truncateDate(fields[0]))
       val Weight = parseFloat (fields [1]);
       val Fat = parseFloat (fields [2]);

@@ -40,7 +40,7 @@ public class MainActivity
    /**
     * <p>Google FIT Model</p>
     */
-   protected GoogleFit googleFit;
+   private GoogleFit Google_Fit;
    /**
     * <p> Calculator fragment </p>
     */
@@ -63,11 +63,6 @@ public class MainActivity
          Main_Fragment.doConnect (connected);
       } // if
 
-      if (connected)
-      {
-         googleFit.insertWeight (new Withings (new java.util.Date (), 80.0f, 0.0f, 0.0f, ""));
-      }
-
       return;
    } // doConnect
 
@@ -89,7 +84,7 @@ public class MainActivity
    {
       if (requestCode == GoogleFit.REQUEST_OAUTH)
       {
-         googleFit.doConnect (resultCode);
+         Google_Fit.doConnect (resultCode);
       } // if
 
       return;
@@ -105,7 +100,7 @@ public class MainActivity
 
       authInProgress = savedInstanceState != null && savedInstanceState.getBoolean (GoogleFit.AUTH_PENDING);
 
-      googleFit = new GoogleFit (this, authInProgress);
+      Google_Fit = new GoogleFit (this, authInProgress);
 
       return;
    } // onCreate
@@ -115,7 +110,7 @@ public class MainActivity
    protected void onSaveInstanceState (@NotNull android.os.Bundle outState)
    {
       super.onSaveInstanceState (outState);
-      outState.putBoolean (GoogleFit.AUTH_PENDING, googleFit.getAuthentication_In_Progress ());
+      outState.putBoolean (GoogleFit.AUTH_PENDING, Google_Fit.getAuthentication_In_Progress ());
 
       return;
    } // onSaveInstanceState
@@ -128,7 +123,7 @@ public class MainActivity
       // Connect to the Fitness API
 
       doConnect (false);
-      googleFit.connect ();
+      Google_Fit.connect ();
 
       return;
    } // onStart
@@ -139,10 +134,54 @@ public class MainActivity
    {
       super.onStop ();
 
-      googleFit.disconnect ();
+      Google_Fit.disconnect ();
 
       return;
    } // onStop
+
+   @org.androidannotations.annotations.AfterViews
+   protected void After_Views ()
+   {
+      if (Main_Fragment != null)
+      {
+         Main_Fragment.setGoogle_Fit (Google_Fit);
+      } // if
+
+      return;
+   } // doConnect
+
+
+   /**
+    * <p>the import withings button has been clicked.</p>
+    *
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public void Do_Withings_Button ()
+   {
+      if (Main_Fragment != null)
+      {
+         Main_Fragment.Do_Withings_Button ();
+      } // if
+
+      return;
+   } // doConnect
+
+   /**
+    * <p>the import ketfit button has been clicked.</p>
+    *
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public void Do_Ketfit_Button ()
+   {
+      if (Main_Fragment != null)
+      {
+         Main_Fragment.Do_Ketfit_Button ();
+      } // if
+
+      return;
+   } // doConnect
 } // MainActivity
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

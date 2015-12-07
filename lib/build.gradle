@@ -27,16 +27,19 @@ repositories {
    maven {
       url "http://uiq3.sourceforge.net/Repository"
    }
+   mavenCentral()
 } // repositories
 
 buildscript {
    repositories {
       mavenCentral ()
+      mavenCentral()
    }
    dependencies {
       classpath (
          [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version]
       )
+      classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
    }
 } // buildscript
 
@@ -64,7 +67,8 @@ dependencies {
       [group: 'junit', name: 'junit', version: '4.12'],
       [group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'],
       [group: 'org.exparity', name: 'hamcrest-date', version: '1.1.0'],
-      [group: 'org.jetbrains.spek', name: 'spek', version: '0.1.177']
+      [group: 'org.jetbrains.spek', name: 'spek', version: '0.1.180'],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: kotlin_version]
    ) // testCompile
 } // dependencies
 

@@ -17,6 +17,7 @@
 
 package com.krischik.fit_import;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -36,8 +37,11 @@ public class MainFragment
    /**
     * <p> TAG as class name for logging </p>
     */
-   //private final static String TAG = MainFragment.class.getName ();
-
+   private final static String TAG = MainFragment.class.getName ();
+   /**
+    * <p>Google FIT Model</p>
+    */
+   private GoogleFit Google_Fit;
    /**
     * <p>Import Ketfit CVS button</p>
     */
@@ -52,7 +56,7 @@ public class MainFragment
    protected android.widget.Button Withings_Button;
 
    /**
-    * <p>we are connected to Google Fit (or not);
+    * <p>we are connected to Google Fit (or not)</p>
     *
     * @param connected
     *    true when we are connected
@@ -71,6 +75,62 @@ public class MainFragment
       }
       return;
    } // doConnect
+
+   /**
+    * <p>the import withings button has been clicked.</p>
+    *
+    */
+   @hugo.weaving.DebugLog
+   @org.androidannotations.annotations.Click (R.id.Withings_Button)
+   @Override
+   public void Do_Withings_Button ()
+   {
+      if (Google_Fit != null)
+      Google_Fit.insertWeight (new Withings (
+              /* Time    => */new java.util.Date (),
+              /* Weight  => */80.0f,
+              /* Fat     => */20.0f,
+              /* No_Fat  => */80.0f - 20.0f,
+              /* Comment => */"Withings"));
+      else
+      android.util.Log.e (TAG, "LOG00010: No Google_Fit instance!");
+
+      return;
+   } // doConnect
+
+   /**
+    * <p>the import ketfit button has been clicked.</p>
+    *
+    */
+   @hugo.weaving.DebugLog
+   @org.androidannotations.annotations.Click (R.id.Ketfit_Button)
+   @Override
+   public void Do_Ketfit_Button ()
+   {
+      if (Google_Fit != null)
+      Google_Fit.insertKetfit (new  Ketfit (
+              /* Start  => */new java.util.Date (),
+              /* End    => */new java.util.Date (),
+              /* Watt   => */130,
+              /* Puls   => */140,
+              /* Umin   => */70,
+              /* kCal   => */500,
+              /* km     => */6,
+              /* ω      => */0));
+      else
+         android.util.Log.e (TAG, "LOG00000: No Google_Fit instance!");
+
+      return;
+   } // doConnect
+
+   public void setGoogle_Fit(@NotNull GoogleFit google_Fit)
+   {
+      java.util.Objects.requireNonNull(google_Fit);
+
+      Google_Fit = google_Fit;
+
+      return;
+   }
 } // MainFragment
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

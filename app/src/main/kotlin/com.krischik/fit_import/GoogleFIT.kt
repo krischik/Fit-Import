@@ -17,6 +17,8 @@
 
 package com.krischik.fit_import
 
+import com.google.android.gms.fitness.data.Device
+
 /**
  * <p>
  * </p>
@@ -43,6 +45,7 @@ class GoogleFit(
       /**
        * <p>Request Authentication message id</p>
        */
+      @JvmField
       public val REQUEST_OAUTH: Int = 1
 
       /**
@@ -50,6 +53,7 @@ class GoogleFit(
        * being resolved, such as showing the account chooser or presenting a consent dialog. This avoids common
        * duplications as might happen on screen rotations, etc.
        */
+      @JvmField
       public val AUTH_PENDING: String = "auth_state_pending"
    } // companion object
 
@@ -61,11 +65,17 @@ class GoogleFit(
    init
    {
       val Google_API_Builder = com.google.android.gms.common.api.GoogleApiClient.Builder (owner.getActivity())
-      val Scope = com.google.android.gms.common.api.Scope (
+      val Location = com.google.android.gms.common.api.Scope (
          com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ_WRITE)
+      val Activity = com.google.android.gms.common.api.Scope (
+         com.google.android.gms.common.Scopes.FITNESS_ACTIVITY_READ_WRITE)
+      val Body = com.google.android.gms.common.api.Scope (
+         com.google.android.gms.common.Scopes.FITNESS_BODY_READ_WRITE)
 
       Google_API_Builder.addApi (com.google.android.gms.fitness.Fitness.API)
-      Google_API_Builder.addScope (Scope)
+      Google_API_Builder.addScope (Location)
+      Google_API_Builder.addScope (Activity)
+      Google_API_Builder.addScope (Body)
       Google_API_Builder.addConnectionCallbacks (this)
       Google_API_Builder.addOnConnectionFailedListener (this)
       Google_API_Client = Google_API_Builder.build ()
@@ -192,22 +202,52 @@ class GoogleFit(
       Data_Source_Builder.setDataType(com.google.android.gms.fitness.data.DataType.TYPE_WEIGHT)
       Data_Source_Builder.setName(TAG + " – Withings weight")
       Data_Source_Builder.setType(com.google.android.gms.fitness.data.DataSource.TYPE_RAW)
+//      Data_Source_Builder.setDevice(Device())
 
       val Data_Source = Data_Source_Builder.build()
       val Data_Set = com.google.android.gms.fitness.data.DataSet.create(Data_Source)
       val Data_Point = Data_Set.createDataPoint()
-      val Weight_Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_WEIGHT)
 
       Data_Point.setTimeInterval(
          /* startTime => */withings.Time.getTime(),
          /* endTime   => */withings.Time.getTime(),
          /* timeUnit  => */java.util.concurrent.TimeUnit.MILLISECONDS)
 
+      val Weight_Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_WEIGHT)
+
       Weight_Field.setFloat(withings.Weight)
 
       Data_Set.add(Data_Point)
 
-      com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, Data_Set)
+      val Result = com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, Data_Set)
+
+      Result.setResultCallback ({ Status ->
+         if (!Status.isSuccess) {
+            android.util.Log.e (TAG, "There was a problem inserting the weight: " + Status.statusMessage);
+         } // if
+      }, 1, java.util.concurrent.TimeUnit.MINUTES)
+      return
+   } // insertWeight
+   /**
+    * <p>store withings weight</p>
+    */
+   @hugo.weaving.DebugLog
+   public fun insertKetfit(ketfit: Ketfit)
+   {
+      val Data_Source_Builder = com.google.android.gms.fitness.data.DataSource.Builder()
+
+      Data_Source_Builder.setAppPackageName(owner.getActivity())
+      Data_Source_Builder.setDataType(com.google.android.gms.fitness.data.DataType.TYPE_HEART_RATE_BPM)
+      Data_Source_Builder.setName(TAG + " – Ketfit training")
+      Data_Source_Builder.setType(com.google.android.gms.fitness.data.DataSource.TYPE_RAW)
+
+      val Data_Source = Data_Source_Builder.build()
+      val Data_Set = com.google.android.gms.fitness.data.DataSet.create(Data_Source)
+      val Data_Point = Data_Set.createDataPoint()
+
+      Data_Set.add(Data_Point)
+
+      // com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, Data_Set)
       return
    } // insertWeight
 } // GoogleFit

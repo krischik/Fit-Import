@@ -32,7 +32,7 @@ repositories {
 } // repositories
 
 buildscript {
-   ext.kotlin_version = '0.14.451'
+   ext.kotlin_version = '1.0.0-beta-3595'
    ext.androidannotations_version = '3.2'
    ext.androidsupport_version = '21.0.3'
 
