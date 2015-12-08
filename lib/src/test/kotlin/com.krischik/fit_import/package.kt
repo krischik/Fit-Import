@@ -25,7 +25,7 @@ fun Init_Logger()
     java.io.File (" build/test-results").mkdirs()
 
     val manager = java.util.logging.LogManager.getLogManager ()
-    val properties = javaClass<ReadKetfit_Test>() getResourceAsStream "/logging.properties"
+    val properties = ReadKetfit_Test::class.java getResourceAsStream "/logging.properties"
 
     // Read log properties so that the class which we test can write to a log
     // file

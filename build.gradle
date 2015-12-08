@@ -43,12 +43,14 @@ buildscript {
    } // repositories
    dependencies {
       classpath (
-         [group: 'com.android.tools.build', name: 'gradle', version: '1.1.1']
+	 [group: 'com.android.tools.build', name: 'gradle', version: '1.5.0']
       )
-      // NOTE: Do not place your application dependencies here; they belong
-      // in the individual module build.gradle files
    } // dependencies
+   // NOTE: Do not place your application dependencies here; they belong
+   // in the individual module build.gradle files
 } // buildscript
+
+apply plugin: 'idea'
 
 allprojects {
    repositories {
@@ -56,12 +58,14 @@ allprojects {
       mavenLocal ()
       mavenCentral ()
       maven {
-         url "http://repository.jetbrains.com/all/"
+	 url "http://repository.jetbrains.com/all/"
       }
       maven {
-         url "http://uiq3.sourceforge.net/Repository"
+	 url "http://uiq3.sourceforge.net/Repository"
       }
    } // repositories
+   dependencies {
+   } // dependencies
 } // allprojects
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :

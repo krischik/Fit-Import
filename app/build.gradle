@@ -20,9 +20,11 @@ version = "1.0.0"
 description = "Import KetFit and Withings exports into Google Fit — Android App"
 
 buildscript {
+   ext.kotlin_version = '1.0.0-beta-3595'
    repositories {
       mavenCentral ()
       mavenLocal ()
+      mavenCentral()
    }
    dependencies {
       classpath (
@@ -30,10 +32,9 @@ buildscript {
          [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.4'],
          [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
          [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version]
-      )
-      classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-   }
-}
+      ) // classpath
+   } // dependencies
+} // buildscript
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.hugo'
@@ -44,7 +45,7 @@ repositories {
    mavenCentral ()
    mavenLocal ()
    maven {
-      url "http://repository.jetbrains.com/all/"
+      url "http://repository.jetbrains.com/all"
    } // maven
    maven {
       url "http://uiq3.sourceforge.net/Repository"
@@ -88,6 +89,7 @@ android {
       targetSdkVersion 23
       versionCode 10000
       versionName "1.0.0"
+      multiDexEnabled true
    }
    buildTypes {
       release {
@@ -102,37 +104,39 @@ android {
    sourceSets {
       main {
          java.srcDirs += 'src/main/kotlin'
-      }
+      } // main
       androidTest {
          java.srcDirs += 'src/androidTest/kotlin'
-      }
-   }
+      } // androidTest
+   } // sourceSets
    compileOptions {
       sourceCompatibility JavaVersion.VERSION_1_7
       targetCompatibility JavaVersion.VERSION_1_7
-   }
+   } // compileOptions
    productFlavors {
    }
-}
+} // android
 
 dependencies {
    apt (
       [group: 'org.androidannotations', name: 'androidannotations', version: androidannotations_version]
-   )
+   ) // apt
    compile (
       project (':lib'),
       [group: 'com.android.support', name: 'appcompat-v7', version: androidsupport_version],
       [group: 'com.android.support', name: 'support-v4', version: androidsupport_version],
-      [group: 'com.google.android.gms', name: 'play-services', version: '6.1.+'],
+      [group: 'com.android.support', name: 'multidex', version: '1.0.1'],
+      [group: 'com.google.android.gms', name: 'play-services', version: '7.5.0'],
       [group: 'org.androidannotations', name: 'androidannotations-api', version: androidannotations_version],
       [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version],
       [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: kotlin_version]
-   )
+   ) // compile
    androidTestCompile (
-      [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.3.1'],
+      project (':AndroidTestLib'),
+      [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.5.3'],
       [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9']
-   )
-}
+   ) // androidTestCompile
+} // dependencies
 
 apt {
    arguments {
@@ -147,7 +151,8 @@ apt {
       // You can set optional annotation processing options here, like these commented options:
       // logLevel 'INFO'
       // logFile '/var/log/aa.log'
-   }
-}
+   } // arguments
+} // apt
+
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :
 // vim: set textwidth=0 filetype=groovy foldmethod=marker nospell :

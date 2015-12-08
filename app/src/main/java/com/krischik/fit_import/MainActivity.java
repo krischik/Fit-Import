@@ -38,15 +38,28 @@ public class MainActivity
     */
    // private final static String TAG = MainActivity.class.getName ();
    /**
-    * <p>Google FIT Model</p>
-    */
-   private GoogleFit Google_Fit;
-   /**
     * <p> Calculator fragment </p>
     */
    @org.androidannotations.annotations.FragmentById
    @Nullable
    protected MainFragment Main_Fragment;
+   /**
+    * <p>Google FIT Model</p>
+    */
+   private GoogleFit Google_Fit;
+   /**
+    * <p>remember if we are connected</p>
+    */
+   private boolean connected = false;
+
+   /**
+    * <p>remember if we are connected</p>
+    *
+    * @return true when we are connected
+    */
+   public boolean isConnected() {
+      return connected;
+   }
 
    /**
     * <p>we are connected to Google Fit (or not);

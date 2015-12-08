@@ -14,15 +14,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  ********************************************************** }}}1 **********/
-package com.krischik.fit_import
+package com.krischik
 
 /**
  * make sleep command more readable
  * @param Second time in seconds
  * @return time in milli seconds
  */
-@suppress("NOTHING_TO_INLINE")
-@inline
 fun Second (Second: Float): Int = (Second * 1000).toInt()
 
 /**
@@ -30,8 +28,6 @@ fun Second (Second: Float): Int = (Second * 1000).toInt()
  * @param Minutes time in minutes
  * @return time in milli seconds
  */
-@suppress("NOTHING_TO_INLINE")
-@inline
 fun Minutes (Minutes: Float) :Int = (Minutes * 1000 * 60).toInt()
 
 

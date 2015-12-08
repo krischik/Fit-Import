@@ -16,6 +16,8 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
+import com.krischik.Second
+
 /**
  * <p>
  * </p>
@@ -24,12 +26,13 @@ package com.krischik.fit_import
  * @version 1.0
  * @since 1.0
  */
-class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java())
+public class Main_Activity_Test :
+   android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java)
 {
    /**
     * Logging tag
     */
-   private val TAG = Main_Activity_Test::class.java.getName()
+   private val TAG = Main_Activity_Test::class.qualifiedName
    /**
     * Activity to test.
     */

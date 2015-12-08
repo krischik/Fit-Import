@@ -14,20 +14,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  ********************************************************** }}}1 **********/
-package com.krischik.fit_import;
-
+package com.krischik.fit_import
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class Application_Test : android.test.ApplicationTestCase<Application_>(javaClass <Application_>())
+public class Application_Test : android.test.ApplicationTestCase<Application_>(Application_::class.java)
 {
-   class object
+   companion object
    {
       /**
        * Logging tag
        */
-      private val TAG = javaClass<Application_Test>().getName()
+      private val TAG = Application_Test::class.qualifiedName
 
       fun i(Text: String) = android.util.Log.i (TAG, Text)
    }

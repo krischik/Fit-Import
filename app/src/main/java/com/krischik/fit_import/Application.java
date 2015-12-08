@@ -26,19 +26,12 @@ package com.krischik.fit_import;
  */
 @org.androidannotations.annotations.EApplication
 public class Application
-   extends android.app.Application
+   extends android.support.multidex.MultiDexApplication
 {
    /**
     * <p> TAG as class name for logging </p>
     */
-   private final static String TAG;
-
-   java.lang.ref.WeakReference test;
-
-   static
-   {
-      TAG = Application.class.getName ();
-   } // static
+   private final static String TAG = Application.class.getName ();
 } // Application
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

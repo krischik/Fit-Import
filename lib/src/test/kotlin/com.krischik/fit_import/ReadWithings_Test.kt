@@ -37,7 +37,7 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
    /**
     * <p>logging tag</p>
     */
-   private val TAG = javaClass<ReadWithings_Test>().getName ()
+   private val TAG = ReadWithings_Test::class.qualifiedName
    /**
     * <p>logger</p>
     */
@@ -47,7 +47,7 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
       Init_Logger ()
 
       given ("a stream with header") {
-	 val testData = javaClass<ReadWithings_Test>() getResourceAsStream "/Withings.csv"
+	 val testData = ReadWithings_Test::class.java getResourceAsStream "/Withings.csv"
 
 	 on ("opening and closing the file") {
 	    val test = ReadWithings (testData)
@@ -59,7 +59,7 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
       } // given
 
       given ("a stream with test data") {
-	 val testData = javaClass<ReadWithings_Test>() getResourceAsStream "/Withings.csv"
+	 val testData = ReadWithings_Test::class.java getResourceAsStream "/Withings.csv"
 	 val test = ReadWithings (testData)
 
 	 on ("reading 1st data") {

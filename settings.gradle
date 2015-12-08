@@ -1,3 +1,4 @@
 
 include ':lib'
+include ':AndroidTestLib'
 include ':app'

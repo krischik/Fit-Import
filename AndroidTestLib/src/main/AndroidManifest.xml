@@ -1,11 +1,34 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.krischik.androidtestlib">
+<?xml version="1.0" encoding="UTF-8"?>
 
-    <application android:allowBackup="true"
-                 android:label="@string/app_name"
-                 android:icon="@drawable/ic_launcher"
-    >
+<!-- ––––––––––––––––––––––––––––––––––––––––––––––––––––––– {{{1 ––––––––––
+ –  Copyright @ 2007 … 2013  Martin Krischik
+ –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ –  This program is free software: you can redistribute it and/or modify
+ –  it under the terms of the GNU General Public License as published by
+ –  the Free Software Foundation, either version 3 of the License, or
+ –  (at your option) any later version.
+ –
+ –  This program is distributed in the hope that it will be useful,
+ –  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ –  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ –  GNU General Public License for more details.
+ –
+ –  You should have received a copy of the GNU General Public License
+ –  along with this program.  If not, see http://www.gnu.org/licenses/
+ –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ –  $Author: krischik $
+ –
+ –  $Revision: 6838 $
+ –  $Date: 2015-08-24 13:50:24 +0200 (Mo, 24 Aug 2015) $
+ –
+ –  $Id: AndroidManifest.xml 6838 2015-08-24 11:50:24Z krischik $
+ –  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/Calculator/Droid/AndroidManifest.xml $
+ ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
 
-    </application>
-
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.krischik.androidtestlib">
 </manifest>
+
+<!-- vim: set nowrap tabstop=8 shiftwidth=2 softtabstop=2 expandtab :-->
+<!-- vim: set textwidth=0 filetype=xml foldmethod=marker nospell :-->

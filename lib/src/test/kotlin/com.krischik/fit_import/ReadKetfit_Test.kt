@@ -38,7 +38,7 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
    /**
     * <p>logging tag</p>
     */
-   private val TAG = javaClass<ReadKetfit_Test>().getName ()
+   private val TAG = ReadKetfit_Test::class.qualifiedName
    /**
     * <p>logger</p>
     */
@@ -48,7 +48,7 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
       Init_Logger ()
 
       given ("a stream with header") {
-	 val testData = javaClass<ReadKetfit_Test>() getResourceAsStream "/kettfit.csv"
+	 val testData = ReadKetfit_Test::class.java getResourceAsStream "/kettfit.csv"
 
 	 on ("opening and closing the file") {
 	    val test = ReadKetfit (testData)
@@ -60,7 +60,7 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
       } // given
 
       given ("a stream with test data") {
-	 val testData = javaClass<ReadKetfit_Test>() getResourceAsStream "/kettfit.csv"
+	 val testData = ReadKetfit_Test::class.java getResourceAsStream "/kettfit.csv"
 
 	 on ("reading first data") {
 	    val test = ReadKetfit (testData)
