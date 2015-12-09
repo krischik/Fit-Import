@@ -16,11 +16,9 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
-import org.exparity.hamcrest.date.IsSameInstant.sameInstant
+import org.exparity.hamcrest.date.DateMatchers.sameInstant
 import org.exparity.hamcrest.date.Months
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.beans.HasPropertyWithValue.hasProperty
-import org.hamcrest.core.AllOf.allOf
 import org.hamcrest.core.IsEqual.equalTo
 import org.hamcrest.core.IsNull.notNullValue
 
@@ -48,7 +46,7 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
       Init_Logger ()
 
       given ("a stream with header") {
-	 val testData = ReadKetfit_Test::class.java getResourceAsStream "/kettfit.csv"
+	 val testData = ReadKetfit_Test::class.java.getResourceAsStream("/kettfit.csv")
 
 	 on ("opening and closing the file") {
 	    val test = ReadKetfit (testData)
@@ -60,7 +58,7 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
       } // given
 
       given ("a stream with test data") {
-	 val testData = ReadKetfit_Test::class.java getResourceAsStream "/kettfit.csv"
+	 val testData = ReadKetfit_Test::class.java.getResourceAsStream("/kettfit.csv")
 
 	 on ("reading first data") {
 	    val test = ReadKetfit (testData)
