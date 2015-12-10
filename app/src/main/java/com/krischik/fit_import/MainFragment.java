@@ -1,19 +1,16 @@
-/********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
- ***************************************************************************
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see http://www.gnu.org/licenses/
- ********************************************************** }}}1 **********/
+/**********************************************************
+ * {{{1 *********** Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ * ************************************************************************** This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ * <p>
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along with this program.  If not, see
+ * http://www.gnu.org/licenses/ ********************************************************* }}}1
+ **********/
 
 package com.krischik.fit_import;
 
@@ -71,7 +68,7 @@ public class MainFragment
       }
       if (Withings_Button != null)
       {
-         Withings_Button.setEnabled (connected);
+	 Withings_Button.setEnabled (connected);
       }
       return;
    } // doConnect
@@ -86,14 +83,12 @@ public class MainFragment
    public void Do_Withings_Button ()
    {
       if (Google_Fit != null)
-      Google_Fit.insertWeight (new Withings (
-              /* Time    => */new java.util.Date (),
-              /* Weight  => */80.0f,
-              /* Fat     => */20.0f,
-              /* No_Fat  => */80.0f - 20.0f,
-              /* Comment => */"Withings"));
+      {
+      }
       else
-      android.util.Log.e (TAG, "LOG00010: No Google_Fit instance!");
+      {
+         android.util.Log.e (TAG, "LOG00010: No Google_Fit instance!");
+      }
 
       return;
    } // doConnect
@@ -108,7 +103,8 @@ public class MainFragment
    public void Do_Ketfit_Button ()
    {
       if (Google_Fit != null)
-      Google_Fit.insertKetfit (new  Ketfit (
+      {
+	 Google_Fit.Insert_Training (new Ketfit (
               /* Start  => */new java.util.Date (),
               /* End    => */new java.util.Date (),
               /* Watt   => */130,
@@ -117,15 +113,18 @@ public class MainFragment
               /* kCal   => */500,
               /* km     => */6,
               /* ω      => */0));
+      }
       else
-         android.util.Log.e (TAG, "LOG00000: No Google_Fit instance!");
+      {
+	 android.util.Log.e (TAG, "LOG00000: No Google_Fit instance!");
+      }
 
       return;
    } // doConnect
 
-   public void setGoogle_Fit(@NotNull GoogleFit google_Fit)
+   public void setGoogle_Fit (@NotNull GoogleFit google_Fit)
    {
-      java.util.Objects.requireNonNull(google_Fit);
+      java.util.Objects.requireNonNull (google_Fit);
 
       Google_Fit = google_Fit;
 

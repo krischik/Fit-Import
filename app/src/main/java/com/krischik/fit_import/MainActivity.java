@@ -43,6 +43,12 @@ public class MainActivity
    @org.androidannotations.annotations.FragmentById
    @Nullable
    protected MainFragment Main_Fragment;
+
+   public com.krischik.fit_import.GoogleFit getGoogle_Fit ()
+   {
+      return Google_Fit;
+   }
+
    /**
     * <p>Google FIT Model</p>
     */
@@ -75,6 +81,8 @@ public class MainActivity
       {
          Main_Fragment.doConnect (connected);
       } // if
+
+      this.connected=connected;
 
       return;
    } // doConnect

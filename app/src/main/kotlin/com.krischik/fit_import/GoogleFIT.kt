@@ -30,7 +30,7 @@ import com.google.android.gms.fitness.data.Device
  * double authentication
  */
 
-class GoogleFit (
+class GoogleFit(
    val owner: IMainFragment,
    var Authentication_In_Progress: Boolean) :
    com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks,
@@ -64,15 +64,15 @@ class GoogleFit (
    init
    {
       val Google_API_Builder = com.google.android.gms.common.api.GoogleApiClient.Builder (
-	 owner.getActivity())
+         owner.getActivity())
       val Location = com.google.android.gms.common.api.Scope (
-	 com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ_WRITE)
+         com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ_WRITE)
       val Activity = com.google.android.gms.common.api.Scope (
-	 com.google.android.gms.common.Scopes.FITNESS_ACTIVITY_READ_WRITE)
+         com.google.android.gms.common.Scopes.FITNESS_ACTIVITY_READ_WRITE)
       val Body = com.google.android.gms.common.api.Scope (
-	 com.google.android.gms.common.Scopes.FITNESS_BODY_READ_WRITE)
+         com.google.android.gms.common.Scopes.FITNESS_BODY_READ_WRITE)
       val Nutrition = com.google.android.gms.common.api.Scope (
-	 com.google.android.gms.common.Scopes.FITNESS_NUTRITION_READ_WRITE)
+         com.google.android.gms.common.Scopes.FITNESS_NUTRITION_READ_WRITE)
 
       Google_API_Builder.addApi (com.google.android.gms.fitness.Fitness.HISTORY_API)
       Google_API_Builder.addScope (Location)
@@ -104,11 +104,11 @@ class GoogleFit (
 
       if (resultCode == android.app.Activity.RESULT_OK)
       {
-	 // Make sure the app is not already connected or attempting to connect
-	 if (!Google_API_Client.isConnecting () && !Google_API_Client.isConnected ())
-	 {
-	    Google_API_Client.connect ()
-	 } // if
+         // Make sure the app is not already connected or attempting to connect
+         if (!Google_API_Client.isConnecting () && !Google_API_Client.isConnected ())
+         {
+            Google_API_Client.connect ()
+         } // if
       } // if
 
       return
@@ -135,7 +135,7 @@ class GoogleFit (
 
       if (Google_API_Client.isConnected ())
       {
-	 Google_API_Client.disconnect ()
+         Google_API_Client.disconnect ()
       } // if
    } // disconnect
 
@@ -146,12 +146,12 @@ class GoogleFit (
       // you'll be able to determine the reason and react to it here.
       if (i == com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST)
       {
-	 android.util.Log.e (TAG, "LOG00020: Google-Fit connection lost.  Cause: Network Lost.")
+         android.util.Log.e (TAG, "LOG00020: Google-Fit connection lost.  Cause: Network Lost.")
       }
       else if (i == com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED)
       {
-	 android.util.Log.e (TAG,
-	    "LOG00030: Google-Fit Connection lost.  Reason: Service Disconnected")
+         android.util.Log.e (TAG,
+            "LOG00030: Google-Fit Connection lost.  Reason: Service Disconnected")
       } // if
 
       return
@@ -164,79 +164,111 @@ class GoogleFit (
    override fun onConnectionFailed(result: com.google.android.gms.common.ConnectionResult)
    {
       android.util.Log.e (TAG,
-	 "LOG00040: Connection to Google-Fit failed. Cause: " + result.toString ())
+         "LOG00040: Connection to Google-Fit failed. Cause: " + result.toString ())
 
       if (!result.hasResolution ())
       {
-	 // Show the localized error dialog
-	 val errorDialog = com.google.android.gms.common.GooglePlayServicesUtil.getErrorDialog (
-	    result.getErrorCode (),
-	    owner.getActivity(),
-	    0)
-	 errorDialog.show ()
+         // Show the localized error dialog
+         val errorDialog = com.google.android.gms.common.GooglePlayServicesUtil.getErrorDialog (
+            result.getErrorCode (),
+            owner.getActivity(),
+            0)
+         errorDialog.show ()
       }
       else if (!Authentication_In_Progress)
       {
-	 // The failure has a resolution. Resolve it.
-	 // Called typically when the app is not yet authorized, and an
-	 // authorization dialog is displayed to the user.
+         // The failure has a resolution. Resolve it.
+         // Called typically when the app is not yet authorized, and an
+         // authorization dialog is displayed to the user.
 
-	 try
-	 {
-	    android.util.Log.i (TAG, "LOG00050: Attempting to resolve failed connection")
-	    Authentication_In_Progress = true
-	    result.startResolutionForResult (owner.getActivity(), REQUEST_OAUTH)
-	 }
-	 catch (exception: android.content.IntentSender.SendIntentException)
-	 {
-	    android.util.Log.e (TAG,
-	       "LOG00060: Exception while starting resolution activity",
-	       exception)
-	 } // try
+         try
+         {
+            android.util.Log.i (TAG, "LOG00050: Attempting to resolve failed connection")
+            Authentication_In_Progress = true
+            result.startResolutionForResult (owner.getActivity(), REQUEST_OAUTH)
+         }
+         catch (exception: android.content.IntentSender.SendIntentException)
+         {
+            android.util.Log.e (TAG,
+               "LOG00060: Exception while starting resolution activity",
+               exception)
+         } // try
       } // if
 
       return
    }  // onConnectionFailed
 
    /**
-    * <p>store withings weight</p>
+    * This method creates a dataset object to be able to insert data in google fit
+    * @param dataType DataType Fitness Data Type object
+    * @param dataSourceType int Data Source Id. For example, DataSource.TYPE_RAW
+    * @param values Object Values for the fitness data. They must be int or float
+    * @param startTime long Time when the fitness activity started
+    * @param endTime long Time when the fitness activity finished
+    * @param timeUnit TimeUnit Time unit in which period is expressed
+    * @return
     */
    @hugo.weaving.DebugLog
-   public fun insertWeight(withings: Withings)
+   private fun Create_Data_For_Request(
+      Data_Type: com.google.android.gms.fitness.data.DataType,
+      Data_Source_Type: Int,
+      Data_Source_Name: String,
+      Start_Time: java.util.Date,
+      End_Time: java.util.Date = Start_Time,
+      Set_Values: (Data_Point: com.google.android.gms.fitness.data.DataPoint) -> Unit):
+      com.google.android.gms.fitness.data.DataSet
    {
       val Data_Source_Builder = com.google.android.gms.fitness.data.DataSource.Builder()
 
       Data_Source_Builder.setAppPackageName(owner.getActivity())
-      Data_Source_Builder.setDataType(com.google.android.gms.fitness.data.DataType.TYPE_WEIGHT)
-      Data_Source_Builder.setName(TAG + " – Withings weight")
-      Data_Source_Builder.setType(com.google.android.gms.fitness.data.DataSource.TYPE_RAW)
-      //      Data_Source_Builder.setDevice(Device())
+      Data_Source_Builder.setDataType(Data_Type)
+      Data_Source_Builder.setName("GoogleFIT Importer – " + Data_Source_Name)
+      Data_Source_Builder.setType(Data_Source_Type)
 
       val Data_Source = Data_Source_Builder.build()
       val Data_Set = com.google.android.gms.fitness.data.DataSet.create(Data_Source)
       val Data_Point = Data_Set.createDataPoint()
 
       Data_Point.setTimeInterval(
-	 /* startTime => */withings.Time.getTime(),
-	 /* endTime   => */withings.Time.getTime(),
-	 /* timeUnit  => */java.util.concurrent.TimeUnit.MILLISECONDS)
+         /* startTime => */Start_Time.time,
+         /* endTime   => */End_Time.time,
+         /* timeUnit  => */java.util.concurrent.TimeUnit.MILLISECONDS)
 
-      val Weight_Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_WEIGHT)
+      Set_Values (Data_Point)
 
-      Weight_Field.setFloat(withings.Weight)
+      Data_Set.add (Data_Point);
 
-      Data_Set.add(Data_Point)
+      return Data_Set;
+   }
+
+   /**
+    * <p>store withings weight</p>
+    */
+   @hugo.weaving.DebugLog
+   public fun Insert_Weight(withings: Withings)
+   {
+      val Data_Set = Create_Data_For_Request(
+         Data_Type = com.google.android.gms.fitness.data.DataType.TYPE_WEIGHT,
+         Data_Source_Type = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
+         Data_Source_Name = "Withings weight",
+         Start_Time = withings.Time,
+         Set_Values = {
+            Data_Point ->
+            val Weight_Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_WEIGHT)
+
+            Weight_Field.setFloat(withings.Weight)
+         })
 
       val Result = com.google.android.gms.fitness.Fitness.HistoryApi.insertData (
-	 Google_API_Client,
-	 Data_Set)
+         Google_API_Client,
+         Data_Set)
 
-      Result.setResultCallback ({ Status ->
-	 if (!Status.isSuccess)
-	 {
-	    android.util.Log.e (TAG,
-	       "There was a problem inserting the weight: " + Status.statusMessage);
-	 } // if
+      Result.setResultCallback ({
+         Status ->
+         if (!Status.isSuccess)
+         {
+            android.util.Log.e (TAG, "There was a problem inserting the weight: " + Status.statusMessage);
+         } // if
       }, 1, java.util.concurrent.TimeUnit.MINUTES)
       return
    } // insertWeight
@@ -245,20 +277,37 @@ class GoogleFit (
     * <p>store withings weight</p>
     */
    @hugo.weaving.DebugLog
-   public fun insertKetfit(ketfit: Ketfit)
+   public fun Insert_Training(ketfit: Ketfit)
    {
-      val Data_Source_Builder = com.google.android.gms.fitness.data.DataSource.Builder()
+      val Data_Set = Create_Data_For_Request(
+         Data_Type = com.google.android.gms.fitness.data.DataType.TYPE_ACTIVITY_SEGMENT,
+         Data_Source_Type = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
+         Data_Source_Name = "Ketfit training",
+         Start_Time = ketfit.Start,
+         End_Time = ketfit.End,
+         Set_Values = {
+            Data_Point ->
+            val Activity = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_ACTIVITY)
 
-      Data_Source_Builder.setAppPackageName(owner.getActivity())
-      Data_Source_Builder.setDataType(com.google.android.gms.fitness.data.DataType.TYPE_HEART_RATE_BPM)
-      Data_Source_Builder.setName(TAG + " – Ketfit training")
-      Data_Source_Builder.setType(com.google.android.gms.fitness.data.DataSource.TYPE_RAW)
+            Activity.setActivity(com.google.android.gms.fitness.FitnessActivities.ELLIPTICAL);
 
-      val Data_Source = Data_Source_Builder.build()
-      val Data_Set = com.google.android.gms.fitness.data.DataSet.create(Data_Source)
-      val Data_Point = Data_Set.createDataPoint()
+            val BPM = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_BPM)
 
-      Data_Set.add(Data_Point)
+            BPM.setInt(ketfit.Puls);
+         })
+
+      val Result = com.google.android.gms.fitness.Fitness.HistoryApi.insertData (
+         Google_API_Client,
+         Data_Set)
+
+      Result.setResultCallback ({
+         Status ->
+         if (!Status.isSuccess)
+         {
+            android.util.Log.e (TAG, "There was a problem inserting the weight: " + Status.statusMessage);
+         } // if
+      }, 1, java.util.concurrent.TimeUnit.MINUTES)
+
 
       // com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, Data_Set)
       return

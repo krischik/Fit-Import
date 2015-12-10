@@ -18,6 +18,7 @@
 package com.krischik.fit_import
 
 import com.krischik.Second
+import com.krischik.Minutes
 
 /**
  * Created by krma1 on 08.12.15.
@@ -25,7 +26,7 @@ import com.krischik.Second
  * @version 1.0
  * @since 1.0
  */
-class GoogleFIT_Test :
+public class GoogleFIT_Test :
    android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java)
 {
    /**
@@ -44,6 +45,11 @@ class GoogleFIT_Test :
     * Robotium helper instance
     */
    private var Solo: com.robotium.solo.Solo? = null
+
+   /**
+    * Randim number generator
+    */
+   private val Random = java.util.Random (java.util.Date ().time)
 
    /**
     * get the activity and the text view to test
@@ -92,14 +98,62 @@ class GoogleFIT_Test :
     */
    @android.test.suitebuilder.annotation.Smoke
    @android.test.suitebuilder.annotation.SmallTest
-   fun test_00_Open()
+   fun test_00_Insert_Weight()
    {
-      android.util.Log.d (TAG, "+ test_00_Open")
+      android.util.Log.d (TAG, "+ test_00_Insert_Weight")
 
-      Solo?.sleep (Second (0.5f))
+      val activity = Activity?.get()
 
-      android.util.Log.d (TAG, "- test_00_Open")
-   } // test_00_Open
+      com.krischik.test.Utilities.Async_Assert_True (
+         Message = { "Application should connect to Google Fit" },
+         Condition = { activity?.isConnected ?: false },
+         Timeout =  Second(30.0f).toLong())
+
+      val Weight = 80.0f + (Random.nextFloat() * 10.0f - 5.0f)
+      val Withings = com.krischik.fit_import.Withings (
+         /* Time    => */java.util.Date (),
+         /* Weight  => */Weight,
+         /* Fat     => */20.0f,
+         /* No_Fat  => */Weight - 20.0f,
+         /* Comment => */"Withings")
+      val Google_Fit = activity?.getGoogle_Fit()
+      Google_Fit?.Insert_Weight (Withings)
+
+      android.util.Log.d (TAG, "- test_00_Insert_Weight")
+   } // test_00_Insert_Weight
+   /**
+    * Test opening the main activity (smoke test / release compatible version)
+    */
+   @android.test.suitebuilder.annotation.Smoke
+   @android.test.suitebuilder.annotation.SmallTest
+   fun test_01_Insert_Training()
+   {
+      android.util.Log.d (TAG, "+ test_01_Insert_Training")
+
+      val activity = Activity?.get()
+
+      com.krischik.test.Utilities.Async_Assert_True (
+         Message = { "Application should connect to Google Fit" },
+         Condition = { activity?.isConnected ?: false },
+         Timeout =  Second(30.0f).toLong())
+
+      val Puls = 140 + (Random.nextInt (20) - 10)
+      val End = java.util.Date ()
+      val Start = java.util.Date (End.time - Minutes(30.0f))
+      val Ketfit = Ketfit (
+         /* Start  => */Start,
+         /* End    => */End,
+         /* Watt   => */130,
+         /* Puls   => */Puls,
+         /* Umin   => */70,
+         /* kCal   => */500,
+         /* km     => */6,
+         /* ω      => */0)
+      val Google_Fit = activity?.getGoogle_Fit()
+      Google_Fit?.Insert_Training (Ketfit);
+
+      android.util.Log.d (TAG, "- test_01_Insert_Training")
+   } // test_01_Insert_Training
 } // GoogleFIT_Test
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

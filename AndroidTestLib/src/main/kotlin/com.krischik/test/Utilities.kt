@@ -26,7 +26,6 @@ package com.krischik.test
 import java.util.logging.Logger
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
-import org.exparity.hamcrest.date.Months
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.beans.HasPropertyWithValue.hasProperty
 import org.hamcrest.core.AllOf.allOf
@@ -145,7 +144,7 @@ object Utilities
 //   {
 //      () -> "Not true after timeout"
 //   }
-   public fun Async_Assert_True (
+   public tailrec fun Async_Assert_True (
       Message: () -> String,
       Condition: () -> Boolean,
       Timeout: Long = Second (10.0f),
