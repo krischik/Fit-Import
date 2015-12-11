@@ -223,7 +223,7 @@ class GoogleFit(
     * @return
     */
    @hugo.weaving.DebugLog
-   private fun createDataForRequest(
+   private fun createDataSet(
       dataType: com.google.android.gms.fitness.data.DataType,
       sourceType: Int,
       sourceName: String,
@@ -267,7 +267,7 @@ class GoogleFit(
    {
       run (
          {
-            val dataSet = createDataForRequest(
+            val dataSet = createDataSet(
                dataType = com.google.android.gms.fitness.data.DataType.TYPE_WEIGHT,
                sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
                sourceName = "Withings weight",
@@ -280,22 +280,23 @@ class GoogleFit(
                   Weight_Field.setFloat(withings.weight)
                })
 
-            val Result = com.google.android.gms.fitness.Fitness.HistoryApi.insertData (
-               Google_API_Client,
-               dataSet)
+            val Result = com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, dataSet)
 
-            Result.setResultCallback ({
-               status ->
-               if (!status.isSuccess)
+            Result.setResultCallback (
                {
-                  android.util.Log.e (TAG, "There was a problem inserting the weight: " + status.statusMessage);
-               } // if
-            }, 1, java.util.concurrent.TimeUnit.MINUTES)
+                  status ->
+                  if (!status.isSuccess)
+                  {
+                     android.util.Log.e (TAG, "There was a problem inserting the weight: " + status.statusMessage);
+                  } // if
+               },
+               /* time => */ 1,
+               /* unit => */ java.util.concurrent.TimeUnit.MINUTES)
          })
 
       if (withings.fat != 0.0f)
       {
-         val dataSet = createDataForRequest(
+         val dataSet = createDataSet(
             dataType = com.google.android.gms.fitness.data.DataType.TYPE_BODY_FAT_PERCENTAGE,
             sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
             sourceName = "Withings fat",
@@ -308,17 +309,18 @@ class GoogleFit(
                Weight_Field.setFloat(withings.fat / withings.weight * 100)
             })
 
-         val Result = com.google.android.gms.fitness.Fitness.HistoryApi.insertData (
-            Google_API_Client,
-            dataSet)
+         val Result = com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, dataSet)
 
-         Result.setResultCallback ({
-            status ->
-            if (!status.isSuccess)
+         Result.setResultCallback (
             {
-               android.util.Log.e (TAG, "There was a problem inserting the fat content: " + status.statusMessage);
-            } // if
-         }, 1, java.util.concurrent.TimeUnit.MINUTES)
+               status ->
+               if (!status.isSuccess)
+               {
+                  android.util.Log.e (TAG, "There was a problem inserting the fat content: " + status.statusMessage);
+               } // if
+            },
+            /* time => */  1,
+            /* unit => */  java.util.concurrent.TimeUnit.MINUTES)
       }
       return
    } // insertWeight
@@ -340,131 +342,109 @@ class GoogleFit(
       val requestBuilder = com.google.android.gms.fitness.request.SessionInsertRequest.Builder()
 
       requestBuilder.setSession (session)
-
-      run (
+      requestBuilder.addDataSet (createDataSet(
+         dataType = com.google.android.gms.fitness.data.DataType.TYPE_ACTIVITY_SAMPLE,
+         sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
+         sourceName = "Ketfit training",
+         device = Kettler_Trainer,
+         startTime = ketfit.start,
+         endTime = ketfit.end,
+         setValues =
          {
-            val dataSet = createDataForRequest(
-               dataType = com.google.android.gms.fitness.data.DataType.TYPE_ACTIVITY_SAMPLE,
-               sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
-               sourceName = "Ketfit training",
-               device = Kettler_Trainer,
-               startTime = ketfit.start,
-               endTime = ketfit.end,
-               setValues = {
-                  Data_Point ->
-                  val Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_ACTIVITY)
+            Data_Point ->
+            val Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_ACTIVITY)
 
-                  Field.setActivity(com.google.android.gms.fitness.FitnessActivities.ELLIPTICAL);
-               })
-
-            requestBuilder.addDataSet(dataSet)
-         })
-      run (
+            Field.setActivity(com.google.android.gms.fitness.FitnessActivities.ELLIPTICAL);
+         }))
+      requestBuilder.addDataSet (createDataSet(
+         dataType = com.google.android.gms.fitness.data.DataType.TYPE_HEART_RATE_BPM,
+         sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
+         sourceName = "Ketfit training",
+         device = Kettler_Trainer,
+         startTime = ketfit.start,
+         endTime = ketfit.end,
+         setValues =
          {
-            val dataSet = createDataForRequest(
-               dataType = com.google.android.gms.fitness.data.DataType.TYPE_HEART_RATE_BPM,
-               sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
-               sourceName = "Ketfit training",
-               device = Kettler_Trainer,
-               startTime = ketfit.start,
-               endTime = ketfit.end,
-               setValues = {
-                  Data_Point ->
+            Data_Point ->
 
-                  val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_BPM)
+            val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_BPM)
 
-                  field.setFloat(ketfit.puls.toFloat());
-               })
-
-            requestBuilder.addDataSet(dataSet)
-         })
-      run (
+            field.setFloat(ketfit.puls.toFloat());
+         }))
+      requestBuilder.addDataSet (createDataSet(
+         dataType = com.google.android.gms.fitness.data.DataType.TYPE_POWER_SAMPLE,
+         sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
+         sourceName = "Ketfit training",
+         device = Kettler_Trainer,
+         startTime = ketfit.start,
+         endTime = ketfit.end,
+         setValues =
          {
-            val dataSet = createDataForRequest(
-               dataType = com.google.android.gms.fitness.data.DataType.TYPE_POWER_SAMPLE,
-               sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
-               sourceName = "Ketfit training",
-               device = Kettler_Trainer,
-               startTime = ketfit.start,
-               endTime = ketfit.end,
-               setValues = {
-                  Data_Point ->
+            Data_Point ->
 
-                  val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_WATTS)
+            val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_WATTS)
 
-                  field.setFloat(ketfit.watt.toFloat());
-               })
-
-            requestBuilder.addDataSet(dataSet)
-         })
-      run (
+            field.setFloat(ketfit.watt.toFloat());
+         }))
+      requestBuilder.addDataSet (createDataSet(
+         dataType = com.google.android.gms.fitness.data.DataType.TYPE_CYCLING_WHEEL_RPM,
+         sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
+         sourceName = "Ketfit training",
+         device = Kettler_Trainer,
+         startTime = ketfit.start,
+         endTime = ketfit.end,
+         setValues =
          {
-            val dataSet = createDataForRequest(
-               dataType = com.google.android.gms.fitness.data.DataType.TYPE_CYCLING_WHEEL_RPM,
-               sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
-               sourceName = "Ketfit training",
-               device = Kettler_Trainer,
-               startTime = ketfit.start,
-               endTime = ketfit.end,
-               setValues = {
-                  Data_Point ->
+            Data_Point ->
 
-                  val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_RPM)
+            val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_RPM)
 
-                  field.setFloat(ketfit.uMin.toFloat());
-               })
-
-            requestBuilder.addDataSet(dataSet)
-         })
-      run (
+            field.setFloat(ketfit.uMin.toFloat());
+         }))
+      requestBuilder.addDataSet (createDataSet(
+         dataType = com.google.android.gms.fitness.data.DataType.TYPE_CALORIES_EXPENDED,
+         sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
+         sourceName = "Ketfit training",
+         device = Kettler_Trainer,
+         startTime = ketfit.start,
+         endTime = ketfit.end,
+         setValues =
          {
-            val dataSet = createDataForRequest(
-               dataType = com.google.android.gms.fitness.data.DataType.TYPE_CALORIES_EXPENDED,
-               sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
-               sourceName = "Ketfit training",
-               device = Kettler_Trainer,
-               startTime = ketfit.start,
-               endTime = ketfit.end,
-               setValues = {
-                  Data_Point ->
+            Data_Point ->
 
-                  val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_CALORIES)
+            val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_CALORIES)
 
-                  field.setFloat(ketfit.kCal.toFloat ());
-               })
-
-            requestBuilder.addDataSet(dataSet)
-         })
-      run (
+            field.setFloat(ketfit.kCal.toFloat ());
+         }))
+      requestBuilder.addDataSet (createDataSet(
+         dataType = com.google.android.gms.fitness.data.DataType.TYPE_DISTANCE_CUMULATIVE,
+         sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
+         sourceName = "Ketfit training",
+         device = Kettler_Trainer,
+         startTime = ketfit.start,
+         endTime = ketfit.end,
+         setValues =
          {
-            val dataSet = createDataForRequest(
-               dataType = com.google.android.gms.fitness.data.DataType.TYPE_DISTANCE_CUMULATIVE,
-               sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
-               sourceName = "Ketfit training",
-               device = Kettler_Trainer,
-               startTime = ketfit.start,
-               endTime = ketfit.end,
-               setValues = {
-                  Data_Point ->
+            Data_Point ->
 
-                  val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_DISTANCE)
+            val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_DISTANCE)
 
-                  field.setFloat(ketfit.km.toFloat ());
-               })
-
-            requestBuilder.addDataSet(dataSet)
-         })
+            field.setFloat(ketfit.km.toFloat ());
+         }))
 
       val request = requestBuilder.build();
       val Result = com.google.android.gms.fitness.Fitness.SessionsApi.insertSession (Google_API_Client, request)
 
-      Result.setResultCallback ({
-         status ->
-         if (!status.isSuccess)
+      Result.setResultCallback (
          {
-            android.util.Log.e (TAG, "There was a problem inserting the training session: " + status.statusMessage);
-         } // if
-      }, 1, java.util.concurrent.TimeUnit.MINUTES)
+            status ->
+            if (!status.isSuccess)
+            {
+               android.util.Log.e (TAG, "There was a problem inserting the training session: " + status.statusMessage);
+            } // if
+         },
+         /* time => */ 1,
+         /* unit => */ java.util.concurrent.TimeUnit.MINUTES)
 
       // com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, Data_Set)
       return

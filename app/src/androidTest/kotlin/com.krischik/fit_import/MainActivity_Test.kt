@@ -84,6 +84,8 @@ public class Main_Activity_Test :
 
       super.tearDown ()
 
+      Solo?.sleep (Second (0.5f))
+
       android.util.Log.d (TAG, "- tearDown")
    } // tearDown
 
