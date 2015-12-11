@@ -108,12 +108,13 @@ public class GoogleFIT_Test :
          condition = { activity?.isConnected ?: false },
          timeout =  com.krischik.test.Utilities.seconds(30.0f))
 
-      val weight = 80.0f + (Random.nextFloat() * 10.0f - 5.0f)
+      val weight = 80.0f + (Random.nextFloat() * 20.0f - 10.0f)
+      val fat = 20.0f + (Random.nextFloat() * 10.0f - 5.0f)
       val withings = com.krischik.fit_import.Withings (
          /* Time    => */java.util.Date (),
          /* weight  => */weight,
-         /* Fat     => */20.0f,
-         /* No_Fat  => */weight - 20.0f,
+         /* Fat     => */fat,
+         /* No_Fat  => */weight - fat,
          /* Comment => */"test_00_Insert_Weight")
       val Google_Fit = activity?.getGoogleFit()
       Google_Fit?.insertWeight (withings)
@@ -137,16 +138,20 @@ public class GoogleFIT_Test :
          timeout =  com.krischik.test.Utilities.seconds(30.0f))
 
       val puls = 140 + (Random.nextInt (20) - 10)
+      val watt = 160 + (Random.nextInt (20) - 10)
+      val uMin = 70  + (Random.nextInt (20) - 10)
+      val kCal = 500  + (Random.nextInt (100) - 50)
+      val km = 6  + (Random.nextInt (3) - 2)
       val end = java.util.Date ()
       val start = java.util.Date (end.time - com.krischik.test.Utilities.minutes(30.0f))
       val ketfit = Ketfit (
          /* start  => */start,
          /* end    => */end,
-         /* Watt   => */130,
+         /* Watt   => */watt,
          /* puls   => */puls,
-         /* Umin   => */70,
-         /* kCal   => */500,
-         /* km     => */6,
+         /* Umin   => */uMin,
+         /* kCal   => */kCal,
+         /* km     => */km,
          /* ω      => */0)
       val Google_Fit = activity?.getGoogleFit()
       Google_Fit?.insertTraining (ketfit);
