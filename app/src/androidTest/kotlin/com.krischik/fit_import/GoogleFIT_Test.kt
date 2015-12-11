@@ -18,7 +18,6 @@
 package com.krischik.fit_import
 
 import com.krischik.Second
-import com.krischik.Minutes
 
 /**
  * Created by krma1 on 08.12.15.
@@ -84,9 +83,9 @@ public class GoogleFIT_Test :
    {
       android.util.Log.d (TAG, "+ tearDown")
 
-      Activity?.clear ()
-      Activity = null
-      Instrument = null
+      //Activity?.clear ()
+      //Activity = null
+      //Instrument = null
 
       super.tearDown ()
 
@@ -104,20 +103,20 @@ public class GoogleFIT_Test :
 
       val activity = Activity?.get()
 
-      com.krischik.test.Utilities.Async_Assert_True (
-         Message = { "Application should connect to Google Fit" },
-         Condition = { activity?.isConnected ?: false },
-         Timeout =  Second(30.0f).toLong())
+      com.krischik.test.Utilities.asyncAssertTrue (
+         message = { "Application should connect to Google Fit" },
+         condition = { activity?.isConnected ?: false },
+         timeout =  com.krischik.test.Utilities.seconds(30.0f))
 
-      val Weight = 80.0f + (Random.nextFloat() * 10.0f - 5.0f)
-      val Withings = com.krischik.fit_import.Withings (
+      val weight = 80.0f + (Random.nextFloat() * 10.0f - 5.0f)
+      val withings = com.krischik.fit_import.Withings (
          /* Time    => */java.util.Date (),
-         /* Weight  => */Weight,
+         /* weight  => */weight,
          /* Fat     => */20.0f,
-         /* No_Fat  => */Weight - 20.0f,
-         /* Comment => */"Withings")
-      val Google_Fit = activity?.getGoogle_Fit()
-      Google_Fit?.Insert_Weight (Withings)
+         /* No_Fat  => */weight - 20.0f,
+         /* Comment => */"test_00_Insert_Weight")
+      val Google_Fit = activity?.getGoogleFit()
+      Google_Fit?.insertWeight (withings)
 
       android.util.Log.d (TAG, "- test_00_Insert_Weight")
    } // test_00_Insert_Weight
@@ -132,25 +131,25 @@ public class GoogleFIT_Test :
 
       val activity = Activity?.get()
 
-      com.krischik.test.Utilities.Async_Assert_True (
-         Message = { "Application should connect to Google Fit" },
-         Condition = { activity?.isConnected ?: false },
-         Timeout =  Second(30.0f).toLong())
+      com.krischik.test.Utilities.asyncAssertTrue (
+         message = { "Application should connect to Google Fit" },
+         condition = { activity?.isConnected ?: false },
+         timeout =  com.krischik.test.Utilities.seconds(30.0f))
 
-      val Puls = 140 + (Random.nextInt (20) - 10)
-      val End = java.util.Date ()
-      val Start = java.util.Date (End.time - Minutes(30.0f))
-      val Ketfit = Ketfit (
-         /* Start  => */Start,
-         /* End    => */End,
+      val puls = 140 + (Random.nextInt (20) - 10)
+      val end = java.util.Date ()
+      val start = java.util.Date (end.time - com.krischik.test.Utilities.minutes(30.0f))
+      val ketfit = Ketfit (
+         /* start  => */start,
+         /* end    => */end,
          /* Watt   => */130,
-         /* Puls   => */Puls,
+         /* puls   => */puls,
          /* Umin   => */70,
          /* kCal   => */500,
          /* km     => */6,
          /* ω      => */0)
-      val Google_Fit = activity?.getGoogle_Fit()
-      Google_Fit?.Insert_Training (Ketfit);
+      val Google_Fit = activity?.getGoogleFit()
+      Google_Fit?.insertTraining (ketfit);
 
       android.util.Log.d (TAG, "- test_01_Insert_Training")
    } // test_01_Insert_Training

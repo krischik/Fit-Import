@@ -58,8 +58,7 @@ public class Main_Activity_Test :
       super.setUp ()
 
       Instrument = getInstrumentation ()
-      Activity = java.lang.ref.WeakReference (getActivity ())
-
+      Activity = java.lang.ref.WeakReference (activity)
       Solo = com.robotium.solo.Solo (Instrument, Activity?.get ())
 
       android.util.Log.d (TAG, "> Instrument =" + Instrument)
@@ -79,9 +78,9 @@ public class Main_Activity_Test :
    {
       android.util.Log.d (TAG, "+ tearDown")
 
-      Activity?.clear ()
-      Activity = null
-      Instrument = null
+      // Activity?.clear ()
+      // Activity = null
+      // Instrument = null
 
       super.tearDown ()
 
@@ -100,8 +99,7 @@ public class Main_Activity_Test :
       Solo?.sleep (Second (0.5f))
 
       android.util.Log.d (TAG, "- test_00_Open")
-   } // test_00_Open
-
+   } // test_00_
 }
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

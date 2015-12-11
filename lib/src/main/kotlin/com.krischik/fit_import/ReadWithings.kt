@@ -50,7 +50,8 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
     */
    val reader = java.io.BufferedReader (inputStream);
 
-   init {
+   init
+   {
       logger.entering(TAG, "ReadWithigns", dataStream)
 
       // Skip the fist line. They are just the header.
@@ -96,17 +97,17 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
       val line = reader.readLine()
       val rawFields = line.split(',')
       val fields = rawFields.map { field -> field.trim('"') }
-      val Date = Date_Format.parse(truncateDate(fields[0]))
-      val Weight = parseFloat (fields [1]);
-      val Fat = parseFloat (fields [2]);
-      val No_Fat = parseFloat (fields [3]);
+      val date = Date_Format.parse(truncateDate(fields[0]))
+      val weight = parseFloat (fields [1]);
+      val fat = parseFloat (fields [2]);
+      val noFat = parseFloat (fields [3]);
 
       val retval = Withings(
-	 Time = Date,
-	 Weight = Weight,
-	 Fat = Fat,
-	 No_Fat = No_Fat,
-	 Comment = fields [4])
+         time = date,
+         weight = weight,
+         fat = fat,
+         noFat = noFat,
+         comment = fields [4])
 
       logger.exiting(TAG, "read", retval)
       return retval

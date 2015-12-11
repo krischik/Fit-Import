@@ -44,12 +44,12 @@ public interface IMainFragment
     *
 
     */
-   public void Do_Withings_Button ();
+   public void doWithingsButton ();
    /**
     * <p>the import ketfit button has been clicked.</p>
     *
     */
-   public void Do_Ketfit_Button ();
+   public void doKetfitButton ();
 
 } // IMainFragment
 

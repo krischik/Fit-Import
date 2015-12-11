@@ -31,11 +31,11 @@ package com.krischik.fit_import
  */
 
 data class Withings(
-   val Time: java.util.Date,
-   val Weight: Float,
-   val Fat: Float,
-   val No_Fat: Float,
-   val Comment: String)
+   val time: java.util.Date,
+   val weight: Float,
+   val fat: Float,
+   val noFat: Float,
+   val comment: String)
 
 // vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
 // vim: set textwidth=0 filetype=kotlin foldmethod=marker spell spelllang=en_gb :

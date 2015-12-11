@@ -47,7 +47,7 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
       Init_Logger ()
 
       given ("a stream with header") {
-	 val testData = ReadWithings_Test::class.java getResourceAsStream "/Withings.csv"
+	 val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
 
 	 on ("opening and closing the file") {
 	    val test = ReadWithings (testData)
@@ -59,7 +59,7 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
       } // given
 
       given ("a stream with test data") {
-	 val testData = ReadWithings_Test::class.java getResourceAsStream "/Withings.csv"
+	 val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
 	 val test = ReadWithings (testData)
 
 	 on ("reading 1st data") {
@@ -67,11 +67,11 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
 
 	    it ("should return the expexed value") {
 	       assertThat(info, notNullValue())
-	       assertThat(info.Time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
-	       assertThat(info.Weight.toDouble(), closeTo(94.34, 0.001))
-	       assertThat(info.Fat.toDouble(), closeTo(26.81, 0.001))
-	       assertThat(info.No_Fat.toDouble(), closeTo(68.43, 0.001))
-	       assertThat(info.Comment, equalTo(""))
+	       assertThat(info.time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
+	       assertThat(info.weight.toDouble(), closeTo(94.34, 0.001))
+	       assertThat(info.fat.toDouble(), closeTo(26.81, 0.001))
+	       assertThat(info.noFat.toDouble(), closeTo(68.43, 0.001))
+	       assertThat(info.comment, equalTo(""))
 	    } // if
 	 } // on
 	 on ("reading 2nd data") {
@@ -79,11 +79,11 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
 
 	    it ("should return the expexed value") {
 	       assertThat(info, notNullValue())
-	       assertThat(info.Time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
-	       assertThat(info.Weight.toDouble(), closeTo(96.77, 0.001))
-	       assertThat(info.Fat.toDouble(), closeTo(0.0, 0.001))
-	       assertThat(info.No_Fat.toDouble(), closeTo(0.0, 0.001))
-	       assertThat(info.Comment, equalTo(""))
+	       assertThat(info.time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
+	       assertThat(info.weight.toDouble(), closeTo(96.77, 0.001))
+	       assertThat(info.fat.toDouble(), closeTo(0.0, 0.001))
+	       assertThat(info.noFat.toDouble(), closeTo(0.0, 0.001))
+	       assertThat(info.comment, equalTo(""))
 	    } // if
 	 } // on
 	 // test.close ()

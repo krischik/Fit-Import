@@ -38,19 +38,19 @@ public class MainFragment
    /**
     * <p>Google FIT Model</p>
     */
-   private GoogleFit Google_Fit;
+   private GoogleFit googleFit;
    /**
     * <p>Import Ketfit CVS button</p>
     */
-   @org.androidannotations.annotations.ViewById
+   @org.androidannotations.annotations.ViewById (R.id.Ketfit_Button)
    @Nullable
-   protected android.widget.Button Ketfit_Button;
+   protected android.widget.Button ketfitButton;
    /**
     * <p>Import Withings CVS button</p>
     */
-   @org.androidannotations.annotations.ViewById
+   @org.androidannotations.annotations.ViewById (R.id.Withings_Button)
    @Nullable
-   protected android.widget.Button Withings_Button;
+   protected android.widget.Button withingsButton;
 
    /**
     * <p>we are connected to Google Fit (or not)</p>
@@ -62,13 +62,13 @@ public class MainFragment
    @Override
    public void doConnect (boolean connected)
    {
-      if (Ketfit_Button != null)
+      if (ketfitButton != null)
       {
-         Ketfit_Button.setEnabled (connected);
+         ketfitButton.setEnabled (connected);
       }
-      if (Withings_Button != null)
+      if (withingsButton != null)
       {
-	 Withings_Button.setEnabled (connected);
+	 withingsButton.setEnabled (connected);
       }
       return;
    } // doConnect
@@ -80,14 +80,14 @@ public class MainFragment
    @hugo.weaving.DebugLog
    @org.androidannotations.annotations.Click (R.id.Withings_Button)
    @Override
-   public void Do_Withings_Button ()
+   public void doWithingsButton ()
    {
-      if (Google_Fit != null)
+      if (googleFit != null)
       {
       }
       else
       {
-         android.util.Log.e (TAG, "LOG00010: No Google_Fit instance!");
+         android.util.Log.e (TAG, "LOG00010: No googleFit instance!");
       }
 
       return;
@@ -100,11 +100,11 @@ public class MainFragment
    @hugo.weaving.DebugLog
    @org.androidannotations.annotations.Click (R.id.Ketfit_Button)
    @Override
-   public void Do_Ketfit_Button ()
+   public void doKetfitButton ()
    {
-      if (Google_Fit != null)
+      if (googleFit != null)
       {
-	 Google_Fit.Insert_Training (new Ketfit (
+	 googleFit.insertTraining (new Ketfit (
               /* Start  => */new java.util.Date (),
               /* End    => */new java.util.Date (),
               /* Watt   => */130,
@@ -116,17 +116,17 @@ public class MainFragment
       }
       else
       {
-	 android.util.Log.e (TAG, "LOG00000: No Google_Fit instance!");
+	 android.util.Log.e (TAG, "LOG00000: No googleFit instance!");
       }
 
       return;
    } // doConnect
 
-   public void setGoogle_Fit (@NotNull GoogleFit google_Fit)
+   public void setGoogleFit (@NotNull GoogleFit googleFit)
    {
-      java.util.Objects.requireNonNull (google_Fit);
+      java.util.Objects.requireNonNull (googleFit);
 
-      Google_Fit = google_Fit;
+      this.googleFit = googleFit;
 
       return;
    }

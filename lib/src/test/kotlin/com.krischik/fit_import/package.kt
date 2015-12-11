@@ -25,11 +25,11 @@ fun Init_Logger()
     java.io.File (" build/test-results").mkdirs()
 
     val manager = java.util.logging.LogManager.getLogManager ()
-    val properties = ReadKetfit_Test::class.java getResourceAsStream "/logging.properties"
+    val properties = ReadKetfit_Test::class.java.getResourceAsStream("/logging.properties")
 
     // Read log properties so that the class which we test can write to a log
     // file
-    manager readConfiguration properties
+    manager.readConfiguration(properties)
 } // Init_Logger
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

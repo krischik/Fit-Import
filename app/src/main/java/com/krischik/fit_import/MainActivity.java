@@ -40,19 +40,19 @@ public class MainActivity
    /**
     * <p> Calculator fragment </p>
     */
-   @org.androidannotations.annotations.FragmentById
+   @org.androidannotations.annotations.FragmentById (R.id.Main_Fragment)
    @Nullable
-   protected MainFragment Main_Fragment;
+   protected MainFragment mainFragment;
 
-   public com.krischik.fit_import.GoogleFit getGoogle_Fit ()
+   public com.krischik.fit_import.GoogleFit getGoogleFit ()
    {
-      return Google_Fit;
+      return googleFit;
    }
 
    /**
     * <p>Google FIT Model</p>
     */
-   private GoogleFit Google_Fit;
+   private GoogleFit googleFit;
    /**
     * <p>remember if we are connected</p>
     */
@@ -77,9 +77,9 @@ public class MainActivity
    @Override
    public void doConnect (boolean connected)
    {
-      if (Main_Fragment != null)
+      if (mainFragment != null)
       {
-         Main_Fragment.doConnect (connected);
+         mainFragment.doConnect (connected);
       } // if
 
       this.connected=connected;
@@ -103,9 +103,9 @@ public class MainActivity
    @Override
    protected void onActivityResult (int requestCode, int resultCode, android.content.Intent data)
    {
-      if (requestCode == GoogleFit.REQUEST_OAUTH)
+      if (requestCode == GoogleFit.Request_OAuth)
       {
-         Google_Fit.doConnect (resultCode);
+         googleFit.doConnect (resultCode);
       } // if
 
       return;
@@ -119,9 +119,9 @@ public class MainActivity
 
       boolean authInProgress;
 
-      authInProgress = savedInstanceState != null && savedInstanceState.getBoolean (GoogleFit.AUTH_PENDING);
+      authInProgress = savedInstanceState != null && savedInstanceState.getBoolean (GoogleFit.Auth_Pending);
 
-      Google_Fit = new GoogleFit (this, authInProgress);
+      googleFit = new GoogleFit (this, authInProgress);
 
       return;
    } // onCreate
@@ -131,7 +131,7 @@ public class MainActivity
    protected void onSaveInstanceState (@NotNull android.os.Bundle outState)
    {
       super.onSaveInstanceState (outState);
-      outState.putBoolean (GoogleFit.AUTH_PENDING, Google_Fit.getAuthentication_In_Progress ());
+      outState.putBoolean (GoogleFit.Auth_Pending, googleFit.getAuthentication_In_Progress ());
 
       return;
    } // onSaveInstanceState
@@ -144,7 +144,7 @@ public class MainActivity
       // Connect to the Fitness API
 
       doConnect (false);
-      Google_Fit.connect ();
+      googleFit.connect ();
 
       return;
    } // onStart
@@ -155,17 +155,17 @@ public class MainActivity
    {
       super.onStop ();
 
-      Google_Fit.disconnect ();
+      googleFit.disconnect ();
 
       return;
    } // onStop
 
    @org.androidannotations.annotations.AfterViews
-   protected void After_Views ()
+   protected void afterViews ()
    {
-      if (Main_Fragment != null)
+      if (mainFragment != null)
       {
-         Main_Fragment.setGoogle_Fit (Google_Fit);
+         mainFragment.setGoogleFit (googleFit);
       } // if
 
       return;
@@ -178,11 +178,11 @@ public class MainActivity
     */
    @hugo.weaving.DebugLog
    @Override
-   public void Do_Withings_Button ()
+   public void doWithingsButton ()
    {
-      if (Main_Fragment != null)
+      if (mainFragment != null)
       {
-         Main_Fragment.Do_Withings_Button ();
+         mainFragment.doWithingsButton ();
       } // if
 
       return;
@@ -194,11 +194,11 @@ public class MainActivity
     */
    @hugo.weaving.DebugLog
    @Override
-   public void Do_Ketfit_Button ()
+   public void doKetfitButton ()
    {
-      if (Main_Fragment != null)
+      if (mainFragment != null)
       {
-         Main_Fragment.Do_Ketfit_Button ();
+         mainFragment.doKetfitButton ();
       } // if
 
       return;

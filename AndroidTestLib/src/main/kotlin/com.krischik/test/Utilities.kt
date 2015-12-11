@@ -55,17 +55,17 @@ object Utilities
 
    /**
     * make sleep command more readable
-    * @param Second time in seconds
+    * @param seconds time in seconds
     * @return time in milli seconds
     */
-   public fun Second (Second: Float): Long = (Second * 1000).toLong ()
+   public fun seconds(seconds: Float): Long = (seconds * 1000).toLong ()
 
    /**
     * make sleep command more readable
-    * @param Minutes time in minutes
+    * @param minutes time in minutes
     * @return time in milli seconds
     */
-   public fun Minutes (Minutes: Float) :Long = (Minutes * 1000 * 60).toLong ()
+   public fun minutes(minutes: Float) :Long = (minutes * 1000 * 60).toLong ()
 
    /**
     * return an unix timestamp as string
@@ -73,12 +73,12 @@ object Utilities
     * @return
     *   string representing the current time as unix timestamp
     */
-   public fun Unix_Timestamp () = java.util.Date ().time / 1000L
+   public fun unixTimestamp() = java.util.Date ().time / 1000L
 
    /**
     * initialize the logger framework. Do not use on Android as you won't have logging.properties there.
     */
-   public fun Init_Logger ()
+   public fun initLogger()
    {
       java.io.File ("target/surefire-reports").mkdirs ()
 
@@ -99,7 +99,7 @@ object Utilities
     * @param actual
           * actual messages
     */
-   fun Assert_Messages (
+   fun assertMessages(
       expected: Int, actual: List <String>)
    {
       if (expected != 0 && actual.isEmpty())
@@ -119,7 +119,7 @@ object Utilities
     * @param Instance instance
     * @return Name and hash code
     */
-   public fun Instance_Id(Instance: Any?) =
+   public fun instanceId(Instance: Any?) =
       if (Instance == null)
       {
 	 "instance is null"
@@ -132,72 +132,72 @@ object Utilities
    /**
     * checks if the condition becomes true within the given time frame
     *
-    * @param Message
+    * @param message
     * Message to show when the assertion fails
-    * @param Condition
+    * @param condition
     * Condition to check. Should be pure (free of side effects as it is called mutliple times
-    * @param Timeout
+    * @param timeout
     * time after which the test will fail (milli sec)
-    * @param Wait
+    * @param wait
     * Wait time between tests
     */
 //   {
 //      () -> "Not true after timeout"
 //   }
-   public tailrec fun Async_Assert_True (
-      Message: () -> String,
-      Condition: () -> Boolean,
-      Timeout: Long = Second (10.0f),
-      Wait: Long = Second (0.5f))
+   public tailrec fun asyncAssertTrue(
+      message: () -> String,
+      condition: () -> Boolean,
+      timeout: Long = seconds (10.0f),
+      wait: Long = seconds (0.5f))
    {
       // Utilities.logger.entering (
       // Utilities.TAG, "Async_Assert_True Timeout", Array (Message, Timeout, Wait))
 
-      if (Condition ())
+      if (condition ())
       {
 	 return
       }
-      else if (Timeout < 0)
+      else if (timeout < 0)
       {
-	 fail (Message ())
+	 fail (message ())
       }
       else
       {
-	 Thread.sleep (Wait)
-	 Async_Assert_True (Message, Condition, Timeout - Wait, Wait)
+	 Thread.sleep (wait)
+	 asyncAssertTrue (message, condition, timeout - wait, wait)
       } // if
    } // Async_Assert_True
    /**
     *
     * checks if the condition becomes false within the given time frame
     *
-    * @param Message
+    * @param message
     * Message to show when the assertion fails
-    * @param Condition
+    * @param condition
     * Condition to check. Should be pure (free of side effects as it is called mutliple times
-    * @param Timeout
+    * @param timeout
     * time after which the test will fail (milli sec)
-    * @param Wait
+    * @param wait
     * Wait time between tests
     */
-    public fun Async_Assert_False (
-      Message: () -> String,
-      Condition: () -> Boolean,
-      Timeout: Long = Second (10.0f),
-      Wait: Long = Second (0.5f))
+    public fun asyncAssertFalse(
+      message: () -> String,
+      condition: () -> Boolean,
+      timeout: Long = seconds (10.0f),
+      wait: Long = seconds (0.5f))
    {
-      Async_Assert_True (Message, {!Condition ()}, Timeout, Wait)
+      asyncAssertTrue (message, {!condition ()}, timeout, wait)
    } // Async_Assert_False
    /**
     * test that all elements inside an array are not null
     *
     * @param Message message to display
-    * @param Test_Array array to test
+    * @param testArray array to test
     */
-    public fun <T> Assert_Array_None_Null(
-      Test_Array : Array  <T>)
+    public fun <T> assertArrayNoneNull(
+      testArray: Array  <T>)
    {
-      Test_Array.forEach (
+      testArray.forEach (
       {
 	 Element: T ->
 	    assertThat (Element, notNullValue ())
@@ -207,9 +207,9 @@ object Utilities
    /**
     * Asserted with trace. Just replace the == for a , at test which make problems.
     */
-   public fun <Element_Type> assert (Value: Array <Element_Type>, Expected: Array <Element_Type>)
+   public fun <Element_Type> assert (value: Array <Element_Type>, expected: Array <Element_Type>)
    {
-      if (! (Value == Expected))
+      if (! (value == expected))
       {
 	 // Utilities.logger.log (
 	 //   java.util.logging.Level.WARNING,
@@ -229,7 +229,7 @@ object Utilities
     * @return
     *    a string reader with the xml text
     */
-   public fun To_Reader (@NotNull stream: java.io.InputStream) = java.io.InputStreamReader (stream, "UTF-8")
+   public fun toReader(@NotNull stream: java.io.InputStream) = java.io.InputStreamReader (stream, "UTF-8")
 
 } // Utilities
 
