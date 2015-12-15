@@ -160,6 +160,30 @@ public class GoogleFIT_Test :
 
       android.util.Log.d (TAG, "- test_01_Insert_Training")
    } // test_01_Insert_Training
+   /**
+    * Test opening the main activity (smoke test / release compatible version)
+    */
+   @android.test.suitebuilder.annotation.Smoke
+   @android.test.suitebuilder.annotation.SmallTest
+   fun test_02_Insert_Weights()
+   {
+      android.util.Log.d (TAG, "+ test_02_Insert_Weights")
+
+//      val activity = Activity?.get()
+//      val Google_Fit = activity?.getGoogleFit()
+//      val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
+//      val test = ReadWithings (testData)
+
+//      test
+//      {
+//         Google_Fit?.insertWeight (withings)
+//
+//      }
+
+//      test.close ()
+
+      android.util.Log.d (TAG, "- test_02_Insert_Weights")
+   } // test_00_Insert_Weight
 } // GoogleFIT_Test
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

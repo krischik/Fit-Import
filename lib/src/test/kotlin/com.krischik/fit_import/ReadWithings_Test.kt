@@ -43,53 +43,88 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
     */
    private val logger = java.util.logging.Logger.getLogger (TAG);
 
-   init {
+   init
+   {
       Init_Logger ()
 
-      given ("a stream with header") {
-	 val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
+      given ("a stream with header")
+      {
+         val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
 
-	 on ("opening and closing the file") {
-	    val test = ReadWithings (testData)
+         on ("opening and closing the file")
+         {
+            val test = ReadWithings (testData)
 
-	    test.close ()
-	    it ("should cause no error") {
-	    } // if
-	 } // on
+            it ("should cause no error")
+            {
+               assertThat(test, notNullValue())
+            } // it
+
+            test.close ()
+         } // on
       } // given
 
       given ("a stream with test data") {
-	 val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
-	 val test = ReadWithings (testData)
+         val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
 
-	 on ("reading 1st data") {
-	    val info = test.read();
+         on ("reading two records data")
+         {
+            val test = ReadWithings (testData)
+            val record_1 = test.read()
 
-	    it ("should return the expexed value") {
-	       assertThat(info, notNullValue())
-	       assertThat(info.time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
-	       assertThat(info.weight.toDouble(), closeTo(94.34, 0.001))
-	       assertThat(info.fat.toDouble(), closeTo(26.81, 0.001))
-	       assertThat(info.noFat.toDouble(), closeTo(68.43, 0.001))
-	       assertThat(info.comment, equalTo(""))
-	    } // if
-	 } // on
-	 on ("reading 2nd data") {
-	    val info = test.read();
+            it ("should return the expected 1st value")
+            {
+               assertThat(record_1, notNullValue())
+               assertThat(record_1?.time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
+               assertThat(record_1?.weight?.toDouble(), closeTo(94.34, 0.001))
+               assertThat(record_1?.fat?.toDouble(), closeTo(26.81, 0.001))
+               assertThat(record_1?.noFat?.toDouble(), closeTo(68.43, 0.001))
+               assertThat(record_1?.comment, equalTo(""))
+            } // it
 
-	    it ("should return the expexed value") {
-	       assertThat(info, notNullValue())
-	       assertThat(info.time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
-	       assertThat(info.weight.toDouble(), closeTo(96.77, 0.001))
-	       assertThat(info.fat.toDouble(), closeTo(0.0, 0.001))
-	       assertThat(info.noFat.toDouble(), closeTo(0.0, 0.001))
-	       assertThat(info.comment, equalTo(""))
-	    } // if
-	 } // on
-	 // test.close ()
+            val record_2 = test.read()
+
+            it ("should return the expected 2nd value")
+            {
+               assertThat(record_2, notNullValue())
+               assertThat(record_2?.time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
+               assertThat(record_2?.weight?.toDouble(), closeTo(96.77, 0.001))
+               assertThat(record_2?.fat?.toDouble(), closeTo(0.0, 0.001))
+               assertThat(record_2?.noFat?.toDouble(), closeTo(0.0, 0.001))
+               assertThat(record_2?.comment, equalTo(""))
+            } // it
+
+            test.close ()
+         } // on
+      } // given
+      given ("a stream with 2 rows of test data")
+      {
+         val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
+
+         on ("reading all data")
+         {
+            val test = ReadWithings (testData)
+            var recordCount = 0;
+
+            Read_Lines@ while (true)
+            {
+               val testRecord = test.read()
+
+               if (testRecord == null) break@Read_Lines
+
+               recordCount = recordCount + 1;
+               logger.log(java.util.logging.Level.FINE, "Read Record {1}: {2}", arrayOf (recordCount, testRecord))
+            } // when
+
+            it ("should return the 13 records")
+            {
+               assertThat(recordCount, equalTo(2))
+            } // it
+            test.close ()
+         } // on
       } // given
    } // init
-} // ReadWithigns_Test
+} // ReadWithings_Test
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
 // vim: set fileencoding=utf-8 filetype=kotlin foldmethod=syntax spell spelllang=en_gb :

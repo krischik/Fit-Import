@@ -319,9 +319,9 @@ class GoogleFit(
                   android.util.Log.e (TAG, "There was a problem inserting the fat content: " + status.statusMessage);
                } // if
             },
-            /* time => */  1,
-            /* unit => */  java.util.concurrent.TimeUnit.MINUTES)
-      }
+            /* time => */ 1,
+            /* unit => */ java.util.concurrent.TimeUnit.MINUTES)
+      } // if
       return
    } // insertWeight
 

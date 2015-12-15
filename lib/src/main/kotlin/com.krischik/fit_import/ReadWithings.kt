@@ -89,25 +89,34 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
 
    /**
     * <p>read new dataset</p>
+    *
+    * @return null when no more records are availabie.
     */
-   fun read(): Withings
+   fun read(): Withings?
    {
       logger.entering(TAG, "read")
 
-      val line = reader.readLine()
-      val rawFields = line.split(',')
-      val fields = rawFields.map { field -> field.trim('"') }
-      val date = Date_Format.parse(truncateDate(fields[0]))
-      val weight = parseFloat (fields [1]);
-      val fat = parseFloat (fields [2]);
-      val noFat = parseFloat (fields [3]);
+      val line: String? = reader.readLine()
 
-      val retval = Withings(
-         time = date,
-         weight = weight,
-         fat = fat,
-         noFat = noFat,
-         comment = fields [4])
+      val retval: Withings? = if (line != null)
+      {
+         val rawFields = line.split(',')
+         val fields = rawFields.map { field -> field.trim('"') }
+         val date = Date_Format.parse(truncateDate(fields[0]))
+         val weight = parseFloat (fields [1]);
+         val fat = parseFloat (fields [2]);
+         val noFat = parseFloat (fields [3]);
+         Withings(
+            time = date,
+            weight = weight,
+            fat = fat,
+            noFat = noFat,
+            comment = fields [4])
+      }
+      else
+      {
+         null
+      } // if
 
       logger.exiting(TAG, "read", retval)
       return retval
