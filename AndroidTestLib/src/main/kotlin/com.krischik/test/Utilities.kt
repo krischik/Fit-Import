@@ -38,7 +38,7 @@ import kotlin.test.fail
 /**
  * Demonstration of the activity test
  *
- * @author "Martin Krischik" <krischik@users.sourceforge.net>
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0 $Revision: 6780 $
  * @since 1.0
  */

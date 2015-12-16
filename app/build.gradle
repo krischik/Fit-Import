@@ -123,6 +123,7 @@ dependencies {
    ) // apt
    compile (
       project (':lib'),
+      project (':AndroidLib'),
       [group: 'com.android.support', name: 'appcompat-v7', version: androidsupport_version],
       [group: 'com.android.support', name: 'support-v4', version: androidsupport_version],
       [group: 'com.android.support', name: 'multidex', version: '1.0.1'],

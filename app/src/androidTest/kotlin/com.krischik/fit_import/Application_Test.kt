@@ -26,9 +26,9 @@ public class Application_Test : android.test.ApplicationTestCase<Application_>(A
       /**
        * Logging tag
        */
-      private val TAG = Application_Test::class.qualifiedName
+      private val TAG = com.krischik.Log.getLogTag(Application_Test::class.java)
 
-      fun i(Text: String) = android.util.Log.i (TAG, Text)
+      fun i(Text: String) = com.krischik.Log.i (TAG, Text)
    }
 
    /**
@@ -41,7 +41,7 @@ public class Application_Test : android.test.ApplicationTestCase<Application_>(A
    {
       val API = android.os.Build.VERSION.SDK_INT
 
-      android.util.Log.d (TAG, "+ test_02_Configuration")
+      com.krischik.Log.d (TAG, "+ test_02_Configuration")
 
       i ("Build Confiuration")
       i ("> Debug                   = " + BuildConfig.DEBUG)
@@ -88,7 +88,7 @@ public class Application_Test : android.test.ApplicationTestCase<Application_>(A
 	 i ("17: densityDpi            = " + Configuration.densityDpi)
       } // if
 
-      android.util.Log.d (TAG, "- test_02_Configuration")
+      com.krischik.Log.d (TAG, "- test_02_Configuration")
    } // test_02_Configuration
 } // Application_Test
 

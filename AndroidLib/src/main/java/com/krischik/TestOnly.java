@@ -14,28 +14,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  ********************************************************** }}}1 **********/
-package com.krischik.fit_import
+
+package com.krischik;
 
 /**
  * <p>
+ * Method or class used for testing only — marked so that it will not be removed by proguard.
  * </p>
  *
- * <pre>
- * "Date","Gewicht (kg)","Fettmasse (kg)","Fettfreier Anteil (kg)","Kommentare"
- * "2014-02-13 6:04 Uhr","94.34","26.81","68.43",""
- * "2014-02-12 6:09 Uhr","94.89","27.43","67.36",""
- * </pre>
  * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
- * @since 1.0
+ * @since 2.6.0
  */
+public @interface TestOnly
+{
+} // TestOnly
 
-data class Withings(
-   val time: java.util.Date,
-   val weight: Float,
-   val fat: Float,
-   val noFat: Float,
-   val comment: String)
-
-// vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
-// vim: set textwidth=0 filetype=kotlin foldmethod=marker spell spelllang=en_gb :
+// vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
+// vim: set fileencoding=utf-8 filetype=java foldmethod=syntax spell spelllang=en_gb :

@@ -17,13 +17,12 @@
 
 package com.krischik.fit_import
 
-import com.krischik.Second
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
 
 /**
  * Created by krma1 on 08.12.15.
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
@@ -33,68 +32,11 @@ public class GoogleFIT_Test :
    /**
     * Logging tag
     */
-   private val TAG = GoogleFIT_Test::class.qualifiedName
-   /**
-    * Activity to test.
-    */
-   private var Activity: java.lang.ref.WeakReference<MainActivity>? = null
-   /**
-    * Instrumentation to control the test.
-    */
-   private var Instrument: android.app.Instrumentation? = null
-   /**
-    * Robotium helper instance
-    */
-   private var Solo: com.robotium.solo.Solo? = null
-
+   private val TAG = com.krischik.Log.getLogTag(GoogleFIT_Test::class.javaClass);
    /**
     * Randim number generator
     */
    private val Random = java.util.Random (java.util.Date ().time)
-
-   /**
-    * get the activity and the text view to test
-    *
-    * @see android.test.ActivityInstrumentationTestCase2#setUp ()
-    */
-   protected override fun setUp()
-   {
-      android.util.Log.d (TAG, "+ setUp")
-
-      Solo?.sleep (Second (0.5f))
-
-      super.setUp ()
-
-      Instrument = getInstrumentation ()
-      Activity = java.lang.ref.WeakReference (getActivity ())
-
-      Solo = com.robotium.solo.Solo (Instrument, Activity?.get ())
-
-      android.util.Log.d (TAG, "> Instrument =" + Instrument)
-      android.util.Log.d (TAG, "> Activity   =" + Activity?.get ())
-
-      android.util.Log.d (TAG, "- setUp")
-   } // setUp
-
-   /**
-    * end the activity and free memory
-    *
-    * @see android.test.ActivityInstrumentationTestCase2#tearDown()
-    */
-   protected override fun tearDown()
-   {
-      android.util.Log.d (TAG, "+ tearDown")
-
-      //Activity?.clear ()
-      //Activity = null
-      //Instrument = null
-
-      super.tearDown ()
-
-      Solo?.sleep (Second (0.5f))
-
-      android.util.Log.d (TAG, "- tearDown")
-   } // tearDown
 
    /**
     * Test opening the main activity (smoke test / release compatible version)
@@ -103,9 +45,7 @@ public class GoogleFIT_Test :
    @android.test.suitebuilder.annotation.SmallTest
    fun test_00_Insert_Weight()
    {
-      android.util.Log.d (TAG, "+ test_00_Insert_Weight")
-
-      val activity = Activity?.get()
+      com.krischik.Log.d (TAG, "+ test_00_Insert_Weight")
 
       com.krischik.test.Utilities.asyncAssertTrue (
          message = { "Application should connect to Google Fit" },
@@ -123,7 +63,7 @@ public class GoogleFIT_Test :
       val Google_Fit = activity?.getGoogleFit()
       Google_Fit?.insertWeight (withings)
 
-      android.util.Log.d (TAG, "- test_00_Insert_Weight")
+      com.krischik.Log.d (TAG, "- test_00_Insert_Weight")
    } // test_00_Insert_Weight
 
    /**
@@ -133,9 +73,7 @@ public class GoogleFIT_Test :
    @android.test.suitebuilder.annotation.SmallTest
    fun test_01_Insert_Training()
    {
-      android.util.Log.d (TAG, "+ test_01_Insert_Training")
-
-      val activity = Activity?.get()
+      com.krischik.Log.d (TAG, "+ test_01_Insert_Training")
 
       com.krischik.test.Utilities.asyncAssertTrue (
          message = { "Application should connect to Google Fit" },
@@ -161,7 +99,7 @@ public class GoogleFIT_Test :
       val Google_Fit = activity?.getGoogleFit()
       Google_Fit?.insertTraining (ketfit);
 
-      android.util.Log.d (TAG, "- test_01_Insert_Training")
+      com.krischik.Log.d (TAG, "- test_01_Insert_Training")
    } // test_01_Insert_Training
 
    /**
@@ -171,9 +109,7 @@ public class GoogleFIT_Test :
    @android.test.suitebuilder.annotation.SmallTest
    fun test_02_Insert_Weights()
    {
-      android.util.Log.d (TAG, "+ test_02_Insert_Weights")
-
-      val activity = Activity?.get()
+      com.krischik.Log.d (TAG, "+ test_02_Insert_Weights")
 
       com.krischik.test.Utilities.asyncAssertTrue (
          message = { "Application should connect to Google Fit" },
@@ -192,13 +128,15 @@ public class GoogleFIT_Test :
          if (testRecord == null) break@Read_Lines
 
          recordCount = recordCount + 1;
-         // android.util.Log.v (TAG , "Read Record {1}: {2}", recordCount, testRecord)
+
+         com.krischik.Log.v (TAG , "Read Record {1}: {2}", recordCount, testRecord)
+
          Google_Fit?.insertWeight (testRecord)
       } // when
 
       assertThat(recordCount, equalTo(2))
       test.close ()
-      android.util.Log.d (TAG, "- test_02_Insert_Weights")
+      com.krischik.Log.d (TAG, "- test_02_Insert_Weights")
    } // test_02_Insert_Weights
 
    /**
@@ -208,9 +146,7 @@ public class GoogleFIT_Test :
    @android.test.suitebuilder.annotation.SmallTest
    fun test_03_Insert_Trainings()
    {
-      android.util.Log.d (TAG, "+ test_03_Insert_Trainings")
-
-      val activity = Activity?.get()
+      com.krischik.Log.d (TAG, "+ test_03_Insert_Trainings")
 
       com.krischik.test.Utilities.asyncAssertTrue (
          message = { "Application should connect to Google Fit" },
@@ -230,13 +166,14 @@ public class GoogleFIT_Test :
 
          recordCount = recordCount + 1;
 
-         // android.util.Log.v (TAG , "Read Record {1}: {2}", recordCount, testRecord)
+         com.krischik.Log.v (TAG , "Read Record {1}: {2}", recordCount, testRecord)
+
          Google_Fit?.insertTraining (testRecord);
       } // when
 
       assertThat(recordCount, equalTo(13))
       test.close ()
-      android.util.Log.d (TAG, "- test_02_Insert_Trainings")
+      com.krischik.Log.d (TAG, "- test_02_Insert_Trainings")
    } // test_00_Insert_Weight
 } // GoogleFIT_Test
 

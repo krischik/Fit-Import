@@ -21,7 +21,7 @@ package com.krischik.fit_import
  * <p>
  * </p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  * @param Authentication_In_Progress: true when authentication is currently on progress. Used to prevent
@@ -39,7 +39,7 @@ class GoogleFit(
       /**
        * Logging tag
        */
-      private val TAG = GoogleFit::class.qualifiedName
+      private val TAG = com.krischik.Log.getLogTag(GoogleFit::class.java)
 
       /**
        * <p>Request Authentication message id</p>
@@ -103,7 +103,7 @@ class GoogleFit(
    @hugo.weaving.DebugLog
    override fun onConnected(bundle: android.os.Bundle?)
    {
-      android.util.Log.i (TAG, "LOG00010: Connected to Google-Fit!")
+      com.krischik.Log.i (TAG, "LOG00010: Connected to Google-Fit!")
       // Now you can make calls to the Fitness APIs.
       // Put application specific code here.
 
@@ -135,7 +135,7 @@ class GoogleFit(
    @hugo.weaving.DebugLog
    public fun connect()
    {
-      android.util.Log.i (TAG, "LOG00070: Connecting to Google-Fit…")
+      com.krischik.Log.i (TAG, "LOG00070: Connecting to Google-Fit…")
 
       Google_API_Client.connect ()
    } // connect
@@ -146,9 +146,9 @@ class GoogleFit(
    @hugo.weaving.DebugLog
    public fun disconnect()
    {
-      android.util.Log.i (TAG, "LOG00080: Disconnecting from Google-Fit…")
+      com.krischik.Log.i (TAG, "LOG00080: Disconnecting from Google-Fit…")
 
-      if (Google_API_Client.isConnected ())
+      if (Google_API_Client.isConnected)
       {
          Google_API_Client.disconnect ()
       } // if
@@ -161,11 +161,11 @@ class GoogleFit(
       // you'll be able to determine the reason and react to it here.
       if (i == com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST)
       {
-         android.util.Log.e (TAG, "LOG00020: Google-Fit connection lost.  Cause: Network Lost.")
+         com.krischik.Log.e (TAG, "LOG00020: Google-Fit connection lost.  Cause: Network Lost.")
       }
       else if (i == com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED)
       {
-         android.util.Log.e (TAG,
+         com.krischik.Log.e (TAG,
             "LOG00030: Google-Fit Connection lost.  Reason: Service Disconnected")
       } // if
 
@@ -178,16 +178,17 @@ class GoogleFit(
    @hugo.weaving.DebugLog
    override fun onConnectionFailed(result: com.google.android.gms.common.ConnectionResult)
    {
-      android.util.Log.e (TAG,
+      com.krischik.Log.e (TAG,
          "LOG00040: Connection to Google-Fit failed. Cause: " + result.toString ())
 
       if (!result.hasResolution ())
       {
          // Show the localized error dialog
-         val errorDialog = com.google.android.gms.common.GooglePlayServicesUtil.getErrorDialog (
-            result.errorCode,
-            owner.activity,
-            0)
+         val apiAvailability = com.google.android.gms.common.GoogleApiAvailability.getInstance ()
+         val errorDialog = apiAvailability.getErrorDialog (
+            /* activity    => */ owner.activity,
+            /* errorCode   => */ result.errorCode,
+            /* requestCode => */ Request_OAuth)
          errorDialog.show ()
       }
       else if (!Authentication_In_Progress)
@@ -198,13 +199,13 @@ class GoogleFit(
 
          try
          {
-            android.util.Log.i (TAG, "LOG00050: Attempting to resolve failed connection")
+            com.krischik.Log.i (TAG, "LOG00050: Attempting to resolve failed connection")
             Authentication_In_Progress = true
             result.startResolutionForResult (owner.getActivity(), Request_OAuth)
          }
          catch (exception: android.content.IntentSender.SendIntentException)
          {
-            android.util.Log.e (TAG,
+            com.krischik.Log.e (TAG,
                "LOG00060: Exception while starting resolution activity",
                exception)
          } // try
@@ -287,7 +288,7 @@ class GoogleFit(
                   status ->
                   if (!status.isSuccess)
                   {
-                     android.util.Log.e (TAG, "There was a problem inserting the weight: " + status.statusMessage);
+                     com.krischik.Log.e (TAG, "There was a problem inserting the weight: " + status.statusMessage);
                   } // if
                },
                /* time => */ 1,
@@ -316,7 +317,7 @@ class GoogleFit(
                status ->
                if (!status.isSuccess)
                {
-                  android.util.Log.e (TAG, "There was a problem inserting the fat content: " + status.statusMessage);
+                  com.krischik.Log.e (TAG, "There was a problem inserting the fat content: " + status.statusMessage);
                } // if
             },
             /* time => */ 1,
@@ -326,7 +327,7 @@ class GoogleFit(
    } // insertWeight
 
    /**
-    * <p>store ketter training</p>
+    * <p>store Kettler training</p>
     */
    @hugo.weaving.DebugLog
    public fun insertTraining(ketfit: Ketfit)
@@ -440,7 +441,7 @@ class GoogleFit(
             status ->
             if (!status.isSuccess)
             {
-               android.util.Log.e (TAG, "There was a problem inserting the training session: " + status.statusMessage);
+               com.krischik.Log.e (TAG, "There was a problem inserting the training session: " + status.statusMessage);
             } // if
          },
          /* time => */ 1,

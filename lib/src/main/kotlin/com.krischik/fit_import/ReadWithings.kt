@@ -21,7 +21,7 @@ package com.krischik.fit_import
  *     Read ketfit file.
  * </p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */

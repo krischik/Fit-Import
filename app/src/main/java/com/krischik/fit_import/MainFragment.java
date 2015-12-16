@@ -19,10 +19,8 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * <p> </p>
- * <p/>
- * ${tags}
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
@@ -34,7 +32,7 @@ public class MainFragment
    /**
     * <p> TAG as class name for logging </p>
     */
-   private final static String TAG = MainFragment.class.getName ();
+   private final static String TAG = com.krischik.Log.getLogTag (MainFragment.class);
    /**
     * <p>Google FIT Model</p>
     */
@@ -87,7 +85,7 @@ public class MainFragment
       }
       else
       {
-         android.util.Log.e (TAG, "LOG00010: No googleFit instance!");
+         com.krischik.Log.e (TAG, "LOG00010: No googleFit instance!");
       }
 
       return;
@@ -116,7 +114,7 @@ public class MainFragment
       }
       else
       {
-	 android.util.Log.e (TAG, "LOG00000: No googleFit instance!");
+	 com.krischik.Log.e (TAG, "LOG00000: No googleFit instance!");
       }
 
       return;

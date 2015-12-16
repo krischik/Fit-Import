@@ -22,7 +22,7 @@ import com.krischik.Second
  * <p>
  * </p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
@@ -32,62 +32,7 @@ public class Main_Activity_Test :
    /**
     * Logging tag
     */
-   private val TAG = Main_Activity_Test::class.qualifiedName
-   /**
-    * Activity to test.
-    */
-   private var Activity: java.lang.ref.WeakReference<MainActivity>? = null
-   /**
-    * Instrumentation to control the test.
-    */
-   private var Instrument: android.app.Instrumentation? = null
-   /**
-    * Robotium helper instance
-    */
-   private var Solo: com.robotium.solo.Solo? = null
-
-   /**
-    * get the activity and the text view to test
-    *
-    * @see android.test.ActivityInstrumentationTestCase2#setUp ()
-    */
-   protected override fun setUp()
-   {
-      android.util.Log.d (TAG, "+ setUp")
-
-      super.setUp ()
-
-      Instrument = getInstrumentation ()
-      Activity = java.lang.ref.WeakReference (activity)
-      Solo = com.robotium.solo.Solo (Instrument, Activity?.get ())
-
-      android.util.Log.d (TAG, "> Instrument =" + Instrument)
-      android.util.Log.d (TAG, "> Activity   =" + Activity?.get ())
-
-      Solo?.sleep (Second (0.5f))
-
-      android.util.Log.d (TAG, "- setUp")
-   } // setUp
-
-   /**
-    * end the activity and free memory
-    *
-    * @see android.test.ActivityInstrumentationTestCase2#tearDown()
-    */
-   protected override fun tearDown()
-   {
-      android.util.Log.d (TAG, "+ tearDown")
-
-      // Activity?.clear ()
-      // Activity = null
-      // Instrument = null
-
-      super.tearDown ()
-
-      Solo?.sleep (Second (0.5f))
-
-      android.util.Log.d (TAG, "- tearDown")
-   } // tearDown
+   private val TAG = com.krischik.Log.getLogTag(Main_Activity_Test::class.java)
 
    /**
     * Test opening the main activity (smoke test / release compatible version)
@@ -96,11 +41,13 @@ public class Main_Activity_Test :
    @android.test.suitebuilder.annotation.SmallTest
    fun test_00_Open()
    {
-      android.util.Log.d (TAG, "+ test_00_Open")
+      com.krischik.Log.d (TAG, "+ test_00_Open")
+      val Instrument = instrumentation
+      val Solo = com.robotium.solo.Solo (Instrument, activity)
 
-      Solo?.sleep (Second (0.5f))
+      Solo.sleep (Second (0.5f))
 
-      android.util.Log.d (TAG, "- test_00_Open")
+      com.krischik.Log.d (TAG, "- test_00_Open")
    } // test_00_
 }
 
