@@ -58,7 +58,12 @@ path=("${ANDROID_HOME}/tools" ${path})
 path=("${ANDROID_HOME}/platform-tools" ${path})
 fpath=(${PROJECT_HOME}/src/main/scripts ${fpath})
 
-Scala_Library="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
+#mvn org.apache.maven.plugins:maven-dependency-plugin:2.1:get \
+    #-DrepoUrl=http://download.java.net/maven/2/ \
+    #-Dartifact=robo-guice:robo-guice:0.4-SNAPSHOT
+
+typeset -x -g     CALCULATOR_VERSION=6.7.6
+typeset -x -g CALCULATOR_SCALASCRIPT="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
 
 alias			 PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
 alias			mvn="${M2_HOME}/bin/mvn"
@@ -66,6 +71,9 @@ alias			mvn="${M2_HOME}/bin/mvn"
 typeset -f -u Svn-Commit
 typeset -f -u Maven
 typeset -f -u Diff_2_3
+typeset -f -u Device-Activate-Logging 
+typeset -f -u Device-Deactivate-Logging
+typeset -f -u Device-Set-Logging
 
 function lxpm ()
 {

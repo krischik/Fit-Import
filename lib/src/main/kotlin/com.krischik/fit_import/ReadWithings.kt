@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -59,18 +59,18 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
       reader.readLine()
 
       logger.exiting(TAG, "ReadWithigns")
-   }
+   } // init
 
    /**
     * <p>Withings puts some stupid “Uhr” at the end of the string</p>
     */
    private fun truncateDate(inText: String): String
    {
-      val length = Date_Format.toPattern().length()
+      val length = Date_Format.toPattern().length
       var retval = inText.substring(0, length)
 
       return retval
-   }
+   } // truncateDate
 
    /**
     * <p>Fields which have not be measured are keept empty and the stupid java parser won't parse empty string.</p>
@@ -84,8 +84,8 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
       else
       {
          0.0f
-      }
-   }
+      } // if
+   } // parseFloat
 
    /**
     * <p>read new dataset</p>
@@ -97,7 +97,6 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
       logger.entering(TAG, "read")
 
       val line: String? = reader.readLine()
-
       val retval: Withings? = if (line != null)
       {
          val rawFields = line.split(',')
@@ -106,6 +105,7 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
          val weight = parseFloat (fields [1]);
          val fat = parseFloat (fields [2]);
          val noFat = parseFloat (fields [3]);
+
          Withings(
             time = date,
             weight = weight,

@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ public class GoogleFIT_Test :
          /* Fat     => */fat,
          /* No_Fat  => */weight - fat,
          /* Comment => */"test_00_Insert_Weight")
-      val Google_Fit = activity?.getGoogleFit()
+      val Google_Fit = activity?.googleFit
       Google_Fit?.insertWeight (withings)
 
       com.krischik.Log.d (TAG, "- test_00_Insert_Weight")
@@ -96,7 +96,7 @@ public class GoogleFIT_Test :
          /* kCal   => */kCal,
          /* km     => */km,
          /* ω      => */0)
-      val Google_Fit = activity?.getGoogleFit()
+      val Google_Fit = activity?.googleFit
       Google_Fit?.insertTraining (ketfit);
 
       com.krischik.Log.d (TAG, "- test_01_Insert_Training")
@@ -116,7 +116,7 @@ public class GoogleFIT_Test :
          condition = { activity?.isConnected ?: false },
          timeout = com.krischik.test.Utilities.seconds(30.0f))
 
-      val Google_Fit = activity?.getGoogleFit()
+      val Google_Fit = activity?.googleFit
       val testData = GoogleFIT_Test::class.java.getResourceAsStream("/Withings.csv")
       val test = ReadWithings (testData)
       var recordCount = 0;
@@ -129,7 +129,8 @@ public class GoogleFIT_Test :
 
          recordCount = recordCount + 1;
 
-         com.krischik.Log.v (TAG , "Read Record {1}: {2}", recordCount, testRecord)
+         // com.krischik.Log.v (TAG , "Read Record %1\$d: %2", recordCount, testRecord)
+         com.krischik.Log.v (TAG , "Read Record ${recordCount}: ${testRecord}")
 
          Google_Fit?.insertWeight (testRecord)
       } // when
@@ -153,7 +154,7 @@ public class GoogleFIT_Test :
          condition = { activity?.isConnected ?: false },
          timeout = com.krischik.test.Utilities.seconds(30.0f))
 
-      val Google_Fit = activity?.getGoogleFit()
+      val Google_Fit = activity?.googleFit
       val testData = GoogleFIT_Test::class.java.getResourceAsStream("/ketfit.csv")
       val test = ReadKetfit (testData)
       var recordCount = 0;
@@ -166,7 +167,7 @@ public class GoogleFIT_Test :
 
          recordCount = recordCount + 1;
 
-         com.krischik.Log.v (TAG , "Read Record {1}: {2}", recordCount, testRecord)
+         com.krischik.Log.v (TAG , "Read Record ${recordCount}: ${testRecord}")
 
          Google_Fit?.insertTraining (testRecord);
       } // when
