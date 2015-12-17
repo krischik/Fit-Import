@@ -129,13 +129,12 @@ public class GoogleFIT_Test :
 
          recordCount = recordCount + 1;
 
-         // com.krischik.Log.v (TAG , "Read Record %1\$d: %2", recordCount, testRecord)
-         com.krischik.Log.v (TAG , "Read Record ${recordCount}: ${testRecord}")
+         com.krischik.Log.v (TAG , "Read Record %1\$d: %2\$s", recordCount, testRecord)
 
          Google_Fit?.insertWeight (testRecord)
       } // when
 
-      assertThat(recordCount, equalTo(2))
+      assertThat(recordCount, equalTo(11))
       test.close ()
       com.krischik.Log.d (TAG, "- test_02_Insert_Weights")
    } // test_02_Insert_Weights
@@ -167,12 +166,12 @@ public class GoogleFIT_Test :
 
          recordCount = recordCount + 1;
 
-         com.krischik.Log.v (TAG , "Read Record ${recordCount}: ${testRecord}")
+         com.krischik.Log.v (TAG , "Read Record %1\$d: %2\$s", recordCount, testRecord)
 
          Google_Fit?.insertTraining (testRecord);
       } // when
 
-      assertThat(recordCount, equalTo(13))
+      assertThat(recordCount, equalTo(16))
       test.close ()
       com.krischik.Log.d (TAG, "- test_02_Insert_Trainings")
    } // test_00_Insert_Weight

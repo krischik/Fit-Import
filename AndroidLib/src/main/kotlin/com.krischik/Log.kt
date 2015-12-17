@@ -27,12 +27,13 @@ package com.krischik
  */
 public object Log
 {
+
    /**
     * <p>
     * maximum tag length when {@link android.util.Log#isLoggable} is used
     * </p>
     */
-   val Max_Tag_Length = 23;
+   val Max_Tag_Length = 23
    /**
     * <p>
     * log tag
@@ -55,14 +56,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun d(tag: String, msg: String, vararg args: Any)
+   public fun d(tag: String, msg: String, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.DEBUG))
       {
-         android.util.Log.d (tag, Log.format (msg, args));
+         android.util.Log.d (tag, Log.format (msg, *args))
       } // if
 
-      return;
+      return
    } // d
 
    /**
@@ -78,14 +79,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun d( tag: String, msg: String, exception: Throwable, vararg args: Any)
+   public fun d( tag: String, msg: String, exception: Throwable, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.DEBUG))
       {
-         android.util.Log.d (tag, Log.format (msg, args), exception);
+         android.util.Log.d (tag, Log.format (msg, *args), exception)
       } // if
 
-      return;
+      return
    } // d
 
    /**
@@ -99,14 +100,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun e(tag: String, msg: String, vararg args: Any)
+   public fun e(tag: String, msg: String, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.ERROR))
       {
-         android.util.Log.e (tag, Log.format (msg, args));
+         android.util.Log.e (tag, Log.format (msg, *args))
       } // if
 
-      return;
+      return
    } // e
 
    /**
@@ -122,14 +123,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun e( tag: String, msg: String, exception: Throwable, vararg args: Any)
+   public fun e( tag: String, msg: String, exception: Throwable, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.ERROR))
       {
-         android.util.Log.e (tag, Log.format (msg, args), exception);
+         android.util.Log.e (tag, Log.format (msg, *args), exception)
       } // if
 
-      return;
+      return
    } // e
 
    /**
@@ -145,27 +146,27 @@ public object Log
     * @return die formatierte nachricht.
     * @see String#format(String, Object...)
     */
-   public fun format(msg: String, vararg args: Any): String
+   public fun format(msg: String, vararg args: Any?): String
    {
       val retval = if (args.size > 0)
       {
          try
          {
-            java.lang.String.format (msg, args);
+            msg.format(*args)
          }
          catch (exception: java.util.IllegalFormatException)
          {
-            android.util.Log.w (Log.TAG, "LOG01840: Error ignored for now, please fix ASAP)", exception);
+            android.util.Log.w (Log.TAG, "LOG01840: Error ignored for now, please fix ASAP)", exception)
 
-            msg;
+            msg
          } // try
       }
       else
       {
-         msg;
+         msg
       } // if
 
-      return retval;
+      return retval
    } // format
 
    /**
@@ -181,22 +182,22 @@ public object Log
    @JvmStatic
    public fun getLogTag(clazz: java.lang.Class<out Any>): String
    {
-      val name = clazz.getName ();
-      val endIndex = name.length;
-      val beginIndex = endIndex - Max_Tag_Length;
+      val name = clazz.name
+      val endIndex = name.length
+      val beginIndex = endIndex - Max_Tag_Length
       val retval = if (endIndex > Max_Tag_Length)
       {
          String (
             /* value  => */name.toCharArray (),
             /* offset => */beginIndex,
-            /* count  => */Max_Tag_Length);
+            /* count  => */Max_Tag_Length)
       }
       else
       {
-         name;
+         name
       } // if
 
-      return retval;
+      return retval
    } // getLogTag
 
    /**
@@ -210,14 +211,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun i(tag:String, msg: String, vararg args: Any)
+   public fun i(tag:String, msg: String, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.INFO))
       {
-         android.util.Log.i (tag, Log.format (msg, args));
+         android.util.Log.i (tag, Log.format (msg, *args))
       } // if
 
-      return;
+      return
    } // i
 
    /**
@@ -233,14 +234,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun i( tag: String, msg: String, exception: Throwable, vararg args: Any)
+   public fun i( tag: String, msg: String, exception: Throwable, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.INFO))
       {
-         android.util.Log.i (tag, Log.format (msg, args), exception);
+         android.util.Log.i (tag, Log.format (msg, *args), exception)
       } // if
 
-      return;
+      return
    } // i
 
    /**
@@ -260,16 +261,16 @@ public object Log
    {
       val retval = try
       {
-         android.util.Log.isLoggable ("KrischikLog", level) || android.util.Log.isLoggable (tag, level);
+         android.util.Log.isLoggable ("KrischikLog", level) || android.util.Log.isLoggable (tag, level)
       }
       catch (exception: java.lang.IllegalArgumentException)
       {
-         android.util.Log.wtf (Log.TAG, "LOG01890: You are using the wrong log TAG!", exception);
+         android.util.Log.wtf (Log.TAG, "LOG01890: You are using the wrong log TAG!", exception)
 
-         true;
+         true
       } // try
 
-      return retval;
+      return retval
    } // isLoggable
 
    /**
@@ -283,14 +284,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun v(tag:String , msg: String, vararg args: Any)
+   public fun v(tag:String , msg: String, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.VERBOSE))
       {
-         android.util.Log.v (tag, Log.format (msg, args));
+         android.util.Log.v (tag, Log.format (msg, *args))
       } // if
 
-      return;
+      return
    } // v
 
    /**
@@ -306,14 +307,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun v( tag: String, msg: String, exception: Throwable, vararg args: Any)
+   public fun v( tag: String, msg: String, exception: Throwable, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.VERBOSE))
       {
-         android.util.Log.v (tag, Log.format (msg, args), exception);
+         android.util.Log.v (tag, Log.format (msg, *args), exception)
       } // if
 
-      return;
+      return
    } // v
 
    /**
@@ -327,14 +328,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun w(tag:String, msg: String, vararg args: Any)
+   public fun w(tag:String, msg: String, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.WARN))
       {
-         android.util.Log.w (tag, Log.format (msg, args));
+         android.util.Log.w (tag, Log.format (msg, *args))
       } // if
 
-      return;
+      return
    } // w
 
    /**
@@ -350,14 +351,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun w( tag: String, msg: String, exception: Throwable, vararg args: Any)
+   public fun w( tag: String, msg: String, exception: Throwable, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.WARN))
       {
-         android.util.Log.w (tag, Log.format (msg, args), exception);
+         android.util.Log.w (tag, Log.format (msg, *args), exception)
       } // if
 
-      return;
+      return
    } // w
 
    /**
@@ -371,14 +372,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun wtf(tag:String, msg: String, vararg args: Any)
+   public fun wtf(tag:String, msg: String, vararg args: Any?)
    {
       if (Log.isLoggable (tag, android.util.Log.ASSERT))
       {
-         android.util.Log.wtf (tag, Log.format (msg, args));
+         android.util.Log.wtf (tag, Log.format (msg, *args))
       } // if
 
-      return;
+      return
    } // wtf
 
    /**
@@ -394,14 +395,14 @@ public object Log
     */
    @com.krischik.TestOnly
    @JvmStatic
-   public fun wtf( tag: String, msg: String, exception: Throwable, vararg args: Any)
+   public fun wtf( tag: String, msg: String, exception: Throwable, vararg args: Any?)
    {
       if (isLoggable (tag, android.util.Log.ASSERT))
       {
-         android.util.Log.wtf (tag, Log.format (msg, args), exception);
+         android.util.Log.wtf (tag, Log.format (msg, *args), exception)
       } // if
 
-      return;
+      return
    } // wtf
 
 } // Log
