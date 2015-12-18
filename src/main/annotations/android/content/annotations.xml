@@ -1,0 +1,33 @@
+<!--
+  ~ ********************************************************** {{{1 ************
+  ~   Copyright © 2005…2011  Martin Krischik
+  ~ ****************************************************************************
+  ~   This program is free software: you can redistribute it and/or modify
+  ~   it under the terms of the GNU General Public License as published by
+  ~   the Free Software Foundation, either version 3 of the License, or
+  ~   (at your option) any later version.
+  ~
+  ~   This program is distributed in the hope that it will be useful,
+  ~   but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~   GNU General Public License for more details.
+  ~
+  ~   You should have received a copy of the GNU General Public License
+  ~   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  ~ ****************************************************************************
+  ~   $Author: krischik $
+  ~   $Revision: 6850 $
+  ~   $Date: 2015-09-11 14:51:47 +0200 (Fr, 11 Sep 2015) $
+  ~   $Id: annotations.xml 6850 2015-09-11 12:51:47Z krischik $
+  ~   $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/annotations/android/content/annotations.xml $
+  ~ *********************************************************** }}}1 ***********
+  -->
+
+<root>
+  <item name = 'android.content.ContextWrapper android.content.ComponentName startService(android.content.Intent) 0'>
+    <annotation name = 'org.jetbrains.annotations.NotNull' />
+  </item>
+  <item name = 'android.content.ContextWrapper java.io.File getExternalFilesDir(java.lang.String)'>
+    <annotation name = 'org.jetbrains.annotations.Nullable' />
+  </item>
+</root>

@@ -16,31 +16,53 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsEqual.equalTo
+
 /**
  * <p>
+ *     Read ketfit file.
  * </p>
  *
- * <pre>
- * "Date","Gewicht (kg)","Fettmasse (kg)","Fettfreier Anteil (kg)","Kommentare"
- * "2014-02-13 6:04 Uhr","94.34","26.81","68.43",""
- * "2014-02-12 6:09 Uhr","94.89","27.43","67.36",""
- * </pre>
  * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
-
-data class Withings(
-   val time: java.util.Date,
-   val weight: Float,
-   val fat: Float,
-   val noFat: Float,
-   val comment: String)
+public class Withings_Test : org.jetbrains.spek.api.Spek()
 {
    /**
-    * <p>Withings uses kg for body fat while GoogleFit uses percent.
+    * <p>logging tag</p>
     */
-   public fun getFatPercentage() = fat / weight * 100
-}
-// vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
-// vim: set textwidth=0 filetype=kotlin foldmethod=marker spell spelllang=en_gb :
+   private val TAG = ReadKetfit_Test::class.qualifiedName
+   /**
+    * <p>logger</p>
+    */
+   private val logger = java.util.logging.Logger.getLogger (TAG);
+
+   init
+   {
+      Init_Logger ()
+
+      given ("A Withings instance")
+      {
+         val withings = Withings (
+            /* Time    => */java.util.Date (),
+            /* weight  => */100.0f,
+            /* Fat     => */20.0f,
+            /* No_Fat  => */80.0f - 20.0f,
+            /* Comment => */"Withings_Test")
+         on ("getting the distance in m")
+         {
+            val test = withings.getFatPercentage()
+
+            it ("should be 20%")
+            {
+               assertThat(test, equalTo(20.0f))
+            } // it
+         } // on
+      } // given
+   } // init
+} // ReadKetfit_Test
+
+// vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
+// vim: set fileencoding=utf-8 filetype=kotlin foldmethod=syntax spell spelllang=en_gb :

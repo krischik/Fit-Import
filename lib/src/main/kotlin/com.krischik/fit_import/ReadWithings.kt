@@ -42,6 +42,15 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
    } // object
 
    /**
+    * <p>convenience constructor creating an reader from an file instance.
+    */
+   public constructor(file: java.io.File) :
+   this(java.io.FileInputStream (file))
+   {
+      return
+   } // constructor
+
+   /**
     * <p>stream to read from</p>
     */
    val inputStream = java.io.InputStreamReader (dataStream);

@@ -1,0 +1,33 @@
+<!--
+  ~ ********************************************************** {{{1 ************
+  ~   Copyright © 2005 … 2013 "Martin Krischik" <krischik@users.sourceforge.net>
+  ~ ****************************************************************************
+  ~   This program is free software: you can redistribute it and/or modify
+  ~   it under the terms of the GNU General Public License as published by
+  ~   the Free Software Foundation, either version 3 of the License, or
+  ~   (at your option) any later version.
+  ~
+  ~   This program is distributed in the hope that it will be useful,
+  ~   but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~   GNU General Public License for more details.
+  ~
+  ~   You should have received a copy of the GNU General Public License
+  ~   along with this program.  If not, see «http://www.gnu.org/licenses».
+  ~ ****************************************************************************
+  ~   $Author: krischik $
+  ~   $Revision: 6809 $
+  ~   $Date: 2015-06-19 16:03:47 +0200 (Fr, 19 Jun 2015) $
+  ~   $Id: annotations.xml 6809 2015-06-19 14:03:47Z krischik $
+  ~   $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/annotations/android/support/v4/app/annotations.xml $
+  ~ *********************************************************** }}}1 ***********
+  -->
+
+<root>
+  <item name = 'android.support.v4.app.Fragment android.support.v4.app.FragmentActivity getActivity()'>
+    <annotation name = 'org.jetbrains.annotations.Nullable' />
+  </item>
+  <item name = 'android.support.v4.app.FragmentActivity void onSaveInstanceState(android.os.Bundle) 0'>
+    <annotation name = 'org.jetbrains.annotations.NotNull' />
+  </item>
+</root>

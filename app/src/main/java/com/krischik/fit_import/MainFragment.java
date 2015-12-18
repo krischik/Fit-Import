@@ -1,7 +1,6 @@
-/********************************************************** {{{1 ***********
- * Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
- * *************************************************************************
- * This program is free software: you can
+/**********************************************************
+ * {{{1 *********** Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
+ * ************************************************************************* This program is free software: you can
  * redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later version.
  * <p>
@@ -10,8 +9,8 @@
  * details.
  * <p>
  * You should have received a copy of the GNU General Public License along with this program.  If not, see
- * http://www.gnu.org/licenses/
- ********************************************************** }}}1 **********/
+ * http://www.gnu.org/licenses/ ********************************************************* }}}1
+ **********/
 
 package com.krischik.fit_import;
 
@@ -25,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
  * @version 1.0
  * @since 1.0
  */
+@SuppressWarnings ("HardcodedLineSeparator")
 @org.androidannotations.annotations.EFragment (R.layout.main_fragment)
 public class MainFragment
    extends android.support.v4.app.Fragment
@@ -52,6 +52,14 @@ public class MainFragment
    protected android.widget.Button withingsButton;
 
    /**
+    * <p>Import Withings CVS button</p>
+    */
+   @org.androidannotations.annotations.ViewById (R.id.Error_Text)
+   @Nullable
+   protected android.widget.EditText errorText;
+
+
+   /**
     * <p>we are connected to Google Fit (or not)</p>
     *
     * @param connected
@@ -63,7 +71,7 @@ public class MainFragment
    {
       if (ketfitButton != null)
       {
-         ketfitButton.setEnabled (connected);
+	 ketfitButton.setEnabled (connected);
       }
       if (withingsButton != null)
       {
@@ -74,19 +82,68 @@ public class MainFragment
 
    /**
     * <p>the import withings button has been clicked.</p>
-    *
     */
    @hugo.weaving.DebugLog
    @org.androidannotations.annotations.Click (R.id.Withings_Button)
    @Override
    public void doWithingsButton ()
    {
-      if (googleFit != null)
+      final android.support.v4.app.FragmentActivity activity = getActivity ();
+
+      assert errorText != null : "Won't be null if buttons are available to be clicked";
+      errorText.setText ("");
+
+      if (googleFit != null && activity != null)
       {
+	 final java.io.File dir = activity.getExternalFilesDir (null);
+
+	 if (dir != null)
+	 {
+	    final java.io.File file = new java.io.File (dir, "Withings - Gewicht Martin.csv");
+
+	    if (file.exists ())
+	    {
+	       final ReadWithings records = new ReadWithings (file);
+
+	       Read_Records:
+	       while (true)
+	       {
+		  final Withings record = records.read ();
+
+		  if (record == null)
+		  {
+		     break Read_Records;
+		  }
+
+		  com.krischik.Log.v (TAG, "Read Record: %1$s", record);
+
+		  try
+		  {
+		     googleFit.insertWeight (record);
+		  }
+		  catch (Exception exception)
+		  {
+		     errorText.append (exception.getMessage ()+ '\n');
+		     com.krischik.Log.e (TAG, "LOG00060:Insert error!", exception);
+		  }
+	       } // when
+	    }
+	    else
+	    {
+	       errorText.append ("Input file “" + file + "” does not exist\n");
+	       com.krischik.Log.e (TAG, "LOG00030: Input file “%1$s” does not exist", file);
+	    }
+	 }
+	 else
+	 {
+	    errorText.append ("No directory to read from!\n");
+	    com.krischik.Log.e (TAG, "LOG00040: No directory to read from");
+	 }
       }
       else
       {
-         com.krischik.Log.e (TAG, "LOG00010: No googleFit instance!");
+	 errorText.append ("No googleFit or activity!\n");
+	 com.krischik.Log.e (TAG, "LOG00050: No googleFit or activity!");
       }
 
       return;
@@ -94,28 +151,68 @@ public class MainFragment
 
    /**
     * <p>the import ketfit button has been clicked.</p>
-    *
     */
    @hugo.weaving.DebugLog
    @org.androidannotations.annotations.Click (R.id.Ketfit_Button)
    @Override
    public void doKetfitButton ()
    {
-      if (googleFit != null)
+      final android.support.v4.app.FragmentActivity activity = getActivity ();
+
+      assert errorText != null : "Won't be null if buttons are available to be clicked";
+      errorText.setText ("");
+
+      if (googleFit != null && activity != null)
       {
-	 googleFit.insertTraining (new Ketfit (
-              /* Start  => */new java.util.Date (),
-              /* End    => */new java.util.Date (),
-              /* Watt   => */130,
-              /* Puls   => */140,
-              /* Umin   => */70,
-              /* kCal   => */500,
-              /* km     => */6,
-              /* ω      => */0));
+	 final java.io.File dir = activity.getExternalFilesDir (null);
+
+	 if (dir != null)
+	 {
+	    final java.io.File file = new java.io.File (dir, "kettfit_01_01_2014-31_12_2015.csv");
+
+	    if (file.exists ())
+	    {
+	       final ReadKetfit records = new ReadKetfit (file);
+
+	       Read_Records:
+	       while (true)
+	       {
+		  final Ketfit record = records.read ();
+
+		  if (record == null)
+		  {
+		     break Read_Records;
+		  }
+
+		  com.krischik.Log.v (TAG, "Read Record: %1$s", record);
+
+		  try
+		  {
+		     googleFit.insertTraining (record);
+		  }
+		  catch (Exception exception)
+		  {
+		     errorText.append (exception.getMessage () + '\n');
+		     com.krischik.Log.e (TAG, "LOG00060:Insert error!", exception);
+		  }
+	       } // when
+	    }
+	    else
+	    {
+	       errorText.append ("Input file “" + file + "” does not exist\n");
+	       com.krischik.Log.e (TAG, "LOG00020: Input file “%1$s” does not exist", file);
+	    }
+	 }
+	 else
+	 {
+	    errorText.append ("No directory to read from!\n");
+	    com.krischik.Log.e (TAG, "LOG00020: No directory to read from");
+	 }
       }
       else
       {
-	 com.krischik.Log.e (TAG, "LOG00000: No googleFit instance!");
+	 errorText.append ("No googleFit or activity!\n");
+	 com.krischik.Log.e (TAG, "LOG00010: No googleFit or activity!");
       }
 
       return;

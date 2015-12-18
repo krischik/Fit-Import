@@ -112,6 +112,7 @@ class GoogleFit(
       return
    } // onConnected
 
+
    @hugo.weaving.DebugLog
    public fun doConnect(resultCode: Int)
    {
@@ -307,7 +308,7 @@ class GoogleFit(
                Data_Point ->
                val Weight_Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_PERCENTAGE)
 
-               Weight_Field.setFloat(withings.fat / withings.weight * 100)
+               Weight_Field.setFloat(withings.getFatPercentage ())
             })
 
          val Result = com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, dataSet)
@@ -418,7 +419,7 @@ class GoogleFit(
             field.setFloat(ketfit.kCal.toFloat ());
          }))
       requestBuilder.addDataSet (createDataSet(
-         dataType = com.google.android.gms.fitness.data.DataType.TYPE_DISTANCE_CUMULATIVE,
+         dataType = com.google.android.gms.fitness.data.DataType.TYPE_DISTANCE_DELTA,
          sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
          sourceName = "Ketfit training",
          device = Kettler_Trainer,
@@ -430,7 +431,7 @@ class GoogleFit(
 
             val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_DISTANCE)
 
-            field.setFloat(ketfit.km.toFloat ());
+            field.setFloat(ketfit.getMeter ());
          }))
 
       val request = requestBuilder.build();
@@ -450,6 +451,7 @@ class GoogleFit(
       // com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, Data_Set)
       return
    } // insertWeight
+
 } // GoogleFit
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

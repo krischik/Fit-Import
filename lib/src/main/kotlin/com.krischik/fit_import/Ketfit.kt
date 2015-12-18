@@ -39,6 +39,11 @@ data class Ketfit(
    val kCal: Int,
    val km: Int,
    val ω: Int)
-
+{
+   /**
+    * <p>Kettler measures km and GoogleFit uses m</p>
+    */
+   public fun getMeter(): Float = km.toFloat() * 1000.0f
+}
 // vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
 // vim: set textwidth=0 filetype=kotlin foldmethod=marker spell spelllang=en_gb :
