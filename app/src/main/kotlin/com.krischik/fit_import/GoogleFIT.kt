@@ -275,7 +275,8 @@ class GoogleFit(
                sourceName = "Withings weight",
                device = Withings_Scale,
                startTime = withings.time,
-               setValues = {
+               setValues =
+               {
                   Data_Point ->
                   val Weight_Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_WEIGHT)
 
@@ -304,7 +305,8 @@ class GoogleFit(
             sourceName = "Withings fat",
             device = Withings_Scale,
             startTime = withings.time,
-            setValues = {
+            setValues =
+            {
                Data_Point ->
                val Weight_Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_PERCENTAGE)
 
@@ -451,7 +453,6 @@ class GoogleFit(
       // com.google.android.gms.fitness.Fitness.HistoryApi.insertData (Google_API_Client, Data_Set)
       return
    } // insertWeight
-
 } // GoogleFit
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
