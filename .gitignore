@@ -25,6 +25,7 @@ proguard/
 
 # Log Files
 *.log
+*.logcat
 
 #vim
 .DS_Store

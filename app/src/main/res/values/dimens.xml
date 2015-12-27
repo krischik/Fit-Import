@@ -18,6 +18,8 @@
  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
 <resources>
 <!-- Default screen margins, per the Android Design guidelines. -->
-  <dimen name='activity_horizontal_margin'>16dp</dimen>
-  <dimen name='activity_vertical_margin'>16dp</dimen>
+  <dimen name="Activity_Horizontal_Margin">16dp</dimen>
+  <dimen name="Activity_Vertical_Margin">16dp</dimen>
+  <dimen name = "Widget_Margin">4dp</dimen>
+  <dimen name = "Button_Elevation">4dp</dimen>
 </resources>

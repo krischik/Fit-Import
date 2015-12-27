@@ -20,33 +20,57 @@
 <RelativeLayout
   android:layout_height='match_parent'
   android:layout_width='match_parent'
-  android:paddingBottom='@dimen/activity_vertical_margin'
-  android:paddingLeft='@dimen/activity_horizontal_margin'
-  android:paddingRight='@dimen/activity_horizontal_margin'
-  android:paddingTop='@dimen/activity_vertical_margin'
+  android:paddingBottom="@dimen/Activity_Vertical_Margin"
+  android:paddingLeft="@dimen/Activity_Horizontal_Margin"
+  android:paddingRight="@dimen/Activity_Horizontal_Margin"
+  android:paddingTop="@dimen/Activity_Vertical_Margin"
   xmlns:android='http://schemas.android.com/apk/res/android'
   xmlns:tools='http://schemas.android.com/tools'
 >
   <Button
     android:layout_width = "match_parent"
     android:layout_height = "wrap_content"
-    android:text = "Import Withings CSV"
+    android:text = "@string/Import_Withings_CVS"
     android:id = "@+id/Withings_Button"
     android:layout_alignParentTop = "true"
     android:layout_alignParentLeft = "true"
     android:layout_alignParentStart = "true"
     android:layout_alignParentRight = "true"
     android:layout_alignParentEnd = "true"
-    android:elevation = "4dp" />
+    android:elevation = "@dimen/Button_Elevation"
+    android:layout_margin = "@dimen/Widget_Margin" />
   <Button
     android:layout_width = "match_parent"
     android:layout_height = "wrap_content"
-    android:text = "Import Ketfit CSV"
+    android:text = "@string/Import_Ketfit_CVS"
     android:id = "@+id/Ketfit_Button"
     android:layout_below = "@+id/Withings_Button"
     android:layout_alignParentLeft = "true"
     android:layout_alignParentStart = "true"
     android:layout_alignParentRight = "true"
     android:layout_alignParentEnd = "true"
-    android:elevation = "4dp" />
+    android:elevation = "@dimen/Button_Elevation"
+  android:layout_margin = "@dimen/Widget_Margin" />
+  <EditText
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    android:inputType = "none|textMultiLine"
+    android:ems = "10"
+    android:id = "@+id/Error_Text"
+    android:layout_below = "@+id/Ketfit_Button"
+    android:layout_alignParentBottom = "true"
+    android:layout_marginLeft = "@dimen/Widget_Margin"
+    android:layout_marginRight = "@dimen/Widget_Margin"
+    android:layout_marginTop = "@dimen/Widget_Margin"
+    android:layout_marginBottom = "@dimen/Widget_Margin"
+    android:layout_alignParentEnd = "true"
+    android:layout_alignParentStart = "true"
+    android:layout_alignEnd = "@+id/Ketfit_Button"
+    android:layout_alignStart = "@+id/Ketfit_Button"
+    android:typeface = "monospace"
+    android:textStyle = "normal"
+    android:editable = "false"
+    android:gravity = "top|left"
+    android:elegantTextHeight = "false"
+    android:scrollIndicators = "top|left|bottom|right" />
 </RelativeLayout>

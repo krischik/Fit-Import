@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,8 +21,6 @@ package com.krischik
  * @param Second time in seconds
  * @return time in milli seconds
  */
-@suppress("NOTHING_TO_INLINE")
-@inline
 fun Second (Second: Float): Int = (Second * 1000).toInt()
 
 /**
@@ -30,10 +28,7 @@ fun Second (Second: Float): Int = (Second * 1000).toInt()
  * @param Minutes time in minutes
  * @return time in milli seconds
  */
-@suppress("NOTHING_TO_INLINE")
-@inline
 fun Minutes (Minutes: Float) :Int = (Minutes * 1000 * 60).toInt()
-
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
 // vim: set fileencoding=utf-8 filetype=kotlin foldmethod=marker spell spelllang=en_gb :

@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,11 +25,15 @@ fun Init_Logger()
     java.io.File (" build/test-results").mkdirs()
 
     val manager = java.util.logging.LogManager.getLogManager ()
+<<<<<<< HEAD
     val properties = ReadKetfit_Test::class.java getResourceAsStream "/logging.properties"
+=======
+    val properties = ReadKetfit_Test::class.java.getResourceAsStream("/logging.properties")
+>>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
 
     // Read log properties so that the class which we test can write to a log
     // file
-    manager readConfiguration properties
+    manager.readConfiguration(properties)
 } // Init_Logger
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

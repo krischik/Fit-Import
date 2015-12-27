@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ package com.krischik.fit_import
  *     Read ketfit file.
  * </p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
@@ -42,6 +42,15 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
    } // object
 
    /**
+    * <p>convenience constructor creating an reader from an file instance.
+    */
+   public constructor(file: java.io.File) :
+   this(java.io.FileInputStream (file))
+   {
+      return
+   } // constructor
+
+   /**
     * <p>stream to read from</p>
     */
    val inputStream = java.io.InputStreamReader (dataStream);
@@ -50,7 +59,8 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
     */
    val reader = java.io.BufferedReader (inputStream);
 
-   init {
+   init
+   {
       logger.entering(TAG, "ReadWithigns", dataStream)
 
       // Skip the fist line. They are just the header.
@@ -58,55 +68,64 @@ public class ReadWithings(val dataStream: java.io.InputStream) : AutoCloseable
       reader.readLine()
 
       logger.exiting(TAG, "ReadWithigns")
-   }
+   } // init
 
    /**
     * <p>Withings puts some stupid “Uhr” at the end of the string</p>
     */
    private fun truncateDate(inText: String): String
    {
-      val length = Date_Format.toPattern().length()
+      val length = Date_Format.toPattern().length
       var retval = inText.substring(0, length)
 
       return retval
-   }
+   } // truncateDate
 
    /**
     * <p>Fields which have not be measured are keept empty and the stupid java parser won't parse empty string.</p>
     */
    private fun parseFloat(inText: String): Float
    {
-      return if (inText.length() > 0)
+      return if (inText.length > 0)
       {
-	 java.lang.Float.parseFloat (inText)
+         java.lang.Float.parseFloat (inText)
       }
       else
       {
-	 0.0f
-      }
-   }
+         0.0f
+      } // if
+   } // parseFloat
 
    /**
     * <p>read new dataset</p>
+    *
+    * @return null when no more records are availabie.
     */
-   fun read(): Withings
+   fun read(): Withings?
    {
       logger.entering(TAG, "read")
 
-      val line = reader.readLine()
-      val rawFields = line.split(',')
-      val fields = rawFields.map { field ->  field.removeSurrounding ( "\"") }
-      val Date = Date_Format.parse(truncateDate(fields[0]))
-      val Weight = parseFloat (fields [1]);
-      val Fat = parseFloat (fields [2]);
-      val No_Fat = parseFloat (fields [3]);
+      val line: String? = reader.readLine()
+      val retval: Withings? = if (line != null)
+      {
+         val rawFields = line.split(',')
+         val fields = rawFields.map { field ->  field.removeSurrounding ( "\"") }
+         val date = Date_Format.parse(truncateDate(fields[0]))
+         val weight = parseFloat (fields [1]);
+         val fat = parseFloat (fields [2]);
+         val noFat = parseFloat (fields [3]);
 
-      val retval = Withings(
-	 Time = Date,
-	 Weight = Weight,
-	 Fat = Fat,
-	 No_Fat = No_Fat,
-	 Comment = fields [4])
+         Withings(
+            time = date,
+            weight = weight,
+            fat = fat,
+            noFat = noFat,
+            comment = fields [4])
+      }
+      else
+      {
+         null
+      } // if
 
       logger.exiting(TAG, "read", retval)
       return retval

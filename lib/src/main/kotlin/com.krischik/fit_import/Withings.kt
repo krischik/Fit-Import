@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,17 +25,22 @@ package com.krischik.fit_import
  * "2014-02-13 6:04 Uhr","94.34","26.81","68.43",""
  * "2014-02-12 6:09 Uhr","94.89","27.43","67.36",""
  * </pre>
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
 
 data class Withings(
-   val Time: java.util.Date,
-   val Weight: Float,
-   val Fat: Float,
-   val No_Fat: Float,
-   val Comment: String)
-
+   val time: java.util.Date,
+   val weight: Float,
+   val fat: Float,
+   val noFat: Float,
+   val comment: String)
+{
+   /**
+    * <p>Withings uses kg for body fat while GoogleFit uses percent.
+    */
+   public fun getFatPercentage() = fat / weight * 100
+}
 // vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
 // vim: set textwidth=0 filetype=kotlin foldmethod=marker spell spelllang=en_gb :

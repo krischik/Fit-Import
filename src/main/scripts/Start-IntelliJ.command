@@ -22,10 +22,10 @@
 #  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Start-IntelliJ.command $
 ############################################################ }}}1 ###########
 
-source ${0:h}/Setup.command
+source ${0:h}/Setup-${HOST}.command
 
 setopt Err_Exit;
-setopt No_X_Trace;
+setopt No_XTrace;
 
 "${INTELLIJ_HOME}/Contents/MacOS/idea"		    \
     "${PROJECT_HOME}"				    \

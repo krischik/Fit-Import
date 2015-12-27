@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,11 +23,11 @@ import java.util.Calendar
  *     Read ketfit file.
  * </p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
-public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
+public class ReadKetfit(val dataStream: java.io.InputStream) : AutoCloseable
 {
    companion object
    {
@@ -54,6 +54,15 @@ public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
    } // object
 
    /**
+    * <p>convenience constructor creating an reader from an file instance.
+    */
+   public constructor(file: java.io.File) :
+   this(java.io.FileInputStream (file))
+   {
+      return
+   }
+
+   /**
     * <p>stream to read from</p>
     */
    val inputStream = java.io.InputStreamReader (dataStream);
@@ -62,7 +71,8 @@ public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
     */
    val reader = java.io.BufferedReader (inputStream);
 
-   init {
+   init
+   {
       logger.entering(TAG, "ReadKetfit", dataStream)
 
       // Skip the fist 2 line. They are just the header.
@@ -75,50 +85,60 @@ public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
 
    /**
     * <p>read new dataset</p>
+    *
+    * @return null when no more records are availabie.
     */
-   fun read(): Ketfit
+   fun read(): Ketfit?
    {
       logger.entering(TAG, "read")
 
       val line = reader.readLine()
-      val fields = line.split(';')
 
-      val Date = java.util.GregorianCalendar();
-      val Time = java.util.GregorianCalendar();
-      val Duration = java.util.GregorianCalendar();
+      val retval: Ketfit? = if (line != null)
+      {
+         val fields = line.split(';')
 
-      Date.setTime(Date_Format.parse(fields[0]))
-      Time.setTime(Time_Format.parse(fields[1]))
-      Duration.setTime(Duration_Format.parse(fields[2]))
+         val date = java.util.GregorianCalendar();
+         val time = java.util.GregorianCalendar();
+         val duration = java.util.GregorianCalendar();
 
-      val Start = java.util.GregorianCalendar (
-	 /* year         => */Date.get(Calendar.YEAR),
-	 /* month        => */Date.get(Calendar.MONTH),
-	 /* dayOfMonth   => */Date.get(Calendar.DAY_OF_MONTH),
-	 /* hourOfDay    => */Time.get(Calendar.HOUR_OF_DAY),
-	 /* minute       => */Time.get(Calendar.MINUTE),
-	 /* second       => */Time.get(Calendar.SECOND));
-      val End = Start.clone() as java.util.GregorianCalendar
+         date.setTime(Date_Format.parse(fields[0]))
+         time.setTime(Time_Format.parse(fields[1]))
+         duration.setTime(Duration_Format.parse(fields[2]))
 
-      End.add (Calendar.SECOND, Duration.get(Calendar.SECOND));
-      End.add (Calendar.MINUTE, Duration.get(Calendar.MINUTE));
-      End.add (Calendar.SECOND, Duration.get(Calendar.SECOND));
+         val start = java.util.GregorianCalendar (
+            /* year         => */date.get(Calendar.YEAR),
+            /* month        => */date.get(Calendar.MONTH),
+            /* dayOfMonth   => */date.get(Calendar.DAY_OF_MONTH),
+            /* hourOfDay    => */time.get(Calendar.HOUR_OF_DAY),
+            /* minute       => */time.get(Calendar.MINUTE),
+            /* second       => */time.get(Calendar.SECOND));
+         val end = start.clone() as java.util.GregorianCalendar
 
-      val Watt = java.lang.Integer.parseInt (fields [3]);
-      val Puls = java.lang.Integer.parseInt (fields [4]);
-      val Umin = java.lang.Integer.parseInt (fields [5]);
-      val Kilo_Cal = java.lang.Integer.parseInt (fields [6]);
-      val km = java.lang.Integer.parseInt (fields [7]);
+         end.add (Calendar.SECOND, duration.get(Calendar.SECOND));
+         end.add (Calendar.MINUTE, duration.get(Calendar.MINUTE));
+         end.add (Calendar.SECOND, duration.get(Calendar.SECOND));
 
-      val retval = Ketfit(
-	 Start = Start.getTime(),
-	 End = End.getTime(),
-	 Watt = Watt,
-	 Puls = Puls,
-	 Umin = Umin,
-	 kCal = Kilo_Cal,
-	 km = km,
-	 ω = 0)
+         val watt = java.lang.Integer.parseInt (fields [3]);
+         val puls = java.lang.Integer.parseInt (fields [4]);
+         val uMin = java.lang.Integer.parseInt (fields [5]);
+         val kCal = java.lang.Integer.parseInt (fields [6]);
+         val km = java.lang.Integer.parseInt (fields [7]);
+
+         Ketfit(
+            start = start.getTime(),
+            end = end.getTime(),
+            watt = watt,
+            puls = puls,
+            uMin = uMin,
+            kCal = kCal,
+            km = km,
+            ω = 0)
+      }
+      else
+      {
+         null
+      } // if
 
       logger.exiting(TAG, "read", retval)
       return retval

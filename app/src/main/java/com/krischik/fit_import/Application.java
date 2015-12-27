@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,25 +20,18 @@ package com.krischik.fit_import;
 /**
  * <p> </p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
 @org.androidannotations.annotations.EApplication
 public class Application
-   extends android.app.Application
+   extends android.support.multidex.MultiDexApplication
 {
    /**
     * <p> TAG as class name for logging </p>
     */
-   private final static String TAG;
-
-   java.lang.ref.WeakReference test;
-
-   static
-   {
-      TAG = Application.class.getName ();
-   } // static
+   private final static String TAG = Application.class.getName ();
 } // Application
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

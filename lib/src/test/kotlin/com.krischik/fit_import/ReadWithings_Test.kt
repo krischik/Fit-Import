@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ import org.exparity.hamcrest.date.Months
  *     Read ketfit file.:
  * </p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
@@ -37,28 +37,44 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
    /**
     * <p>logging tag</p>
     */
+<<<<<<< HEAD
    // private val TAG = ReadWithings_Test::class.java.name
+=======
+   private val TAG = ReadWithings_Test::class.qualifiedName
+>>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
    /**
     * <p>logger</p>
     */
    // private val logger = java.util.logging.Logger.getLogger (TAG);
 
-   init {
+   init
+   {
       Init_Logger ()
 
+<<<<<<< HEAD
       given ("a stream with header") {
 	 val testData = ReadWithings_Test::class.java getResourceAsStream "/Withings.csv"
+=======
+      given ("a stream with header")
+      {
+         val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
+>>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
 
-	 on ("opening and closing the file") {
-	    val test = ReadWithings (testData)
+         on ("opening and closing the file")
+         {
+            val test = ReadWithings (testData)
 
-	    test.close ()
-	    it ("should cause no error") {
-	    } // if
-	 } // on
+            it ("should cause no error")
+            {
+               assertThat(test, notNullValue())
+            } // it
+
+            test.close ()
+         } // on
       } // given
 
       given ("a stream with test data") {
+<<<<<<< HEAD
 	 val testData = ReadWithings_Test::class.java getResourceAsStream "/Withings.csv"
 	 val test = ReadWithings (testData)
 
@@ -87,9 +103,68 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
 	    } // if
 	 } // on
 	 // test.close ()
+=======
+         val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
+
+         on ("reading two records data")
+         {
+            val test = ReadWithings (testData)
+            val record_1 = test.read()
+
+            it ("should return the expected 1st value")
+            {
+               assertThat(record_1, notNullValue())
+               assertThat(record_1?.time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
+               assertThat(record_1?.weight?.toDouble(), closeTo(94.34, 0.001))
+               assertThat(record_1?.fat?.toDouble(), closeTo(26.81, 0.001))
+               assertThat(record_1?.noFat?.toDouble(), closeTo(68.43, 0.001))
+               assertThat(record_1?.comment, equalTo(""))
+            } // it
+
+            val record_2 = test.read()
+
+            it ("should return the expected 2nd value")
+            {
+               assertThat(record_2, notNullValue())
+               assertThat(record_2?.time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
+               assertThat(record_2?.weight?.toDouble(), closeTo(96.77, 0.001))
+               assertThat(record_2?.fat?.toDouble(), closeTo(0.0, 0.001))
+               assertThat(record_2?.noFat?.toDouble(), closeTo(0.0, 0.001))
+               assertThat(record_2?.comment, equalTo(""))
+            } // it
+
+            test.close ()
+         } // on
+      } // given
+      given ("a stream with 2 rows of test data")
+      {
+         val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
+
+         on ("reading all data")
+         {
+            val test = ReadWithings (testData)
+            var recordCount = 0;
+
+            Read_Lines@ while (true)
+            {
+               val testRecord = test.read()
+
+               if (testRecord == null) break@Read_Lines
+
+               recordCount = recordCount + 1;
+               logger.log(java.util.logging.Level.FINE, "Read Record {1}: {2}", arrayOf (recordCount, testRecord))
+            } // when
+
+            it ("should return the 13 records")
+            {
+               assertThat(recordCount, equalTo(2))
+            } // it
+            test.close ()
+         } // on
+>>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
       } // given
    } // init
-} // ReadWithigns_Test
+} // ReadWithings_Test
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
 // vim: set fileencoding=utf-8 filetype=kotlin foldmethod=syntax spell spelllang=en_gb :

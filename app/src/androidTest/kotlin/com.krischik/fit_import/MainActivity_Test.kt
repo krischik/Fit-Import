@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,74 +16,23 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
+import com.krischik.Second
+
 /**
  * <p>
  * </p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
-class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java)
+public class Main_Activity_Test :
+   android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java)
 {
    /**
     * Logging tag
     */
-   private val TAG = Main_Activity_Test::class.java.getName()
-   /**
-    * Activity to test.
-    */
-   private var Activity: java.lang.ref.WeakReference<MainActivity>? = null
-   /**
-    * Instrumentation to control the test.
-    */
-   private var Instrument: android.app.Instrumentation? = null
-   /**
-    * Robotium helper instance
-    */
-   private var Solo: com.robotium.solo.Solo? = null
-
-   /**
-    * get the activity and the text view to test
-    *
-    * @see android.test.ActivityInstrumentationTestCase2#setUp ()
-    */
-   protected override fun setUp()
-   {
-      android.util.Log.d (TAG, "+ setUp")
-
-      super.setUp ()
-
-      Instrument = getInstrumentation ()
-      Activity = java.lang.ref.WeakReference (getActivity ())
-
-      Solo = com.robotium.solo.Solo (Instrument, Activity?.get ())
-
-      android.util.Log.d (TAG, "> Instrument =" + Instrument)
-      android.util.Log.d (TAG, "> Activity   =" + Activity?.get ())
-
-      Solo?.sleep (Second (0.5f))
-
-      android.util.Log.d (TAG, "- setUp")
-   } // setUp
-
-   /**
-    * end the activity and free memory
-    *
-    * @see android.test.ActivityInstrumentationTestCase2#tearDown()
-    */
-   protected override fun tearDown()
-   {
-      android.util.Log.d (TAG, "+ tearDown")
-
-      Activity?.clear ()
-      Activity = null
-      Instrument = null
-
-      super.tearDown ()
-
-      android.util.Log.d (TAG, "- tearDown")
-   } // tearDown
+   private val TAG = com.krischik.Log.getLogTag(Main_Activity_Test::class.java)
 
    /**
     * Test opening the main activity (smoke test / release compatible version)
@@ -92,13 +41,14 @@ class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainAct
    @android.test.suitebuilder.annotation.SmallTest
    fun test_00_Open()
    {
-      android.util.Log.d (TAG, "+ test_00_Open")
+      com.krischik.Log.d (TAG, "+ test_00_Open")
+      val Instrument = instrumentation
+      val Solo = com.robotium.solo.Solo (Instrument, activity)
 
-      Solo?.sleep (Second (0.5f))
+      Solo.sleep (Second (0.5f))
 
-      android.util.Log.d (TAG, "- test_00_Open")
-   } // test_00_Open
-
+      com.krischik.Log.d (TAG, "- test_00_Open")
+   } // test_00_
 }
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

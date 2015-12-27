@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,22 +14,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  ********************************************************** }}}1 **********/
-package com.krischik.fit_import;
-
+package com.krischik.fit_import
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class Application_Test : android.test.ApplicationTestCase<Application_>(javaClass <Application_>())
+public class Application_Test : android.test.ApplicationTestCase<Application_>(Application_::class.java)
 {
-   class object
+   companion object
    {
       /**
        * Logging tag
        */
-      private val TAG = javaClass<Application_Test>().getName()
+      private val TAG = com.krischik.Log.getLogTag(Application_Test::class.java)
 
-      fun i(Text: String) = android.util.Log.i (TAG, Text)
+      fun i(Text: String) = com.krischik.Log.i (TAG, Text)
    }
 
    /**
@@ -42,7 +41,7 @@ public class Application_Test : android.test.ApplicationTestCase<Application_>(j
    {
       val API = android.os.Build.VERSION.SDK_INT
 
-      android.util.Log.d (TAG, "+ test_02_Configuration")
+      com.krischik.Log.d (TAG, "+ test_02_Configuration")
 
       i ("Build Confiuration")
       i ("> Debug                   = " + BuildConfig.DEBUG)
@@ -89,7 +88,7 @@ public class Application_Test : android.test.ApplicationTestCase<Application_>(j
 	 i ("17: densityDpi            = " + Configuration.densityDpi)
       } // if
 
-      android.util.Log.d (TAG, "- test_02_Configuration")
+      com.krischik.Log.d (TAG, "- test_02_Configuration")
    } // test_02_Configuration
 } // Application_Test
 

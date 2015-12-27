@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * <p> </p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
@@ -38,15 +38,34 @@ public class MainActivity
     */
    // private final static String TAG = MainActivity.class.getName ();
    /**
-    * <p>Google FIT Model</p>
-    */
-   protected GoogleFit googleFit;
-   /**
     * <p> Calculator fragment </p>
     */
-   @org.androidannotations.annotations.FragmentById
+   @org.androidannotations.annotations.FragmentById (R.id.Main_Fragment)
    @Nullable
-   protected MainFragment Main_Fragment;
+   protected MainFragment mainFragment;
+
+   public com.krischik.fit_import.GoogleFit getGoogleFit ()
+   {
+      return googleFit;
+   }
+
+   /**
+    * <p>Google FIT Model</p>
+    */
+   private GoogleFit googleFit;
+   /**
+    * <p>remember if we are connected</p>
+    */
+   private boolean connected = false;
+
+   /**
+    * <p>remember if we are connected</p>
+    *
+    * @return true when we are connected
+    */
+   public boolean isConnected() {
+      return connected;
+   }
 
    /**
     * <p>we are connected to Google Fit (or not);
@@ -58,15 +77,12 @@ public class MainActivity
    @Override
    public void doConnect (boolean connected)
    {
-      if (Main_Fragment != null)
+      if (mainFragment != null)
       {
-         Main_Fragment.doConnect (connected);
+         mainFragment.doConnect (connected);
       } // if
 
-      if (connected)
-      {
-         googleFit.insertWeight (new Withings (new java.util.Date (), 80.0f, 0.0f, 0.0f, ""));
-      }
+      this.connected=connected;
 
       return;
    } // doConnect
@@ -87,7 +103,7 @@ public class MainActivity
    @Override
    protected void onActivityResult (int requestCode, int resultCode, android.content.Intent data)
    {
-      if (requestCode == GoogleFit.REQUEST_OAUTH)
+      if (requestCode == GoogleFit.Request_OAuth)
       {
          googleFit.doConnect (resultCode);
       } // if
@@ -103,7 +119,7 @@ public class MainActivity
 
       boolean authInProgress;
 
-      authInProgress = savedInstanceState != null && savedInstanceState.getBoolean (GoogleFit.AUTH_PENDING);
+      authInProgress = savedInstanceState != null && savedInstanceState.getBoolean (GoogleFit.Auth_Pending);
 
       googleFit = new GoogleFit (this, authInProgress);
 
@@ -115,7 +131,7 @@ public class MainActivity
    protected void onSaveInstanceState (@NotNull android.os.Bundle outState)
    {
       super.onSaveInstanceState (outState);
-      outState.putBoolean (GoogleFit.AUTH_PENDING, googleFit.getAuthentication_In_Progress ());
+      outState.putBoolean (GoogleFit.Auth_Pending, googleFit.getAuthentication_In_Progress ());
 
       return;
    } // onSaveInstanceState
@@ -143,6 +159,50 @@ public class MainActivity
 
       return;
    } // onStop
+
+   @org.androidannotations.annotations.AfterViews
+   protected void afterViews ()
+   {
+      if (mainFragment != null)
+      {
+         mainFragment.setGoogleFit (googleFit);
+      } // if
+
+      return;
+   } // doConnect
+
+
+   /**
+    * <p>the import withings button has been clicked.</p>
+    *
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public void doWithingsButton ()
+   {
+      if (mainFragment != null)
+      {
+         mainFragment.doWithingsButton ();
+      } // if
+
+      return;
+   } // doConnect
+
+   /**
+    * <p>the import ketfit button has been clicked.</p>
+    *
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public void doKetfitButton ()
+   {
+      if (mainFragment != null)
+      {
+         mainFragment.doKetfitButton ();
+      } // if
+
+      return;
+   } // doConnect
 } // MainActivity
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,11 +18,9 @@
 package com.krischik.fit_import;
 
 /**
- * <p> </p>
- * <p/>
- * ${tags}
+ * <p>Main Fragment</p>
  *
- * @author martin
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
  * @version 1.0
  * @since 1.0
  */
@@ -41,6 +39,17 @@ public interface IMainFragment
     */
    public android.support.v4.app.FragmentActivity getActivity();
 
+   /**
+    * <p>the import withings button has been clicked.</p>
+    *
+
+    */
+   public void doWithingsButton ();
+   /**
+    * <p>the import ketfit button has been clicked.</p>
+    *
+    */
+   public void doKetfitButton ();
 
 } // IMainFragment
 

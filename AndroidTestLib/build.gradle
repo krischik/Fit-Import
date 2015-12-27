@@ -1,0 +1,67 @@
+/********************************************************** {{{1 ***********
+ *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ ***************************************************************************
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ ********************************************************** }}}1 **********/
+buildscript {
+   repositories {
+      jcenter ()
+   }
+   dependencies {
+      classpath (
+	 [group: 'com.android.tools.build', name: 'gradle', version: '1.2.3'],
+	 [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version]
+      )
+   }
+}
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+repositories {
+   jcenter ()
+}
+
+android {
+   compileSdkVersion 23
+   buildToolsVersion "23.0.1"
+
+   defaultConfig {
+      minSdkVersion 19
+      targetSdkVersion 23
+      versionCode 10000
+      versionName "1.0.0"
+   } // defaultConfig
+   sourceSets {
+      main {
+	 java.srcDirs += 'src/main/kotlin'
+      } // main
+      androidTest {
+	 java.srcDirs += 'src/androidTest/kotlin'
+      } // androidTest
+   } // sourceSets
+} // android
+
+dependencies {
+   compile (
+      project (':lib'),
+      [group: 'junit', name: 'junit', version: '4.12'],
+      [group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'],
+      [group: 'org.hamcrest', name: 'hamcrest-integration', version: '1.3'],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: kotlin_version]
+   ) // compile
+}
+
+// vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :
+// vim: set textwidth=0 filetype=groovy foldmethod=marker nospell :
