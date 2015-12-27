@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  ********************************************************** }}}1 **********/
-package com.krischik.fit_import
+package com.krischik
 
 /**
  * make sleep command more readable

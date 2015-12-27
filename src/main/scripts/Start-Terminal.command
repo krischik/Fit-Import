@@ -26,7 +26,7 @@ tell application "Terminal"
 	set |Tab| to do script "
 cd \"/Volumes/Daten/Developer/Fit-Import\";
 source \"src/main/scripts/Setup.command\""
-	set background color of |Tab| to {58000, 65535, 58000}
+	set background color of |Tab| to {52736, 61952, 61952}
 end tell
 
 ############################################################ {{{1 ###########

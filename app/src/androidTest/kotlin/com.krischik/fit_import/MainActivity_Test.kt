@@ -24,7 +24,7 @@ package com.krischik.fit_import
  * @version 1.0
  * @since 1.0
  */
-class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java())
+class Main_Activity_Test : android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java)
 {
    /**
     * Logging tag

@@ -34,7 +34,7 @@ public class ReadKetfit (val dataStream: java.io.InputStream) : AutoCloseable
       /**
        * <p>logging tag</p>
        */
-      private val TAG = ReadKetfit::class.java.getName ()
+      private val TAG = ReadKetfit::class.java.name
       /**
        * <p>logger</p>
        */
