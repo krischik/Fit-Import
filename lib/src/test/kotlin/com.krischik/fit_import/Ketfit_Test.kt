@@ -41,29 +41,29 @@ public class Ketfit_Test : org.jetbrains.spek.api.Spek()
 
    init
    {
-      Init_Logger ()
+      Utilities.Init_Logger ()
 
       given ("A Ketfit instance")
       {
-         val ketfit = Ketfit (
-            /* start  => */java.util.Date (),
-            /* end    => */java.util.Date (),
-            /* Watt   => */130,
-            /* puls   => */160,
-            /* Umin   => */70,
-            /* kCal   => */500,
-            /* km     => */3,
-            /* ω      => */0)
+	 val ketfit = Ketfit (
+	    /* start  => */java.util.Date (),
+	    /* end    => */java.util.Date (),
+	    /* Watt   => */130,
+	    /* puls   => */160,
+	    /* Umin   => */70,
+	    /* kCal   => */500,
+	    /* km     => */3,
+	    /* ω      => */0)
 
-         on ("getting the distance in m")
-         {
-            val test = ketfit.getMeter()
+	 on ("getting the distance in m")
+	 {
+	    val test = ketfit.getMeter()
 
-            it ("should be 1000 times the distance in km")
-            {
-               assertThat(test, equalTo(3000.0f))
-            } // it
-         } // on
+	    it ("should be 1000 times the distance in km")
+	    {
+	       assertThat(test, equalTo(3000.0f))
+	    } // it
+	 } // on
       } // given
    } // init
 } // ReadKetfit_Test

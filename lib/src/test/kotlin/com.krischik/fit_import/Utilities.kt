@@ -36,17 +36,17 @@ object Utilities
    /**
     * log instance
     */
-   val logger = Logger.getLogger (TAG)
+   val logger = java.util.logging.Logger.getLogger (TAG)
 
    /**
     * initialize the logger framework. Do not use on Android as you won't have logging.properties there.
     */
-   fun Init_Logger()
+   public fun Init_Logger()
    {
       java.io.File ("build/test-results").mkdirs()
 
       val manager = java.util.logging.LogManager.getLogManager ()
-      val properties = PackageKt::class.java.getResourceAsStream("/logging.properties")
+      val properties = Utilities::class.java.getResourceAsStream("/logging.properties")
 
       assertThat(properties, notNullValue ())
 

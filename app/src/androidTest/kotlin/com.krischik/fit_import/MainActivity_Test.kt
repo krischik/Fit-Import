@@ -26,13 +26,13 @@ import com.krischik.Second
  * @version 1.0
  * @since 1.0
  */
-public class Main_Activity_Test :
+public class MainActivity_Test :
    android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java)
 {
    /**
     * Logging tag
     */
-   private val TAG = com.krischik.Log.getLogTag(Main_Activity_Test::class.java)
+   private val TAG = com.krischik.Log.getLogTag(MainActivity_Test::class.java)
 
    /**
     * Test opening the main activity (smoke test / release compatible version)

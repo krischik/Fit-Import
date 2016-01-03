@@ -16,12 +16,13 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.IsNull.notNullValue
-import org.hamcrest.number.IsCloseTo.closeTo
-import org.hamcrest.core.IsEqual.equalTo
 import org.exparity.hamcrest.date.IsSameInstant.sameInstant
 import org.exparity.hamcrest.date.Months
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsEqual.equalTo
+import org.hamcrest.core.IsNull.notNullValue
+import org.hamcrest.number.IsCloseTo.closeTo
+import kotlin.test.fail
 
 /**
  * <p>
@@ -37,132 +38,95 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
    /**
     * <p>logging tag</p>
     */
-<<<<<<< HEAD
-   // private val TAG = ReadWithings_Test::class.java.name
-=======
    private val TAG = ReadWithings_Test::class.qualifiedName
->>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
    /**
     * <p>logger</p>
     */
-   // private val logger = java.util.logging.Logger.getLogger (TAG);
+   private val logger = java.util.logging.Logger.getLogger (TAG);
 
    init
    {
-      Init_Logger ()
+      Utilities.Init_Logger ()
 
-<<<<<<< HEAD
-      given ("a stream with header") {
-	 val testData = ReadWithings_Test::class.java getResourceAsStream "/Withings.csv"
-=======
       given ("a stream with header")
       {
-         val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
->>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
+	 val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
 
-         on ("opening and closing the file")
-         {
-            val test = ReadWithings (testData)
+	 on ("opening and closing the file")
+	 {
+	    val test = ReadWithings (testData)
 
-            it ("should cause no error")
-            {
-               assertThat(test, notNullValue())
-            } // it
+	    it ("should cause no error")
+	    {
+	       assertThat(test, notNullValue())
+	    } // it
 
-            test.close ()
-         } // on
+	    test.close ()
+	 } // on
       } // given
 
-      given ("a stream with test data") {
-<<<<<<< HEAD
-	 val testData = ReadWithings_Test::class.java getResourceAsStream "/Withings.csv"
-	 val test = ReadWithings (testData)
+      given ("a stream with test data")
+      {
+	 val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
 
-	 on ("reading 1st data") {
-	    val info = test.read();
+	 on ("reading two records data")
+	 {
+	    val test = ReadWithings (testData)
+	    val record_1 = test.read()
 
-	    it ("should return the expexed value") {
-	       assertThat(info, notNullValue())
-	       assertThat(info.Time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
-	       assertThat(info.Weight.toDouble(), closeTo(94.34, 0.001))
-	       assertThat(info.Fat.toDouble(), closeTo(26.81, 0.001))
-	       assertThat(info.No_Fat.toDouble(), closeTo(68.43, 0.001))
-	       assertThat(info.Comment, equalTo(""))
-	    } // if
+	    it ("should return the expected 1st value")
+	    {
+	       assertThat(record_1, notNullValue())
+	       assertThat(record_1?.time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
+	       assertThat(record_1?.weight?.toDouble(), closeTo(94.34, 0.001))
+	       assertThat(record_1?.fat?.toDouble(), closeTo(26.81, 0.001))
+	       assertThat(record_1?.noFat?.toDouble(), closeTo(68.43, 0.001))
+	       assertThat(record_1?.comment, equalTo(""))
+	    } // it
+
+	    val record_2 = test.read()
+
+	    it ("should return the expected 2nd value")
+	    {
+	       assertThat(record_2, notNullValue())
+	       assertThat(record_2?.time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
+	       assertThat(record_2?.weight?.toDouble(), closeTo(96.77, 0.001))
+	       assertThat(record_2?.fat?.toDouble(), closeTo(0.0, 0.001))
+	       assertThat(record_2?.noFat?.toDouble(), closeTo(0.0, 0.001))
+	       assertThat(record_2?.comment, equalTo(""))
+	    } // it
+
+	    test.close ()
 	 } // on
-	 on ("reading 2nd data") {
-	    val info = test.read();
-
-	    it ("should return the expexed value") {
-	       assertThat(info, notNullValue())
-	       assertThat(info.Time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
-	       assertThat(info.Weight.toDouble(), closeTo(96.77, 0.001))
-	       assertThat(info.Fat.toDouble(), closeTo(0.0, 0.001))
-	       assertThat(info.No_Fat.toDouble(), closeTo(0.0, 0.001))
-	       assertThat(info.Comment, equalTo(""))
-	    } // if
-	 } // on
-	 // test.close ()
-=======
-         val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
-
-         on ("reading two records data")
-         {
-            val test = ReadWithings (testData)
-            val record_1 = test.read()
-
-            it ("should return the expected 1st value")
-            {
-               assertThat(record_1, notNullValue())
-               assertThat(record_1?.time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
-               assertThat(record_1?.weight?.toDouble(), closeTo(94.34, 0.001))
-               assertThat(record_1?.fat?.toDouble(), closeTo(26.81, 0.001))
-               assertThat(record_1?.noFat?.toDouble(), closeTo(68.43, 0.001))
-               assertThat(record_1?.comment, equalTo(""))
-            } // it
-
-            val record_2 = test.read()
-
-            it ("should return the expected 2nd value")
-            {
-               assertThat(record_2, notNullValue())
-               assertThat(record_2?.time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
-               assertThat(record_2?.weight?.toDouble(), closeTo(96.77, 0.001))
-               assertThat(record_2?.fat?.toDouble(), closeTo(0.0, 0.001))
-               assertThat(record_2?.noFat?.toDouble(), closeTo(0.0, 0.001))
-               assertThat(record_2?.comment, equalTo(""))
-            } // it
-
-            test.close ()
-         } // on
       } // given
       given ("a stream with 2 rows of test data")
       {
-         val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
+	 val testData = ReadWithings_Test::class.java.getResourceAsStream("/Withings.csv")
 
-         on ("reading all data")
-         {
-            val test = ReadWithings (testData)
-            var recordCount = 0;
+	 on ("reading all data")
+	 {
+	    val test = ReadWithings (testData)
+	    var recordCount = 0;
 
-            Read_Lines@ while (true)
-            {
-               val testRecord = test.read()
+	    Read_Lines@ while (true)
+	    {
+	       val testRecord = test.read()
 
-               if (testRecord == null) break@Read_Lines
+	       if (testRecord == null) break@Read_Lines
 
-               recordCount = recordCount + 1;
-               logger.log(java.util.logging.Level.FINE, "Read Record {1}: {2}", arrayOf (recordCount, testRecord))
-            } // when
+	       recordCount = recordCount + 1;
+	       logger.log(java.util.logging.Level.FINE, "Read Record {1}: {2}", arrayOf (recordCount, testRecord))
+	    } // when
 
-            it ("should return the 13 records")
-            {
-               assertThat(recordCount, equalTo(2))
-            } // it
-            test.close ()
-         } // on
->>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
+	    it ("should return the 13 records")
+	    {
+	       assertThat(recordCount, equalTo(2))
+	    } // it
+	    test.close ()
+	 } // on
       } // given
+
+      // fail ("unit test where executed")
    } // init
 } // ReadWithings_Test
 

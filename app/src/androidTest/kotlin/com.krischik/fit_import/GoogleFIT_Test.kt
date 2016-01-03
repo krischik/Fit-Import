@@ -43,23 +43,23 @@ public class GoogleFIT_Test :
     */
    @android.test.suitebuilder.annotation.Smoke
    @android.test.suitebuilder.annotation.SmallTest
-   fun test_00_Insert_Weight()
+   public fun test_00_Insert_Weight()
    {
       com.krischik.Log.d (TAG, "+ test_00_Insert_Weight")
 
       com.krischik.test.Utilities.asyncAssertTrue (
-         message = { "Application should connect to Google Fit" },
-         condition = { activity?.isConnected ?: false },
-         timeout = com.krischik.test.Utilities.seconds(30.0f))
+	 message = { "Application should connect to Google Fit" },
+	 condition = { activity?.isConnected ?: false },
+	 timeout = com.krischik.test.Utilities.seconds(30.0f))
 
       val weight = 80.0f + (Random.nextFloat() * 20.0f - 10.0f)
       val fat = 20.0f + (Random.nextFloat() * 10.0f - 5.0f)
       val withings = com.krischik.fit_import.Withings (
-         /* Time    => */java.util.Date (),
-         /* weight  => */weight,
-         /* Fat     => */fat,
-         /* No_Fat  => */weight - fat,
-         /* Comment => */"test_00_Insert_Weight")
+	 /* Time    => */java.util.Date (),
+	 /* weight  => */weight,
+	 /* Fat     => */fat,
+	 /* No_Fat  => */weight - fat,
+	 /* Comment => */"test_00_Insert_Weight")
       val Google_Fit = activity?.googleFit
       Google_Fit?.insertWeight (withings)
 
@@ -71,14 +71,14 @@ public class GoogleFIT_Test :
     */
    @android.test.suitebuilder.annotation.Smoke
    @android.test.suitebuilder.annotation.SmallTest
-   fun test_01_Insert_Training()
+   public fun test_01_Insert_Training()
    {
       com.krischik.Log.d (TAG, "+ test_01_Insert_Training")
 
       com.krischik.test.Utilities.asyncAssertTrue (
-         message = { "Application should connect to Google Fit" },
-         condition = { activity?.isConnected ?: false },
-         timeout = com.krischik.test.Utilities.seconds(30.0f))
+	 message = { "Application should connect to Google Fit" },
+	 condition = { activity?.isConnected ?: false },
+	 timeout = com.krischik.test.Utilities.seconds(30.0f))
 
       val puls = 140 + (Random.nextInt (20) - 10)
       val watt = 160 + (Random.nextInt (20) - 10)
@@ -88,14 +88,14 @@ public class GoogleFIT_Test :
       val end = java.util.Date ()
       val start = java.util.Date (end.time - com.krischik.test.Utilities.minutes(30.0f))
       val ketfit = Ketfit (
-         /* start  => */start,
-         /* end    => */end,
-         /* Watt   => */watt,
-         /* puls   => */puls,
-         /* Umin   => */uMin,
-         /* kCal   => */kCal,
-         /* km     => */km,
-         /* ω      => */0)
+	 /* start  => */start,
+	 /* end    => */end,
+	 /* Watt   => */watt,
+	 /* puls   => */puls,
+	 /* Umin   => */uMin,
+	 /* kCal   => */kCal,
+	 /* km     => */km,
+	 /* ω      => */0)
       val Google_Fit = activity?.googleFit
       Google_Fit?.insertTraining (ketfit);
 
@@ -107,14 +107,14 @@ public class GoogleFIT_Test :
     */
    @android.test.suitebuilder.annotation.Smoke
    @android.test.suitebuilder.annotation.SmallTest
-   fun test_02_Insert_Weights()
+   public fun test_02_Insert_Weights()
    {
       com.krischik.Log.d (TAG, "+ test_02_Insert_Weights")
 
       com.krischik.test.Utilities.asyncAssertTrue (
-         message = { "Application should connect to Google Fit" },
-         condition = { activity?.isConnected ?: false },
-         timeout = com.krischik.test.Utilities.seconds(30.0f))
+	 message = { "Application should connect to Google Fit" },
+	 condition = { activity?.isConnected ?: false },
+	 timeout = com.krischik.test.Utilities.seconds(30.0f))
 
       val Google_Fit = activity?.googleFit
       val testData = GoogleFIT_Test::class.java.getResourceAsStream("/Withings.csv")
@@ -123,15 +123,15 @@ public class GoogleFIT_Test :
 
       Read_Lines@ while (true)
       {
-         val testRecord = test.read()
+	 val testRecord = test.read()
 
-         if (testRecord == null) break@Read_Lines
+	 if (testRecord == null) break@Read_Lines
 
-         recordCount = recordCount + 1;
+	 recordCount = recordCount + 1;
 
-         com.krischik.Log.v (TAG , "Read Record %1\$d: %2\$s", recordCount, testRecord)
+	 com.krischik.Log.v (TAG, "Read Record %1\$d: %2\$s", recordCount, testRecord)
 
-         Google_Fit?.insertWeight (testRecord)
+	 Google_Fit?.insertWeight (testRecord)
       } // when
 
       assertThat(recordCount, equalTo(11))
@@ -144,14 +144,14 @@ public class GoogleFIT_Test :
     */
    @android.test.suitebuilder.annotation.Smoke
    @android.test.suitebuilder.annotation.SmallTest
-   fun test_03_Insert_Trainings()
+   public fun test_03_Insert_Trainings()
    {
       com.krischik.Log.d (TAG, "+ test_03_Insert_Trainings")
 
       com.krischik.test.Utilities.asyncAssertTrue (
-         message = { "Application should connect to Google Fit" },
-         condition = { activity?.isConnected ?: false },
-         timeout = com.krischik.test.Utilities.seconds(30.0f))
+	 message = { "Application should connect to Google Fit" },
+	 condition = { activity?.isConnected ?: false },
+	 timeout = com.krischik.test.Utilities.seconds(30.0f))
 
       val Google_Fit = activity?.googleFit
       val testData = GoogleFIT_Test::class.java.getResourceAsStream("/ketfit.csv")
@@ -160,15 +160,15 @@ public class GoogleFIT_Test :
 
       Read_Lines@ while (true)
       {
-         val testRecord = test.read()
+	 val testRecord = test.read()
 
-         if (testRecord == null) break@Read_Lines
+	 if (testRecord == null) break@Read_Lines
 
-         recordCount = recordCount + 1;
+	 recordCount = recordCount + 1;
 
-         com.krischik.Log.v (TAG , "Read Record %1\$d: %2\$s", recordCount, testRecord)
+	 com.krischik.Log.v (TAG, "Read Record %1\$d: %2\$s", recordCount, testRecord)
 
-         Google_Fit?.insertTraining (testRecord);
+	 Google_Fit?.insertTraining (testRecord);
       } // when
 
       assertThat(recordCount, equalTo(16))

@@ -13,7 +13,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
- ********************************************************** }}}1 **********/
+ **********************************************************}}}1 **********/
 
 group = "com.krischik"
 version = "1.0.0"
@@ -24,14 +24,14 @@ buildscript {
    repositories {
       mavenCentral ()
       mavenLocal ()
-      mavenCentral()
+      mavenCentral ()
    }
    dependencies {
       classpath (
-         [group: 'com.android.tools.build', name: 'gradle', version: '1.2.3'],
-         [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.4'],
-         [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
-         [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version]
+	 [group: 'com.android.tools.build', name: 'gradle', version: '1.2.3'],
+	 [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.4'],
+	 [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
+	 [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version]
       ) // classpath
    } // dependencies
 } // buildscript
@@ -52,61 +52,63 @@ repositories {
    } // maven
 } // repositories
 
-
 android {
    compileSdkVersion 23
-   buildToolsVersion "23.0.1"
+   buildToolsVersion "23.0.2"
 
    applicationVariants.all { variant ->
       variant.outputs.each { output ->
-         def name = output.outputFile.name
-            .replace (".apk", "-${variant.versionName}.apk")
-            .replace (project.name, "Fit-Import")
+	 def name = output.outputFile.name
+	    .replace (".apk", "-${variant.versionName}.apk")
+	    .replace (project.name, "Fit-Import")
 
-         output.outputFile = new File (output.outputFile.parent, name)
+	 output.outputFile = new File (output.outputFile.parent, name)
       }
    }
 
    signingConfigs {
       debug {
-         storeFile file (System.getenv ("KEY_STORE"))
-         storePassword System.getenv ("KEY_STOREPASS")
-         keyAlias System.getenv ("KEY_ALIAS")
-         keyPassword System.getenv ("KEY_KEYPASS")
+	 storeFile file (System.getenv ("KEY_STORE"))
+	 storePassword System.getenv ("KEY_STOREPASS")
+	 keyAlias System.getenv ("KEY_ALIAS")
+	 keyPassword System.getenv ("KEY_KEYPASS")
       }
       release {
-         storeFile file (System.getenv ("KEY_STORE"))
-         storePassword System.getenv ("KEY_STOREPASS")
-         keyAlias System.getenv ("KEY_ALIAS")
-         keyPassword System.getenv ("KEY_KEYPASS")
+	 storeFile file (System.getenv ("KEY_STORE"))
+	 storePassword System.getenv ("KEY_STOREPASS")
+	 keyAlias System.getenv ("KEY_ALIAS")
+	 keyPassword System.getenv ("KEY_KEYPASS")
       }
    }
 
    defaultConfig {
       applicationId "com.krischik.fit_import"
-      testApplicationId 'com.krischik.fit_import.test'
       minSdkVersion 19
-      targetSdkVersion 23
+      multiDexEnabled true
+      targetSdkVersion 22
+      testApplicationId 'com.krischik.fit_import.test'
+      testInstrumentationRunner "android.support.test.runner.MultiDexTestRunner"
       versionCode 10000
       versionName "1.0.0"
-      multiDexEnabled true
    }
    buildTypes {
       release {
-         signingConfig signingConfigs.release
-         minifyEnabled false
-         proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'proguard-rules.pro'
+	 signingConfig signingConfigs.release
+	 minifyEnabled false
+	 proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'src/main/config/proguard-release.pro'
       }
       debug {
-         signingConfig signingConfigs.debug
+	 signingConfig signingConfigs.debug
+	 minifyEnabled false
+	 proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'src/main/config/proguard-debug.pro'
       }
    }
    sourceSets {
       main {
-         java.srcDirs += 'src/main/kotlin'
+	 java.srcDirs += 'src/main/kotlin'
       } // main
       androidTest {
-         java.srcDirs += 'src/androidTest/kotlin'
+	 java.srcDirs += 'src/androidTest/kotlin'
       } // androidTest
    } // sourceSets
    compileOptions {
@@ -137,9 +139,11 @@ dependencies {
    androidTestCompile (
       project (':AndroidTestLib'),
       [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.5.3'],
-      [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9']
-   )
-   // androidTestCompile
+      [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9'],
+      ) // androidTestCompile
+   androidTestCompile ('com.android.support:multidex-instrumentation:1.0.1') {
+      exclude group: 'com.android.support', module: 'multidex'
+   }
 } // dependencies
 
 apt {

@@ -23,16 +23,11 @@
 
 package com.krischik.test
 
-import java.util.logging.Logger
-import org.jetbrains.annotations.NotNull
-import org.jetbrains.annotations.Nullable
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.beans.HasPropertyWithValue.hasProperty
-import org.hamcrest.core.AllOf.allOf
-import org.hamcrest.core.IsEqual.equalTo
-import org.hamcrest.core.IsNull.notNullValue
 import org.hamcrest.collection.IsCollectionWithSize.hasSize
-
+import org.hamcrest.core.IsNull.notNullValue
+import org.jetbrains.annotations.NotNull
+import java.util.logging.Logger
 import kotlin.test.fail
 
 /**
@@ -65,7 +60,7 @@ object Utilities
     * @param minutes time in minutes
     * @return time in milli seconds
     */
-   public fun minutes(minutes: Float) :Long = (minutes * 1000 * 60).toLong ()
+   public fun minutes(minutes: Float): Long = (minutes * 1000 * 60).toLong ()
 
    /**
     * return an unix timestamp as string
@@ -95,9 +90,9 @@ object Utilities
     * output the messages and fail the test.
     *
     * @param expected
-          * message count expected
+    * message count expected
     * @param actual
-          * actual messages
+    * actual messages
     */
    fun assertMessages(
       expected: Int, actual: List <String>)
@@ -110,7 +105,7 @@ object Utilities
       {
 	 Utilities.logger.log (java.util.logging.Level.INFO, actual.toString())
 
-         assertThat(actual, hasSize (expected))
+	 assertThat(actual, hasSize (expected))
       } // if
    } // Assert_Messages
 
@@ -141,9 +136,9 @@ object Utilities
     * @param wait
     * Wait time between tests
     */
-//   {
-//      () -> "Not true after timeout"
-//   }
+   //   {
+   //      () -> "Not true after timeout"
+   //   }
    public tailrec fun asyncAssertTrue(
       message: () -> String,
       condition: () -> Boolean,
@@ -167,6 +162,7 @@ object Utilities
 	 asyncAssertTrue (message, condition, timeout - wait, wait)
       } // if
    } // Async_Assert_True
+
    /**
     *
     * checks if the condition becomes false within the given time frame
@@ -180,36 +176,37 @@ object Utilities
     * @param wait
     * Wait time between tests
     */
-    public fun asyncAssertFalse(
+   public fun asyncAssertFalse(
       message: () -> String,
       condition: () -> Boolean,
       timeout: Long = seconds (10.0f),
       wait: Long = seconds (0.5f))
    {
-      asyncAssertTrue (message, {!condition ()}, timeout, wait)
+      asyncAssertTrue (message, { !condition () }, timeout, wait)
    } // Async_Assert_False
+
    /**
     * test that all elements inside an array are not null
     *
     * @param Message message to display
     * @param testArray array to test
     */
-    public fun <T> assertArrayNoneNull(
+   public fun <T> assertArrayNoneNull(
       testArray: Array  <T>)
    {
       testArray.forEach (
-      {
-	 Element: T ->
+	 {
+	    Element: T ->
 	    assertThat (Element, notNullValue ())
-      }) // foreach
+	 }) // foreach
    } // Assert_Array_None_Null
 
    /**
     * Asserted with trace. Just replace the == for a , at test which make problems.
     */
-   public fun <Element_Type> assert (value: Array <Element_Type>, expected: Array <Element_Type>)
+   public fun <Element_Type> assert(value: Array <Element_Type>, expected: Array <Element_Type>)
    {
-      if (! (value == expected))
+      if (!(value == expected))
       {
 	 // Utilities.logger.log (
 	 //   java.util.logging.Level.WARNING,
@@ -217,7 +214,7 @@ object Utilities
 	 //      "\nValue    = {0}" +
 	 //      "\nExpected = {1}",
 	 //   Value.toString (), Expected.toString ())
-	    fail()
+	 fail()
       } // if
    } // assert
 

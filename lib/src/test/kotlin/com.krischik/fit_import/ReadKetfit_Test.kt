@@ -36,96 +36,82 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
    /**
     * <p>logging tag</p>
     */
-<<<<<<< HEAD
-   // private val TAG = ReadKetfit_Test::class.java.name
-=======
    private val TAG = ReadKetfit_Test::class.qualifiedName
->>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
    /**
     * <p>logger</p>
     */
-   // private val logger = java.util.logging.Logger.getLogger (TAG);
+   private val logger = java.util.logging.Logger.getLogger (TAG);
 
    init
    {
-      Init_Logger ()
+      Utilities.Init_Logger ()
 
-<<<<<<< HEAD
-      given ("a stream with header") {
-	 val testData = ReadKetfit_Test::class.java getResourceAsStream "/kettfit.csv"
-=======
       given ("a stream with header")
       {
-         val testData = ReadKetfit_Test::class.java.getResourceAsStream("/ketfit.csv")
->>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
+	 val testData = ReadKetfit_Test::class.java.getResourceAsStream("/ketfit.csv")
 
-         on ("opening and closing the file")
-         {
-            val test = ReadKetfit (testData)
+	 on ("opening and closing the file")
+	 {
+	    val test = ReadKetfit (testData)
 
-            it ("should cause no error")
-            {
-               assertThat(test, notNullValue())
-            } // it
+	    it ("should cause no error")
+	    {
+	       assertThat(test, notNullValue())
+	    } // it
 
-            test.close ()
-         } // on
+	    test.close ()
+	 } // on
       } // given
 
-<<<<<<< HEAD
-      given ("a stream with test data") {
-	 val testData = ReadKetfit_Test::class.java getResourceAsStream "/kettfit.csv"
-=======
       given ("a stream with test data")
       {
-         val testData = ReadKetfit_Test::class.java.getResourceAsStream("/ketfit.csv")
+	 val testData = ReadKetfit_Test::class.java.getResourceAsStream("/ketfit.csv")
 
-         on ("reading first data")
-         {
-            val test = ReadKetfit (testData)
-            val info = test.read();
+	 on ("reading first data")
+	 {
+	    val test = ReadKetfit (testData)
+	    val info = test.read();
 
-            it ("should return the exceed value")
-            {
-               assertThat(info, notNullValue())
-               assertThat(info?.start, sameInstant (2014, Months.FEBRUARY, 2, 18, 42, 0, 0))
-               assertThat(info?.end, sameInstant (2014, Months.FEBRUARY, 2, 19, 22, 0, 0))
-               assertThat(info?.watt, equalTo(88))
-               assertThat(info?.puls, equalTo(118))
-               assertThat(info?.uMin, equalTo(48))
-               assertThat(info?.kCal, equalTo(294))
-               assertThat(info?.km, equalTo(6))
-               assertThat(info?.ω, equalTo(0))
-            } // it
+	    it ("should return the exceed value")
+	    {
+	       assertThat(info, notNullValue())
+	       assertThat(info?.start, sameInstant (2014, Months.FEBRUARY, 2, 18, 42, 0, 0))
+	       assertThat(info?.end, sameInstant (2014, Months.FEBRUARY, 2, 19, 22, 0, 0))
+	       assertThat(info?.watt, equalTo(88))
+	       assertThat(info?.puls, equalTo(118))
+	       assertThat(info?.uMin, equalTo(48))
+	       assertThat(info?.kCal, equalTo(294))
+	       assertThat(info?.km, equalTo(6))
+	       assertThat(info?.ω, equalTo(0))
+	    } // it
 
-            test.close ()
-         } // on
+	    test.close ()
+	 } // on
       } // given
       given ("a stream with 13 rows of test data")
       {
-         val testData = ReadKetfit_Test::class.java.getResourceAsStream("/ketfit.csv")
-         on ("reading all data")
-         {
-            val test = ReadKetfit (testData)
-            var recordCount = 0;
-            Read_Lines@ while (true)
-            {
-               val testRecord = test.read()
->>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
+	 val testData = ReadKetfit_Test::class.java.getResourceAsStream("/ketfit.csv")
+	 on ("reading all data")
+	 {
+	    val test = ReadKetfit (testData)
+	    var recordCount = 0;
+	    Read_Lines@ while (true)
+	    {
+	       val testRecord = test.read()
 
-               if (testRecord == null) break@Read_Lines
+	       if (testRecord == null) break@Read_Lines
 
-               recordCount = recordCount + 1;
-               logger.log(java.util.logging.Level.FINE, "Read Record {1}: {2}", arrayOf (recordCount, testRecord))
-            } // when
+	       recordCount = recordCount + 1;
+	       logger.log(java.util.logging.Level.FINE, "Read Record {1}: {2}", arrayOf (recordCount, testRecord))
+	    } // when
 
-            it ("should return the 13 records")
-            {
-               assertThat(recordCount, equalTo(13))
-            } // it
+	    it ("should return the 13 records")
+	    {
+	       assertThat(recordCount, equalTo(13))
+	    } // it
 
-            test.close ()
-         } // on
+	    test.close ()
+	 } // on
       } // given
    } // init
 } // ReadKetfit_Test

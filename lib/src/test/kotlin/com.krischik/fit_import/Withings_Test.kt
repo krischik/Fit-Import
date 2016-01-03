@@ -41,25 +41,25 @@ public class Withings_Test : org.jetbrains.spek.api.Spek()
 
    init
    {
-      Init_Logger ()
+      Utilities.Init_Logger ()
 
       given ("A Withings instance")
       {
-         val withings = Withings (
-            /* Time    => */java.util.Date (),
-            /* weight  => */100.0f,
-            /* Fat     => */20.0f,
-            /* No_Fat  => */80.0f - 20.0f,
-            /* Comment => */"Withings_Test")
-         on ("getting the distance in m")
-         {
-            val test = withings.getFatPercentage()
+	 val withings = Withings (
+	    /* Time    => */java.util.Date (),
+	    /* weight  => */100.0f,
+	    /* Fat     => */20.0f,
+	    /* No_Fat  => */80.0f - 20.0f,
+	    /* Comment => */"Withings_Test")
+	 on ("getting the distance in m")
+	 {
+	    val test = withings.getFatPercentage()
 
-            it ("should be 20%")
-            {
-               assertThat(test, equalTo(20.0f))
-            } // it
-         } // on
+	    it ("should be 20%")
+	    {
+	       assertThat(test, equalTo(20.0f))
+	    } // it
+	 } // on
       } // given
    } // init
 } // ReadKetfit_Test

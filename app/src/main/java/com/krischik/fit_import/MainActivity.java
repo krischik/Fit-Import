@@ -32,11 +32,11 @@ public class MainActivity
    extends android.support.v7.app.ActionBarActivity
    implements IMainFragment
 {
-
    /**
-    * Logging tag
+    * <p> TAG as class name for logging </p>
     */
-   // private final static String TAG = MainActivity.class.getName ();
+   private final static String TAG = com.krischik.Log.getLogTag (MainActivity.class);
+
    /**
     * <p> Calculator fragment </p>
     */
