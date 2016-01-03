@@ -120,7 +120,8 @@ android {
 dependencies {
    apt (
       [group: 'org.androidannotations', name: 'androidannotations', version: androidannotations_version]
-   ) // apt
+   )
+   // apt
    compile (
       project (':lib'),
       project (':AndroidLib'),
@@ -131,12 +132,14 @@ dependencies {
       [group: 'org.androidannotations', name: 'androidannotations-api', version: androidannotations_version],
       [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version],
       [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: kotlin_version]
-   ) // compile
+   )
+   // compile
    androidTestCompile (
       project (':AndroidTestLib'),
       [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.5.3'],
       [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9']
-   ) // androidTestCompile
+   )
+   // androidTestCompile
 } // dependencies
 
 apt {

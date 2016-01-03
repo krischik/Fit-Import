@@ -17,24 +17,44 @@
 
 package com.krischik.fit_import
 
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.IsNull.notNullValue
+
 /**
- * initialize the logger framework. Do not use on Android as you won't have logging.properties there.
+ * Demonstration of the activity test
+ *
+ * @author "Martin Krischik" «krischik@users.sourceforge.net»
+ * @version 1.0 $Revision: 6780 $
+ * @since 1.0
  */
-fun Init_Logger()
+object Utilities
 {
-    java.io.File (" build/test-results").mkdirs()
+   /**
+    * Logging tag
+    */
+   val TAG = Utilities::class.qualifiedName
+   /**
+    * log instance
+    */
+   val logger = Logger.getLogger (TAG)
 
-    val manager = java.util.logging.LogManager.getLogManager ()
-<<<<<<< HEAD
-    val properties = ReadKetfit_Test::class.java getResourceAsStream "/logging.properties"
-=======
-    val properties = ReadKetfit_Test::class.java.getResourceAsStream("/logging.properties")
->>>>>>> e9b7fb8516458ff6b9ff6f6f0df6413aaca194a9
+   /**
+    * initialize the logger framework. Do not use on Android as you won't have logging.properties there.
+    */
+   fun Init_Logger()
+   {
+      java.io.File ("build/test-results").mkdirs()
 
-    // Read log properties so that the class which we test can write to a log
-    // file
-    manager.readConfiguration(properties)
-} // Init_Logger
+      val manager = java.util.logging.LogManager.getLogManager ()
+      val properties = PackageKt::class.java.getResourceAsStream("/logging.properties")
+
+      assertThat(properties, notNullValue ())
+
+      // Read log properties so that the class which we test can write to a log
+      // file
+      manager.readConfiguration (properties)
+   } // Init_Logger
+} // Utilities
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
 // vim: set fileencoding=utf-8 filetype=kotlin foldmethod=marker spell spelllang=en_gb :

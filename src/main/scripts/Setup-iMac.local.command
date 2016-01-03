@@ -34,24 +34,22 @@ typeset -g -x	   MACPORTS_HOME="${opt}/share/java"
 typeset -g -x		 M2_HOME="${MACPORTS_HOME}/maven3"
 typeset -g -x		SVN_HOME="/opt/local"
 typeset -g -x		ANT_HOME="${MACPORTS_HOME}/apache-ant"
-typeset -g -x		JDK_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home"
-typeset -g -x	       JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home"
+typeset -g -x		JDK_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home"
+typeset -g -x	       JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home"
 typeset -g -x	       Workspace="${WORK}/Workspaces/Fit-Import"
 typeset -g -x	      SCALA_HOME="${opt}/share/scala-2.11"
 typeset -g -x	    ANDROID_HOME="${MACPORTS_HOME}/android-sdk-macosx"
-typeset -g -x	   INTELLIJ_HOME="${Developer}/IntelliJ IDEA 14 CE.app"
+typeset -g -x	   INTELLIJ_HOME="${Developer}/IntelliJ IDEA 15 CE.app"
 typeset -g -x	   PROGUARD_HOME="${MACPORTS_HOME}"
 
-typeset -g -x	       UIQ3_DEMO="false"
 typeset -g -x	    PROJECT_NAME="Fit-Import"
 typeset -g -x	     FIT_VERSION=1.0.0
-
 
 typeset -x -g	       JAVA_OPTS="-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms256m -Xmx1g"
 typeset -x -g	      MAVEN_OPTS="-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms256m -Xmx1g"
 typeset -x -g	     GRADLE_OPTS="-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms256m -Xmx1g"
 typeset -x -g	    MAVEN_DEPLOY="file:///Work/HomePage/uiq3/htdocs/Repository"
-typeset -x -g	   MAVEN_INSTALL="file:///Repositories/Local/"
+typeset -x -g	   MAVEN_INSTALL="file:///Work/Repositories/Local/"
 typeset -x -g -U -T CLASSPATH classpath ":"
 
 path=("${JAVA_HOME}/bin" ${path})
@@ -60,15 +58,18 @@ path=("${ANDROID_HOME}/tools" ${path})
 path=("${ANDROID_HOME}/platform-tools" ${path})
 fpath=(${PROJECT_HOME}/src/main/scripts ${fpath})
 
-Scala_Library="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
-
+typeset -x -g     CALCULATOR_VERSION=6.7.6
+typeset -x -g CALCULATOR_SCALASCRIPT="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
 
 alias			 PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
 alias			mvn="${M2_HOME}/bin/mvn"
 
-typeset -x -f -u Svn-Commit
-typeset -x -f -u Maven
-typeset -x -f -u Diff_2_3
+typeset -f -u Svn-Commit
+typeset -f -u Maven
+typeset -f -u Diff_2_3
+typeset -f -u Device-Activate-Logging 
+typeset -f -u Device-Deactivate-Logging
+typeset -f -u Device-Set-Logging
 
 function lxpm ()
 {
