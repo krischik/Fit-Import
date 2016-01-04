@@ -18,7 +18,8 @@
 
 -keepattributes *Annotation*
 
--keep public class com.krischik.fit_import.GoogleFit { *; }
+-keep public class com.krischik.fit_import.GoogleFit 			{ *; }
+-keep public class android.support.test.runner.MultiDexTestRunner	{ *; }
 
 ########## Android Test #########################################################
 
