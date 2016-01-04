@@ -26,8 +26,8 @@ package com.krischik.fit_import;
  */
 @org.androidannotations.annotations.EApplication
 public class Application
-   extends android.app.Application
-//   extends android.support.multidex.MultiDexApplication
+//   extends android.app.Application
+   extends android.support.multidex.MultiDexApplication
 {
    /**
     * <p> TAG as class name for logging </p>

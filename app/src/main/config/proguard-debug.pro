@@ -20,6 +20,7 @@
 
 -keep public class com.krischik.fit_import.GoogleFit 			{ *; }
 -keep public class android.support.test.runner.MultiDexTestRunner	{ *; }
+-keep public class com.android.test.runner.MultiDexTestRunner		{ *; }
 
 ########## Android Test #########################################################
 

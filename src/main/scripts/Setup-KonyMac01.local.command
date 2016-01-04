@@ -68,7 +68,7 @@ typeset -x -g CALCULATOR_SCALASCRIPT="${WORK}/Repositories/Local/net/sourceforge
 alias			 PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
 alias			mvn="${M2_HOME}/bin/mvn"
 
-typeset -f -u Svn-Commit
+typeset -f -u Git-Commit
 typeset -f -u Maven
 typeset -f -u Diff_2_3
 typeset -f -u Device-Activate-Logging 

@@ -35,12 +35,12 @@ function Git-Commit ()
 	    .idea/runConfigurations/*.xml
 	    
 	git add .
-	git commit -c"${in_Comment}"
+	git commit -m"${in_Comment}"
 	git push
     popd
-}
+} # Git-Commit
 
-${@}
+Git-Commit ${@}
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :

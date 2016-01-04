@@ -2,7 +2,7 @@
   <configuration default="false" name="Test Fit-Import" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
     <module name="app" />
     <option name="TESTING_TYPE" value="0" />
-    <option name="INSTRUMENTATION_RUNNER_CLASS" value="android.test.InstrumentationTestRunner" />
+    <option name="INSTRUMENTATION_RUNNER_CLASS" value="com.android.test.runner.MultiDexTestRunner" />
     <option name="METHOD_NAME" value="" />
     <option name="CLASS_NAME" value="" />
     <option name="PACKAGE_NAME" value="" />

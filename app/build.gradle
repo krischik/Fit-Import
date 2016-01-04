@@ -87,7 +87,9 @@ android {
       multiDexEnabled true
       targetSdkVersion 22
       testApplicationId 'com.krischik.fit_import.test'
-      testInstrumentationRunner "android.support.test.runner.MultiDexTestRunner"
+      testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
+//    testInstrumentationRunner "android.support.test.runner.MultiDexTestRunner"
+//    testInstrumentationRunner "android.test.InstrumentationTestRunner"
       versionCode 10000
       versionName "1.0.0"
    }
