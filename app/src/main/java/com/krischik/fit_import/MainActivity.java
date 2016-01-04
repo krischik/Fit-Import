@@ -1,19 +1,16 @@
-/********************************************************** {{{1 ***********
- *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
- ***************************************************************************
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see http://www.gnu.org/licenses/
- ********************************************************** }}}1 **********/
+/**********************************************************
+ * {{{1 *********** Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
+ * ************************************************************************** This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ * <p/>
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ * <p/>
+ * You should have received a copy of the GNU General Public License along with this program.  If not, see
+ * http://www.gnu.org/licenses/ ********************************************************* }}}1
+ **********/
 
 package com.krischik.fit_import;
 
@@ -36,7 +33,15 @@ public class MainActivity
     * <p> TAG as class name for logging </p>
     */
    private final static String TAG = com.krischik.Log.getLogTag (MainActivity.class);
-
+   /**
+    * <p>remember if we are connected</p>
+    */
+   private boolean connected = false;
+   /**
+    * <p>Google FIT Model</p>
+    */
+   @NotNull
+   private GoogleFit googleFit;
    /**
     * <p> Calculator fragment </p>
     */
@@ -44,28 +49,16 @@ public class MainActivity
    @Nullable
    protected MainFragment mainFragment;
 
-   public com.krischik.fit_import.GoogleFit getGoogleFit ()
+   @org.androidannotations.annotations.AfterViews
+   protected void afterViews ()
    {
-      return googleFit;
-   }
+      if (mainFragment != null)
+      {
+	 mainFragment.setGoogleFit (googleFit);
+      } // if
 
-   /**
-    * <p>Google FIT Model</p>
-    */
-   private GoogleFit googleFit;
-   /**
-    * <p>remember if we are connected</p>
-    */
-   private boolean connected = false;
-
-   /**
-    * <p>remember if we are connected</p>
-    *
-    * @return true when we are connected
-    */
-   public boolean isConnected() {
-      return connected;
-   }
+      return;
+   } // doConnect
 
    /**
     * <p>we are connected to Google Fit (or not);
@@ -79,10 +72,42 @@ public class MainActivity
    {
       if (mainFragment != null)
       {
-         mainFragment.doConnect (connected);
+	 mainFragment.doConnect (connected);
       } // if
 
-      this.connected=connected;
+      this.connected = connected;
+
+      return;
+   } // doConnect
+
+   /**
+    * <p>the import ketfit button has been clicked.</p>
+    *
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public void doKetfitButton ()
+   {
+      if (mainFragment != null)
+      {
+	 mainFragment.doKetfitButton ();
+      } // if
+
+      return;
+   } // doConnect
+
+   /**
+    * <p>the import withings button has been clicked.</p>
+    *
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public void doWithingsButton ()
+   {
+      if (mainFragment != null)
+      {
+	 mainFragment.doWithingsButton ();
+      } // if
 
       return;
    } // doConnect
@@ -99,13 +124,32 @@ public class MainActivity
       return this;
    } // getActivity
 
+   /**
+    * <p>Google FIT Model</p>
+    */
+   @NotNull
+   public com.krischik.fit_import.GoogleFit getGoogleFit ()
+   {
+      return googleFit;
+   }
+
+   /**
+    * <p>remember if we are connected</p>
+    *
+    * @return true when we are connected
+    */
+   public boolean isConnected ()
+   {
+      return connected;
+   }
+
    @hugo.weaving.DebugLog
    @Override
    protected void onActivityResult (int requestCode, int resultCode, android.content.Intent data)
    {
       if (requestCode == GoogleFit.Request_OAuth)
       {
-         googleFit.doConnect (resultCode);
+	 googleFit.doConnect (resultCode);
       } // if
 
       return;
@@ -159,50 +203,6 @@ public class MainActivity
 
       return;
    } // onStop
-
-   @org.androidannotations.annotations.AfterViews
-   protected void afterViews ()
-   {
-      if (mainFragment != null)
-      {
-         mainFragment.setGoogleFit (googleFit);
-      } // if
-
-      return;
-   } // doConnect
-
-
-   /**
-    * <p>the import withings button has been clicked.</p>
-    *
-    */
-   @hugo.weaving.DebugLog
-   @Override
-   public void doWithingsButton ()
-   {
-      if (mainFragment != null)
-      {
-         mainFragment.doWithingsButton ();
-      } // if
-
-      return;
-   } // doConnect
-
-   /**
-    * <p>the import ketfit button has been clicked.</p>
-    *
-    */
-   @hugo.weaving.DebugLog
-   @Override
-   public void doKetfitButton ()
-   {
-      if (mainFragment != null)
-      {
-         mainFragment.doKetfitButton ();
-      } // if
-
-      return;
-   } // doConnect
 } // MainActivity
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

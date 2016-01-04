@@ -39,6 +39,12 @@ public class MainFragment
     */
    private GoogleFit googleFit;
    /**
+    * <p>Import Withings CVS button</p>
+    */
+   @org.androidannotations.annotations.ViewById (R.id.Error_Text)
+   @Nullable
+   protected android.widget.EditText errorText;
+   /**
     * <p>Import Ketfit CVS button</p>
     */
    @org.androidannotations.annotations.ViewById (R.id.Ketfit_Button)
@@ -50,14 +56,6 @@ public class MainFragment
    @org.androidannotations.annotations.ViewById (R.id.Withings_Button)
    @Nullable
    protected android.widget.Button withingsButton;
-
-   /**
-    * <p>Import Withings CVS button</p>
-    */
-   @org.androidannotations.annotations.ViewById (R.id.Error_Text)
-   @Nullable
-   protected android.widget.EditText errorText;
-
 
    /**
     * <p>we are connected to Google Fit (or not)</p>
@@ -77,75 +75,6 @@ public class MainFragment
       {
 	 withingsButton.setEnabled (connected);
       }
-      return;
-   } // doConnect
-
-   /**
-    * <p>the import withings button has been clicked.</p>
-    */
-   @hugo.weaving.DebugLog
-   @org.androidannotations.annotations.Click (R.id.Withings_Button)
-   @Override
-   public void doWithingsButton ()
-   {
-      final android.support.v4.app.FragmentActivity activity = getActivity ();
-
-      assert errorText != null : "Won't be null if buttons are available to be clicked";
-      errorText.setText ("");
-
-      if (googleFit != null && activity != null)
-      {
-	 final java.io.File dir = activity.getExternalFilesDir (null);
-
-	 if (dir != null)
-	 {
-	    final java.io.File file = new java.io.File (dir, "Withings - Gewicht Martin.csv");
-
-	    if (file.exists ())
-	    {
-	       final ReadWithings records = new ReadWithings (file);
-
-	       Read_Records:
-	       while (true)
-	       {
-		  final Withings record = records.read ();
-
-		  if (record == null)
-		  {
-		     break Read_Records;
-		  }
-
-		  com.krischik.Log.v (TAG, "Read Record: %1$s", record);
-
-		  try
-		  {
-		     googleFit.insertWeight (record);
-		  }
-		  catch (Exception exception)
-		  {
-		     errorText.append (exception.getMessage ()+ '\n');
-		     com.krischik.Log.e (TAG, "LOG00060:Insert error!", exception);
-		  }
-	       } // when
-	    }
-	    else
-	    {
-	       errorText.append ("Input file “" + file + "” does not exist\n");
-	       com.krischik.Log.e (TAG, "LOG00030: Input file “%1$s” does not exist", file);
-	    }
-	 }
-	 else
-	 {
-	    errorText.append ("No directory to read from!\n");
-	    com.krischik.Log.e (TAG, "LOG00040: No directory to read from");
-	 }
-      }
-      else
-      {
-	 errorText.append ("No googleFit or activity!\n");
-	 com.krischik.Log.e (TAG, "LOG00050: No googleFit or activity!");
-      }
-
       return;
    } // doConnect
 
@@ -213,6 +142,75 @@ public class MainFragment
       {
 	 errorText.append ("No googleFit or activity!\n");
 	 com.krischik.Log.e (TAG, "LOG00010: No googleFit or activity!");
+      }
+
+      return;
+   } // doConnect
+
+   /**
+    * <p>the import withings button has been clicked.</p>
+    */
+   @hugo.weaving.DebugLog
+   @org.androidannotations.annotations.Click (R.id.Withings_Button)
+   @Override
+   public void doWithingsButton ()
+   {
+      final android.support.v4.app.FragmentActivity activity = getActivity ();
+
+      assert errorText != null : "Won't be null if buttons are available to be clicked";
+      errorText.setText ("");
+
+      if (googleFit != null && activity != null)
+      {
+	 final java.io.File dir = activity.getExternalFilesDir (null);
+
+	 if (dir != null)
+	 {
+	    final java.io.File file = new java.io.File (dir, "Withings - Gewicht Martin.csv");
+
+	    if (file.exists ())
+	    {
+	       final ReadWithings records = new ReadWithings (file);
+
+	       Read_Records:
+	       while (true)
+	       {
+		  final Withings record = records.read ();
+
+		  if (record == null)
+		  {
+		     break Read_Records;
+		  }
+
+		  com.krischik.Log.v (TAG, "Read Record: %1$s", record);
+
+		  try
+		  {
+		     googleFit.insertWeight (record);
+		  }
+		  catch (Exception exception)
+		  {
+		     errorText.append (exception.getMessage ()+ '\n');
+		     com.krischik.Log.e (TAG, "LOG00060:Insert error!", exception);
+		  }
+	       } // when
+	    }
+	    else
+	    {
+	       errorText.append ("Input file “" + file + "” does not exist\n");
+	       com.krischik.Log.e (TAG, "LOG00030: Input file “%1$s” does not exist", file);
+	    }
+	 }
+	 else
+	 {
+	    errorText.append ("No directory to read from!\n");
+	    com.krischik.Log.e (TAG, "LOG00040: No directory to read from");
+	 }
+      }
+      else
+      {
+	 errorText.append ("No googleFit or activity!\n");
+	 com.krischik.Log.e (TAG, "LOG00050: No googleFit or activity!");
       }
 
       return;
