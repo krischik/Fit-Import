@@ -56,8 +56,9 @@ dependencies {
    compile (
       [group: 'org.hamcrest', name: 'hamcrest-core', version: Hamcrest_Version],
       [group: 'org.hamcrest', name: 'hamcrest-integration', version: Hamcrest_Version],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: Kotlin_Version],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version],
       [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version]
    ) // compile
 }
 
