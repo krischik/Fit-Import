@@ -16,4 +16,17 @@
  –  You should have received a copy of the GNU General Public License
  –  along with this program.  If not, see http://www.gnu.org/licenses/
  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
-<resources></resources>
+<resources>
+  <style name = 'Menu_Button'>
+    <item name = 'android:drawablePadding'>@dimen/Menu_Button_Padding</item>
+    <item name = 'android:gravity'>left|center_vertical</item>
+    <item name = 'android:hapticFeedbackEnabled'>true</item>
+    <item name = 'android:layout_gravity'>center_vertical</item>
+    <item name = 'android:layout_height'>wrap_content</item>
+    <item name = 'android:layout_marginLeft'>@dimen/Menu_Button_Padding</item>
+    <item name = 'android:layout_marginRight'>@dimen/Menu_Button_Padding</item>
+    <item name = 'android:layout_marginTop'>@dimen/Menu_Button_Padding</item>
+    <item name = 'android:layout_width'>match_parent</item>
+    <item name = 'android:minHeight'>@dimen/Button_Min_Height</item>
+  </style>
+</resources>

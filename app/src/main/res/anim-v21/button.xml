@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ ********************************************************** {{{1 ************
+  ~   Copyright © 2005 … 2013 "Martin Krischik" «krischik@users.sourceforge.net»
+  ~ ****************************************************************************
+  ~   This program is free software: you can redistribute it and/or modify
+  ~   it under the terms of the GNU General Public License as published by
+  ~   the Free Software Foundation, either version 3 of the License, or
+  ~   (at your option) any later version.
+  ~
+  ~   This program is distributed in the hope that it will be useful,
+  ~   but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~   GNU General Public License for more details.
+  ~
+  ~   You should have received a copy of the GNU General Public License
+  ~   along with this program.  If not, see «http://www.gnu.org/licenses».
+  ~ ****************************************************************************
+  ~   $Author: krischik $
+  ~   $Revision: 6793 $
+  ~   $Date: 2015-06-08 12:32:41 +0200 (Mo, 08 Jun 2015) $
+  ~   $Id: calculator_button.xml 6793 2015-06-08 10:32:41Z krischik $
+  ~   $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/Calculator/Droid/res/anim-v21/calculator_button.xml $
+  ~ *********************************************************** }}}1 ***********
+  -->
+<selector
+  tools:ignore = 'NewApi'
+  xmlns:android = 'http://schemas.android.com/apk/res/android'
+  xmlns:tools = 'http://schemas.android.com/tools'
+>
+  <item
+    android:state_pressed = 'true'
+  >
+    <objectAnimator
+      android:duration = '100'
+      android:propertyName = 'translationZ'
+      android:valueFrom = '@dimen/Button_Elevation'
+      android:valueTo = '@dimen/Button_Pressed_Elevation'
+      android:valueType = 'floatType'
+    ></objectAnimator>
+  </item>
+  <item>
+    <objectAnimator
+      android:duration = '100'
+      android:propertyName = 'translationZ'
+      android:valueFrom = '@dimen/Button_Pressed_Elevation'
+      android:valueTo = '@dimen/Button_Elevation'
+      android:valueType = 'floatType'
+    ></objectAnimator>
+  </item>
+</selector>
+  <!-- vim: set nowrap tabstop=8 shiftwidth=2 softtabstop=2 expandtab textwidth=96  :-->
+  <!-- vim: set filetype=xml foldmethod=marker nospell spell spelllang=en_gb :-->

@@ -16,14 +16,20 @@
  –  You should have received a copy of the GNU General Public License
  –  along with this program.  If not, see http://www.gnu.org/licenses/
  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
-
 <resources>
-  <string name = "app_name">Fit-Import</string>
-  <string name = "Connect">Verbinden</string>
-  <string name = "Disconnect">Trennen</string>
-  <string name = "Import_Ketfit_CVS">Importiere Ketfit CSV</string>
-  <string name = "Import_Withings_CVS">Importire Withings CSV</string>
+  <style name = 'Menu_Button'>
+    <item name = 'android:clipToPadding'>false</item>
+    <item name = 'android:drawablePadding'>@dimen/Menu_Button_Padding</item>
+    <item name = 'android:gravity'>left|center_vertical</item>
+    <item name = 'android:hapticFeedbackEnabled'>true</item>
+    <item name = 'android:layout_gravity'>center_vertical</item>
+    <item name = 'android:layout_height'>wrap_content</item>
+    <item name = 'android:layout_marginLeft'>@dimen/Menu_Button_Padding</item>
+    <item name = 'android:layout_marginRight'>@dimen/Menu_Button_Padding</item>
+    <item name = 'android:layout_marginTop'>@dimen/Menu_Button_Padding</item>
+    <item name = 'android:layout_width'>match_parent</item>
+    <item name = 'android:minHeight'>@dimen/Button_Min_Height</item>
+    <item name = 'android:stateListAnimator'>@anim/button</item>
+    <item name = 'android:textAlignment'>gravity</item>
+  </style>
 </resources>
-
-  <!-- vim: set nowrap tabstop=8 shiftwidth=2 softtabstop=2 expandtab textwidth=96 : -->
-  <!-- vim: set fileencoding=utf-8 filetype=xml foldmethod=marker spell spelllang=en_gb : -->

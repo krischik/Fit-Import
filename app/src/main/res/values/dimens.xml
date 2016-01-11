@@ -17,9 +17,12 @@
  –  along with this program.  If not, see http://www.gnu.org/licenses/
  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
 <resources>
-<!-- Default screen margins, per the Android Design guidelines. -->
-  <dimen name="Activity_Horizontal_Margin">16dp</dimen>
-  <dimen name="Activity_Vertical_Margin">16dp</dimen>
+  <dimen name = "Activity_Horizontal_Margin">16dp</dimen>
+  <dimen name = "Activity_Vertical_Margin">16dp</dimen>
   <dimen name = "Widget_Margin">4dp</dimen>
   <dimen name = "Button_Elevation">4dp</dimen>
+  <dimen name = 'Button_Pressed_Elevation'>0dp</dimen>
+  <dimen name = 'Menu_Button_Min_Height'>40dp</dimen>
+  <dimen name = 'Menu_Button_Padding'>4dp</dimen>
+  <dimen name = 'Button_Min_Height'>24dp</dimen>
 </resources>

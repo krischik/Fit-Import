@@ -30,50 +30,41 @@
   <Button
     android:drawableLeft='@drawable/ic_button_withings'
     android:drawableStart='@drawable/ic_button_withings'
-    android:elevation = "@dimen/Button_Elevation"
     android:id = "@+id/Withings_Button"
     android:layout_alignParentEnd = "true"
     android:layout_alignParentLeft = "true"
     android:layout_alignParentRight = "true"
     android:layout_alignParentStart = "true"
     android:layout_alignParentTop = "true"
-    android:layout_height = "wrap_content"
-    android:layout_margin = "@dimen/Widget_Margin"
-    android:layout_width = "match_parent"
     android:text = "@string/Import_Withings_CVS"
     tools:ignore = "RtlHardcoded,UnusedAttribute"
+    style='@style/Menu_Button'
   />
   <Button
     android:drawableLeft='@drawable/ic_button_kettler'
     android:drawableStart='@drawable/ic_button_kettler'
-    android:elevation = "@dimen/Button_Elevation"
     android:id = "@+id/Ketfit_Button"
     android:layout_alignParentEnd = "true"
     android:layout_alignParentLeft = "true"
     android:layout_alignParentRight = "true"
     android:layout_alignParentStart = "true"
     android:layout_below = "@+id/Withings_Button"
-    android:layout_height = "wrap_content"
-    android:layout_margin = "@dimen/Widget_Margin"
-    android:layout_width = "match_parent"
     android:text = "@string/Import_Ketfit_CVS"
     tools:ignore = "RtlHardcoded,UnusedAttribute"
+    style='@style/Menu_Button'
   />
   <Button
     android:drawableLeft='@drawable/ic_button_fit'
     android:drawableStart='@drawable/ic_button_fit'
-    android:elevation = "@dimen/Button_Elevation"
     android:id = "@+id/connect"
     android:layout_alignParentEnd = "true"
     android:layout_alignParentLeft = "true"
     android:layout_alignParentRight = "true"
     android:layout_alignParentStart = "true"
     android:layout_below = "@+id/Ketfit_Button"
-    android:layout_height = "wrap_content"
-    android:layout_margin = "@dimen/Widget_Margin"
-    android:layout_width = "match_parent"
     android:text = "@string/Connect"
     tools:ignore = "RtlHardcoded,UnusedAttribute"
+    style='@style/Menu_Button'
   />
   <EditText
     android:editable = "false"
