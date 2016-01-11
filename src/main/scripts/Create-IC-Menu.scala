@@ -17,8 +17,7 @@ if (args.length != 1)
       java.util.logging.Level.INFO, """
 Create-IC-Launcher must be lauched in the res directory of your project and you need to
 pass exacty one parameter: The source file to be converted. The source file must not be one
-of the potential destination files.For best result the Input file should be sqare and larger
-then 144x144 pixel.""")
+of the potential destination files.For best result the Input file should be sqare and larger then 144x144 pixel.""")
 }
 else
 {
@@ -151,7 +150,7 @@ else
       javax.imageio.ImageIO.write (Character, "png", Output_File)
    } // Resize
 
-   val Base = 48
+   val Base = 32
 
    (
        ("mdpi", Base * 1.0) :: 
