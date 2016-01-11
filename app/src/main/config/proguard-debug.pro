@@ -29,6 +29,8 @@
    public *** Test_* (...);
    public *** test_* ();
    public *** test_* (...);
+
+   static *** *aroundBody* (...);
 }
 
 -keep @com.krischik.TestOnly class *

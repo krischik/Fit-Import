@@ -1,22 +1,28 @@
-/**********************************************************
- * {{{1 ***********
- * Copyright © 2011 … 2012 Noser Engineering
- * **************************************************************************
- * $$Author$$
- * $$Revision$$
- * $$Date$$
- * $$Id$$
- * $$HeadURL$$
- * ********************************************************* }}}1
- **********/
+/********************************************************** {{{1 ***********
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
+ ***************************************************************************
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ ********************************************************** }}}1 **********/
 
 package com.krischik.fit_import;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * <p>
  * </p>
  *
- * ${tags}
  * @author krma1
  * @version 1.0
  * @since 1.0
@@ -26,15 +32,15 @@ public interface IMainActivity
    /**
     * <p>Google FIT Model</p>
     */
-   @org.jetbrains.annotations.NotNull GoogleFit getGoogleFit ();
+   @NotNull
+   public abstract GoogleFit getGoogleFit ();
 
    /**
     * <p>remember if we are connected</p>
     *
     * @return true when we are connected
     */
-   boolean isConnected () // doDisconnect
-   ;
+   public abstract boolean isConnected ();
 } // IMainActivity
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

@@ -18,14 +18,14 @@
  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
 <!--suppress CheckTagEmptyBody -->
 <RelativeLayout
-  android:layout_height='match_parent'
-  android:layout_width='match_parent'
-  android:paddingBottom="@dimen/Activity_Vertical_Margin"
-  android:paddingLeft="@dimen/Activity_Horizontal_Margin"
-  android:paddingRight="@dimen/Activity_Horizontal_Margin"
-  android:paddingTop="@dimen/Activity_Vertical_Margin"
-  xmlns:android='http://schemas.android.com/apk/res/android'
-  xmlns:tools='http://schemas.android.com/tools'
+  android:layout_height = 'match_parent'
+  android:layout_width = 'match_parent'
+  android:paddingBottom = "@dimen/Activity_Vertical_Margin"
+  android:paddingLeft = "@dimen/Activity_Horizontal_Margin"
+  android:paddingRight = "@dimen/Activity_Horizontal_Margin"
+  android:paddingTop = "@dimen/Activity_Vertical_Margin"
+  xmlns:android = 'http://schemas.android.com/apk/res/android'
+  xmlns:tools = 'http://schemas.android.com/tools'
 >
   <Button
     android:layout_width = "match_parent"
@@ -50,14 +50,27 @@
     android:layout_alignParentRight = "true"
     android:layout_alignParentEnd = "true"
     android:elevation = "@dimen/Button_Elevation"
-  android:layout_margin = "@dimen/Widget_Margin" />
+    android:layout_margin = "@dimen/Widget_Margin" />
+  <Button
+    android:layout_width = "match_parent"
+    android:layout_height = "wrap_content"
+    android:text = "@string/disconnect"
+    android:id = "@+id/disconnect"
+    android:layout_below = "@+id/Ketfit_Button"
+    android:layout_alignParentLeft = "true"
+    android:layout_alignParentStart = "true"
+    android:layout_alignParentRight = "true"
+    android:layout_alignParentEnd = "true"
+    android:elevation = "@dimen/Button_Elevation"
+    android:layout_margin = "@dimen/Widget_Margin"
+    tools:ignore = "UnusedAttribute" />
   <EditText
     android:layout_width = "match_parent"
     android:layout_height = "match_parent"
     android:inputType = "none|textMultiLine"
     android:ems = "10"
     android:id = "@+id/Error_Text"
-    android:layout_below = "@+id/Ketfit_Button"
+    android:layout_below = "@+id/disconnect"
     android:layout_alignParentBottom = "true"
     android:layout_marginLeft = "@dimen/Widget_Margin"
     android:layout_marginRight = "@dimen/Widget_Margin"

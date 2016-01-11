@@ -34,22 +34,28 @@ public interface IMainFragment
    public abstract void doConnect (boolean connected);
 
    /**
-    * <p>the activity</p>
-    * @return actvivity
+    * <p>disconnect from Google Fit.</p>
     */
-   public android.support.v4.app.FragmentActivity getActivity();
+   public abstract void doDisconnect ();
+
+   /**
+    * <p>the import ketfit button has been clicked.</p>
+    *
+    */
+   public abstract void doKetfitButton ();
 
    /**
     * <p>the import withings button has been clicked.</p>
     *
 
     */
-   public void doWithingsButton ();
+   public abstract void doWithingsButton ();
+
    /**
-    * <p>the import ketfit button has been clicked.</p>
-    *
+    * <p>the activity</p>
+    * @return actvivity
     */
-   public void doKetfitButton ();
+   public abstract android.support.v4.app.FragmentActivity getActivity();
 
 } // IMainFragment
 

@@ -20,41 +20,32 @@ version = "1.0.0"
 description = "Import KetFit and Withings exports into Google Fit — Android App"
 
 buildscript {
-   ext.kotlin_version = '1.0.0-beta-3595'
    repositories {
       mavenCentral ()
       mavenLocal ()
-      mavenCentral ()
    }
    dependencies {
       classpath (
-	 [group: 'com.android.tools.build', name: 'gradle', version: '1.2.3'],
-	 [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.4'],
+	 [group: 'com.android.tools.build', name: 'gradle', version: '1.5.0'],
+	 [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.8'],
 	 [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
-	 [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version]
+	 [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: Kotlin_Version]
       ) // classpath
    } // dependencies
 } // buildscript
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'android-apt'
-apply plugin: 'kotlin-android'
-
-repositories {
-   mavenCentral ()
-   mavenLocal ()
-   maven {
-      url "http://repository.jetbrains.com/all"
-   } // maven
-   maven {
-      url "http://uiq3.sourceforge.net/Repository"
-   } // maven
-} // repositories
 
 android {
-   compileSdkVersion 23
-   buildToolsVersion "23.0.2"
+   compileSdkVersion Compile_Sdk_Version
+   buildToolsVersion Built_Tools_Version
+
+   packagingOptions {
+       exclude 'LICENSE.txt'
+   } // packagingOptions
 
    applicationVariants.all { variant ->
       variant.outputs.each { output ->
@@ -63,8 +54,8 @@ android {
 	    .replace (project.name, "Fit-Import")
 
 	 output.outputFile = new File (output.outputFile.parent, name)
-      }
-   }
+      } // variant.outputs
+   } // applicationVariants
 
    signingConfigs {
       debug {
@@ -72,20 +63,20 @@ android {
 	 storePassword System.getenv ("KEY_STOREPASS")
 	 keyAlias System.getenv ("KEY_ALIAS")
 	 keyPassword System.getenv ("KEY_KEYPASS")
-      }
+      } // debug
       release {
 	 storeFile file (System.getenv ("KEY_STORE"))
 	 storePassword System.getenv ("KEY_STOREPASS")
 	 keyAlias System.getenv ("KEY_ALIAS")
 	 keyPassword System.getenv ("KEY_KEYPASS")
-      }
-   }
+      } // release
+   } // signingConfigs
 
    defaultConfig {
       applicationId "com.krischik.fit_import"
-      minSdkVersion 19
+      minSdkVersion Min_Sdk_Version
       multiDexEnabled true
-      targetSdkVersion 22
+      targetSdkVersion Target_Sdk_Version
       testApplicationId 'com.krischik.fit_import.test'
       testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
 //    testInstrumentationRunner "android.support.test.runner.MultiDexTestRunner"
@@ -123,19 +114,19 @@ android {
 
 dependencies {
    apt (
-      [group: 'org.androidannotations', name: 'androidannotations', version: androidannotations_version]
+      [group: 'org.androidannotations', name: 'androidannotations', version: Androidannotations_Version]
    )
    // apt
    compile (
-      project (':lib'),
+      project (':Fit-Import-Lib'),
       project (':AndroidLib'),
-      [group: 'com.android.support', name: 'appcompat-v7', version: androidsupport_version],
-      [group: 'com.android.support', name: 'support-v4', version: androidsupport_version],
+      [group: 'com.android.support', name: 'appcompat-v7', version: Androidsupport_Version],
+      [group: 'com.android.support', name: 'support-v4', version: Androidsupport_Version],
       [group: 'com.android.support', name: 'multidex', version: '1.0.1'],
       [group: 'com.google.android.gms', name: 'play-services', version: '7.5.0'],
-      [group: 'org.androidannotations', name: 'androidannotations-api', version: androidannotations_version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: kotlin_version]
+      [group: 'org.androidannotations', name: 'androidannotations-api', version: Androidannotations_Version],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version],
+      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version]
    )
    // compile
    androidTestCompile (
@@ -143,7 +134,7 @@ dependencies {
       [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.5.3'],
       [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9'],
       ) // androidTestCompile
-   androidTestCompile ('com.android.support:multidex-instrumentation:1.0.1') {
+   androidTestCompile ('com.android.support:multidex-instrumentation:1.0.1' ) {
       exclude group: 'com.android.support', module: 'multidex'
    }
 } // dependencies

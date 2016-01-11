@@ -1,16 +1,19 @@
-/**********************************************************
- * {{{1 *********** Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
- * ************************************************************************** This program is free software: you can
- * redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
- * details.
- * <p/>
- * You should have received a copy of the GNU General Public License along with this program.  If not, see
- * http://www.gnu.org/licenses/ ********************************************************* }}}1
- **********/
+/********************************************************** {{{1 ***********
+ *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
+ ***************************************************************************
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ ********************************************************** }}}1 **********/
 
 package com.krischik.fit_import;
 
@@ -27,7 +30,8 @@ import org.jetbrains.annotations.Nullable;
 @org.androidannotations.annotations.EActivity (R.layout.main_activity)
 public class MainActivity
    extends android.support.v7.app.ActionBarActivity
-   implements IMainFragment
+   implements IMainFragment,
+	      IMainActivity
 {
    /**
     * <p> TAG as class name for logging </p>
@@ -81,6 +85,21 @@ public class MainActivity
    } // doConnect
 
    /**
+    * <p>disconnect from Google Fit.</p>
+    */
+   @hugo.weaving.DebugLog
+   @Override
+   public void doDisconnect ()
+   {
+      if (mainFragment != null)
+      {
+         mainFragment.doDisconnect ();
+      } // if
+
+      return;
+   } // doDisconnect
+
+   /**
     * <p>the import ketfit button has been clicked.</p>
     *
     */
@@ -110,7 +129,7 @@ public class MainActivity
       } // if
 
       return;
-   } // doConnect
+   } // doWithingsButton
 
    /**
     * <p>the activity</p>
@@ -127,7 +146,7 @@ public class MainActivity
    /**
     * <p>Google FIT Model</p>
     */
-   @NotNull
+   @Override @NotNull
    public com.krischik.fit_import.GoogleFit getGoogleFit ()
    {
       return googleFit;
@@ -138,10 +157,10 @@ public class MainActivity
     *
     * @return true when we are connected
     */
-   public boolean isConnected ()
+   @Override public boolean isConnected ()
    {
       return connected;
-   }
+   } // doDisconnect
 
    @hugo.weaving.DebugLog
    @Override
@@ -175,6 +194,7 @@ public class MainActivity
    protected void onSaveInstanceState (@NotNull android.os.Bundle outState)
    {
       super.onSaveInstanceState (outState);
+
       outState.putBoolean (GoogleFit.Auth_Pending, googleFit.getAuthentication_In_Progress ());
 
       return;
@@ -199,7 +219,7 @@ public class MainActivity
    {
       super.onStop ();
 
-      googleFit.disconnect ();
+      googleFit.disconnect (/* disable => */false);
 
       return;
    } // onStop

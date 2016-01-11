@@ -89,10 +89,13 @@ public class GoogleFit(
 
       apiBuilder.addApi (com.google.android.gms.fitness.Fitness.HISTORY_API)
       apiBuilder.addApi (com.google.android.gms.fitness.Fitness.SESSIONS_API)
+      apiBuilder.addApi (com.google.android.gms.fitness.Fitness.CONFIG_API)
+
       apiBuilder.addScope (location)
       apiBuilder.addScope (activity)
       apiBuilder.addScope (body)
       apiBuilder.addScope (nutrition)
+
       apiBuilder.addConnectionCallbacks (this)
       apiBuilder.addOnConnectionFailedListener (this)
 
@@ -103,8 +106,6 @@ public class GoogleFit(
    override fun onConnected(bundle: android.os.Bundle?)
    {
       com.krischik.Log.i (TAG, "LOG00010: Connected to Google-Fit!")
-      // Now you can make calls to the Fitness APIs.
-      // Put application specific code here.
 
       owner.doConnect(true)
 
@@ -137,20 +138,31 @@ public class GoogleFit(
       com.krischik.Log.i (TAG, "LOG00070: Connecting to Google-Fit…")
 
       googleAPI.connect ()
+
+      return
    } // connect
 
    /**
     * <p>disconnect from service</p>
     */
    @hugo.weaving.DebugLog
-   public fun disconnect()
+   public fun disconnect(disable: Boolean)
    {
-      com.krischik.Log.i (TAG, "LOG00080: Disconnecting from Google-Fit…")
-
       if (googleAPI.isConnected)
       {
+         com.krischik.Log.i (TAG, "LOG00080: Disconnecting from Google-Fit…")
+
          googleAPI.disconnect ()
       } // if
+
+      if (disable)
+      {
+         com.krischik.Log.i (TAG, "LOG00085: Disable Google-Fit…")
+
+         com.google.android.gms.fitness.Fitness.ConfigApi.disableFit(googleAPI);
+      } // if
+
+      return
    } // disconnect
 
    @hugo.weaving.DebugLog
@@ -200,7 +212,7 @@ public class GoogleFit(
          {
             com.krischik.Log.i (TAG, "LOG00050: Attempting to resolve failed connection")
             Authentication_In_Progress = true
-            result.startResolutionForResult (owner.getActivity(), Request_OAuth)
+            result.startResolutionForResult (owner.activity, Request_OAuth)
          }
          catch (exception: android.content.IntentSender.SendIntentException)
          {
