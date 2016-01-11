@@ -53,7 +53,7 @@ public class Withings_Test : org.jetbrains.spek.api.Spek()
 	    /* Comment => */"Withings_Test")
 	 on ("getting the distance in m")
 	 {
-	    val test = withings.getFatPercentage()
+	    val test = withings.fatPercentage
 
 	    it ("should be 20%")
 	    {

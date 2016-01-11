@@ -1,19 +1,19 @@
-/********************************************************** {{{1 ***********
- *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
- ***************************************************************************
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see http://www.gnu.org/licenses/
- ********************************************************** }}}1 **********/
+/*********************************************************** {{{1 ***********
+ * Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
+ * **************************************************************************
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * <p/>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p/>
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see http://www.gnu.org/licenses/
+ * ********************************************************* }}}1 **********/
 
 package com.krischik.fit_import;
 
@@ -41,6 +41,12 @@ public class MainFragment
     * <p>Google FIT Model</p>
     */
    private GoogleFit googleFit;
+   /**
+    * <p>Import Withings CVS button</p>
+    */
+   @org.androidannotations.annotations.ViewById (R.id.connect)
+   @Nullable
+   protected android.widget.Button connectButton;
    /**
     * <p>Import Withings CVS button</p>
     */
@@ -73,11 +79,18 @@ public class MainFragment
       if (ketfitButton != null)
       {
 	 ketfitButton.setEnabled (connected);
-      }
+      } // if
       if (withingsButton != null)
       {
 	 withingsButton.setEnabled (connected);
-      }
+      } // if
+      if (connectButton != null)
+      {
+	 connectButton.setText (connected
+				   ? R.string.Disconnect
+				   : R.string.Connect);
+      } // if
+
       return;
    } // doConnect
 
@@ -85,17 +98,28 @@ public class MainFragment
     * <p>disconnect from Google Fit.</p>
     */
    @hugo.weaving.DebugLog
-   @org.androidannotations.annotations.Click (com.krischik.fit_import.R.id.disconnect)
+   @org.androidannotations.annotations.Click (com.krischik.fit_import.R.id.connect)
    @Override
-   public void doDisconnect ()
+   public void doConnectButton ()
    {
       if (googleFit != null)
       {
-	 googleFit.disconnect (/* disable => */true);
+	 if (googleFit.isConnected ())
+	 {
+	    googleFit.disconnect (/* disable => */true);
+	 }
+	 else
+	 {
+	    googleFit.connect ();
+	 } // if
+      }
+      else
+      {
+	 this.doConnect (false);
       } // if
 
       return;
-   } // doDisconnect
+   } // doConnectButton
 
    /**
     * <p>the import ketfit button has been clicked.</p>
@@ -130,7 +154,7 @@ public class MainFragment
 		  if (record == null)
 		  {
 		     break Read_Records;
-		  }
+		  } // if
 
 		  com.krischik.Log.v (TAG, "Read Record: %1$s", record);
 
@@ -142,26 +166,26 @@ public class MainFragment
 		  {
 		     errorText.append (exception.getMessage () + '\n');
 		     com.krischik.Log.e (TAG, "LOG00060:Insert error!", exception);
-		  }
-	       } // when
+		  } // try
+	       } // while
 	    }
 	    else
 	    {
 	       errorText.append ("Input file “" + file + "” does not exist\n");
 	       com.krischik.Log.e (TAG, "LOG00020: Input file “%1$s” does not exist", file);
-	    }
+	    } // if
 	 }
 	 else
 	 {
 	    errorText.append ("No directory to read from!\n");
 	    com.krischik.Log.e (TAG, "LOG00020: No directory to read from");
-	 }
+	 } // if
       }
       else
       {
 	 errorText.append ("No googleFit or activity!\n");
 	 com.krischik.Log.e (TAG, "LOG00010: No googleFit or activity!");
-      }
+      } // if
 
       return;
    } // doConnect
@@ -209,28 +233,28 @@ public class MainFragment
 		  }
 		  catch (Exception exception)
 		  {
-		     errorText.append (exception.getMessage ()+ '\n');
+		     errorText.append (exception.getMessage () + '\n');
 		     com.krischik.Log.e (TAG, "LOG00060:Insert error!", exception);
-		  }
-	       } // when
+		  } // try
+	       } // while
 	    }
 	    else
 	    {
 	       errorText.append ("Input file “" + file + "” does not exist\n");
 	       com.krischik.Log.e (TAG, "LOG00030: Input file “%1$s” does not exist", file);
-	    }
+	    } // if
 	 }
 	 else
 	 {
 	    errorText.append ("No directory to read from!\n");
 	    com.krischik.Log.e (TAG, "LOG00040: No directory to read from");
-	 }
+	 } // if
       }
       else
       {
 	 errorText.append ("No googleFit or activity!\n");
 	 com.krischik.Log.e (TAG, "LOG00050: No googleFit or activity!");
-      }
+      } // if
 
       return;
    } // doConnect
@@ -242,7 +266,7 @@ public class MainFragment
       this.googleFit = googleFit;
 
       return;
-   }
+   } // setGoogleFit
 } // MainFragment
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

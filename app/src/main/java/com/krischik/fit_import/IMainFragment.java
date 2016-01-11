@@ -36,7 +36,7 @@ public interface IMainFragment
    /**
     * <p>disconnect from Google Fit.</p>
     */
-   public abstract void doDisconnect ();
+   public abstract void doConnectButton ();
 
    /**
     * <p>the import ketfit button has been clicked.</p>

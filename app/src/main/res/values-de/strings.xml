@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- ––––––––––––––––––––––––––––––––––––––––––––––––––––––– {{{1 –––––––––
+ – Copyright © 2010 … 2012 Noser Engineering
+ ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ – $Author$
+ – $Revision$
+ – $Date$
+ – $Id$
+ – $HeadURL$
+ ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 ––––– -->
+
+<resources>
+  <string name = "app_name">Fit-Import</string>
+  <string name = "Connect">Verbinden</string>
+  <string name = "Disconnect">Trennen</string>
+  <string name = "Import_Ketfit_CVS">Importiere Ketfit CSV</string>
+  <string name = "Import_Withings_CVS">Importire Withings CSV</string>
+</resources>
+
+  <!-- vim: set nowrap tabstop=8 shiftwidth=2 softtabstop=2 expandtab textwidth=96 : -->
+  <!-- vim: set fileencoding=utf-8 filetype=xml foldmethod=marker spell spelllang=en_gb : -->

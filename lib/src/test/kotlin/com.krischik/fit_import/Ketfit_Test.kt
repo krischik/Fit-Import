@@ -57,7 +57,7 @@ public class Ketfit_Test : org.jetbrains.spek.api.Spek()
 
 	 on ("getting the distance in m")
 	 {
-	    val test = ketfit.getMeter()
+	    val test = ketfit.meter
 
 	    it ("should be 1000 times the distance in km")
 	    {

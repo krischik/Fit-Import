@@ -38,7 +38,8 @@
     android:layout_alignParentRight = "true"
     android:layout_alignParentEnd = "true"
     android:elevation = "@dimen/Button_Elevation"
-    android:layout_margin = "@dimen/Widget_Margin" />
+    android:layout_margin = "@dimen/Widget_Margin"
+    tools:ignore = "UnusedAttribute" />
   <Button
     android:layout_width = "match_parent"
     android:layout_height = "wrap_content"
@@ -50,12 +51,13 @@
     android:layout_alignParentRight = "true"
     android:layout_alignParentEnd = "true"
     android:elevation = "@dimen/Button_Elevation"
-    android:layout_margin = "@dimen/Widget_Margin" />
+    android:layout_margin = "@dimen/Widget_Margin"
+    tools:ignore = "UnusedAttribute" />
   <Button
     android:layout_width = "match_parent"
     android:layout_height = "wrap_content"
-    android:text = "@string/disconnect"
-    android:id = "@+id/disconnect"
+    android:text = "@string/Connect"
+    android:id = "@+id/connect"
     android:layout_below = "@+id/Ketfit_Button"
     android:layout_alignParentLeft = "true"
     android:layout_alignParentStart = "true"
@@ -70,7 +72,7 @@
     android:inputType = "none|textMultiLine"
     android:ems = "10"
     android:id = "@+id/Error_Text"
-    android:layout_below = "@+id/disconnect"
+    android:layout_below = "@+id/connect"
     android:layout_alignParentBottom = "true"
     android:layout_marginLeft = "@dimen/Widget_Margin"
     android:layout_marginRight = "@dimen/Widget_Margin"
@@ -83,7 +85,9 @@
     android:typeface = "monospace"
     android:textStyle = "normal"
     android:editable = "false"
-    android:gravity = "top|left"
-    android:elegantTextHeight = "false"
-    android:scrollIndicators = "top|left|bottom|right" />
+    android:gravity = "top|start"
+    android:elegantTextHeight = "true"
+    android:scrollIndicators = "top|bottom|start|end"
+    tools:ignore = "Deprecated"
+    android:enabled = "false" />
 </RelativeLayout>

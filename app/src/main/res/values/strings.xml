@@ -17,10 +17,9 @@
  –  along with this program.  If not, see http://www.gnu.org/licenses/
  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– }}}1 –––––––-->
 <resources>
-  <string name='app_name'>Fit-Import</string>
-  <string name='hello_world'>Hello world!</string>
-  <string name='action_settings'>Settings</string>
+  <string name = 'app_name'>Fit-Import</string>
   <string name = "Import_Withings_CVS">Import Withings CSV</string>
   <string name = "Import_Ketfit_CVS">Import Ketfit CSV</string>
-  <string name = "disconnect">Disconnect</string>
+  <string name = "Disconnect">Disconnect</string>
+  <string name = "Connect">Connect</string>
 </resources>

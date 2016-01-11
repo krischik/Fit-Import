@@ -77,7 +77,7 @@ public class GoogleFit(
 
    init
    {
-      val apiBuilder = com.google.android.gms.common.api.GoogleApiClient.Builder (owner.getActivity())
+      val apiBuilder = com.google.android.gms.common.api.GoogleApiClient.Builder (owner.activity)
       val location = com.google.android.gms.common.api.Scope (
          com.google.android.gms.common.Scopes.FITNESS_LOCATION_READ_WRITE)
       val activity = com.google.android.gms.common.api.Scope (
@@ -120,7 +120,7 @@ public class GoogleFit(
       if (resultCode == android.app.Activity.RESULT_OK)
       {
          // Make sure the app is not already connected or attempting to connect
-         if (!googleAPI.isConnecting () && !googleAPI.isConnected ())
+         if (!googleAPI.isConnecting && !googleAPI.isConnected)
          {
             googleAPI.connect ()
          } // if
@@ -142,12 +142,23 @@ public class GoogleFit(
       return
    } // connect
 
+
+   public val isConnected: Boolean
+      get() = googleAPI.isConnected
+
    /**
     * <p>disconnect from service</p>
     */
    @hugo.weaving.DebugLog
    public fun disconnect(disable: Boolean)
    {
+      if (disable)
+      {
+         com.krischik.Log.i (TAG, "LOG00085: Disable Google-Fit…")
+
+         com.google.android.gms.fitness.Fitness.ConfigApi.disableFit(googleAPI);
+      } // if
+
       if (googleAPI.isConnected)
       {
          com.krischik.Log.i (TAG, "LOG00080: Disconnecting from Google-Fit…")
@@ -155,12 +166,7 @@ public class GoogleFit(
          googleAPI.disconnect ()
       } // if
 
-      if (disable)
-      {
-         com.krischik.Log.i (TAG, "LOG00085: Disable Google-Fit…")
-
-         com.google.android.gms.fitness.Fitness.ConfigApi.disableFit(googleAPI);
-      } // if
+      owner.doConnect(false)
 
       return
    } // disconnect
@@ -179,6 +185,8 @@ public class GoogleFit(
          com.krischik.Log.e (TAG,
             "LOG00030: Google-Fit Connection lost.  Reason: Service Disconnected")
       } // if
+
+      owner.doConnect(false)
 
       return
    } // onConnectionSuspended
@@ -320,7 +328,7 @@ public class GoogleFit(
                Data_Point ->
                val Weight_Field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_PERCENTAGE)
 
-               Weight_Field.setFloat(withings.getFatPercentage ())
+               Weight_Field.setFloat(withings.fatPercentage)
             })
 
          val Result = com.google.android.gms.fitness.Fitness.HistoryApi.insertData (googleAPI, dataSet)
@@ -443,7 +451,7 @@ public class GoogleFit(
 
             val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_DISTANCE)
 
-            field.setFloat(ketfit.getMeter ());
+            field.setFloat(ketfit.meter);
          }))
 
       val request = requestBuilder.build();

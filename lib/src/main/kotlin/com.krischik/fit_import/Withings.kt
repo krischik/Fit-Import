@@ -40,7 +40,8 @@ data class Withings(
    /**
     * <p>Withings uses kg for body fat while GoogleFit uses percent.
     */
-   public fun getFatPercentage() = fat / weight * 100
+   public val fatPercentage: Float
+      get() = fat / weight * 100
 }
 // vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
 // vim: set textwidth=0 filetype=kotlin foldmethod=marker spell spelllang=en_gb :

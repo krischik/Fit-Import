@@ -38,10 +38,6 @@ public class MainActivity
     */
    private final static String TAG = com.krischik.Log.getLogTag (MainActivity.class);
    /**
-    * <p>remember if we are connected</p>
-    */
-   private boolean connected = false;
-   /**
     * <p>Google FIT Model</p>
     */
    @NotNull
@@ -79,8 +75,6 @@ public class MainActivity
 	 mainFragment.doConnect (connected);
       } // if
 
-      this.connected = connected;
-
       return;
    } // doConnect
 
@@ -89,15 +83,15 @@ public class MainActivity
     */
    @hugo.weaving.DebugLog
    @Override
-   public void doDisconnect ()
+   public void doConnectButton ()
    {
       if (mainFragment != null)
       {
-         mainFragment.doDisconnect ();
+         mainFragment.doConnectButton ();
       } // if
 
       return;
-   } // doDisconnect
+   } // doConnectButton
 
    /**
     * <p>the import ketfit button has been clicked.</p>
@@ -159,8 +153,8 @@ public class MainActivity
     */
    @Override public boolean isConnected ()
    {
-      return connected;
-   } // doDisconnect
+      return googleFit.isConnected ();
+   } // doConnectButton
 
    @hugo.weaving.DebugLog
    @Override

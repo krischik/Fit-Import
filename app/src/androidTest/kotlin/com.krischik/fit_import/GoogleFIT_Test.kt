@@ -49,7 +49,7 @@ public class GoogleFIT_Test :
 
       com.krischik.test.Utilities.asyncAssertTrue (
 	 message = { "Application should connect to Google Fit" },
-	 condition = { activity?.isConnected ?: false },
+	 condition = { activity?.googleFit?.isConnected ?: false },
 	 timeout = com.krischik.test.Utilities.seconds(30.0f))
 
       val weight = 80.0f + (Random.nextFloat() * 20.0f - 10.0f)
