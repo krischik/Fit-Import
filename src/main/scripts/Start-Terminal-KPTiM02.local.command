@@ -1,4 +1,4 @@
-#!/opt/local/bin/zsh
+#!/usr/bin/osascript
 ############################################################ {{{1 ###########
 #  Copyright (C) 2007,2008  Martin Krischik
 #############################################################################
@@ -16,22 +16,19 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #############################################################################
 #  $Author: krischik $
-#  $Revision: 6701 $
-#  $Date: 2015-01-01 17:21:38 +0100 (Thu, 01 Jan 2015) $
-#  $Id: Start-IntelliJ.command 6701 2015-01-01 16:21:38Z krischik $
-#  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Start-IntelliJ.command $
+#  $Revision: 6183 $
+#  $Date: 2013-06-27 08:43:02 +0200 (Do, 27. Jun 2013) $
+#  $Id: Start-Terminal.command 6183 2013-06-27 06:43:02Z krischik $
+#  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Start-Terminal.command $
 ############################################################ }}}1 ###########
 
-source ${0:h}/Setup-${HOST}.command
-
-setopt Err_Exit;
-setopt XTrace;
-
-"${INTELLIJ_HOME}/Contents/MacOS/idea"		    \
-    "${PROJECT_HOME}"				    \
-    1>~/Library/Logs/${PROJECT_NAME}-${0:t:r}.out   \
-    2>~/Library/Logs/${PROJECT_NAME}-${0:t:r}.err   &
+tell application "Terminal"
+	set |Tab| to do script "
+cd \"/Work/Projects/Fit-Import\";
+source \"src/main/scripts/Setup-KPTiM02.local.command\""
+	set background color of |Tab| to {52736, 61952, 61952}
+end tell
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :
-# vim: set textwidth=0 filetype=zsh foldmethod=marker nospell :
+# vim: set textwidth=0 filetype=applescript foldmethod=marker nospell :
