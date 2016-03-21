@@ -28,7 +28,7 @@ import org.hamcrest.collection.IsCollectionWithSize.hasSize
 import org.hamcrest.core.IsNull.notNullValue
 import org.jetbrains.annotations.NotNull
 import java.util.logging.Logger
-import kotlin.test.fail
+import junit.framework.Assert.fail
 
 /**
  * Demonstration of the activity test

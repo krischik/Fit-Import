@@ -42,8 +42,14 @@ dependencies {
       [group: 'org.exparity', name: 'hamcrest-date', version: '1.1.0'],
       [group: 'org.hamcrest', name: 'hamcrest-core', version: Hamcrest_Version],
       [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version],
-      [group: 'org.jetbrains.spek', name: 'spek', version: '0.1.182']
+      [group: 'org.jetbrains.spek', name: 'spek', version: '0.1.195']
    ) // testCompile
+}
+repositories {
+   mavenCentral ()
+}
+sourceSets {
+   main.java.srcDirs += 'src/main/kotlin'
 } // dependencies
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :

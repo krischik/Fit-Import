@@ -48,7 +48,7 @@ object Utilities
       val manager = java.util.logging.LogManager.getLogManager ()
       val properties = Utilities::class.java.getResourceAsStream("/logging.properties")
 
-      assertThat(properties, notNullValue ())
+      assertThat("logging properties are accessible",properties, notNullValue ())
 
       // Read log properties so that the class which we test can write to a log
       // file

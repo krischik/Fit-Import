@@ -45,6 +45,26 @@ data class Ketfit(
     */
    public val meter: Float
       get() = km.toFloat() * 1000.0f
+
+   /*
+    * <p>Google fit stores the steps for cross trainer.
+    * First we calculate the total revolutions from the average revolution per minute and the
+    * the time of session.    * We consider one revolution to be one step.
+    */
+   public val steps: Float
+      get() = uMin * durationInMinutes * 2.0f
+
+   /**
+    * <p>Training duration ins minutes</p>
+    */
+   private val durationInMinutes : Float
+      get () = durationInSeconds / 60.0f
+
+   /**
+    * <p>Training duration ins seconds</p>
+    */
+   private val durationInSeconds : Float
+      get () = (end.time - start.time).toFloat() / 1000.0f
 }
 // vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
 // vim: set textwidth=0 filetype=kotlin foldmethod=marker spell spelllang=en_gb :
