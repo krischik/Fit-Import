@@ -36,7 +36,7 @@ typeset -g -x		SVN_HOME="/opt/local"
 typeset -g -x		ANT_HOME="${MACPORTS_HOME}/apache-ant"
 typeset -g -x		JDK_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home"
 typeset -g -x	       JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home"
-typeset -g -x	        IDEA_JDK="/Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk"
+typeset -g -x		IDEA_JDK="/Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk"
 typeset -g -x	       Workspace="${WORK}/Workspaces/Fit-Import"
 typeset -g -x	      SCALA_HOME="${opt}/share/scala-2.11"
 typeset -g -x	    ANDROID_HOME="${MACPORTS_HOME}/android-sdk-macosx"
@@ -59,7 +59,7 @@ path=("${ANDROID_HOME}/tools" ${path})
 path=("${ANDROID_HOME}/platform-tools" ${path})
 fpath=(${PROJECT_HOME}/src/main/scripts ${fpath})
 
-typeset -x -g     CALCULATOR_VERSION=6.7.6
+typeset -x -g	  CALCULATOR_VERSION=6.7.6
 typeset -x -g CALCULATOR_SCALASCRIPT="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
 
 alias	  PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
@@ -71,10 +71,17 @@ for I in			\
     "Device-Activate-Logging"	\
     "Device-Deactivate-Logging"	\
     "Device-Set-Logging"	\
-    "Git-Commit"
+    "Git-Commit"		\
+    "logcat"			\
+    "Run-Debug"			\
+    "Test-Debug"			
 do
     zcompile "${PROJECT_HOME}/src/main/scripts/${I}"
     typeset -f -u "${I}"
+done; unset I;
+
+for I in "${PROJECT_HOME}/src/main/scripts/"*.command; do
+    zcompile "${I}"
 done; unset I;
 
 function lxpm ()

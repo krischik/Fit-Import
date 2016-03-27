@@ -16,18 +16,19 @@
 #  along with this program.  If not, see http://www.gnu.org/licenses/
 ########################################################### }}}1 ###########
 
-function Build-Debug ()
+function Run-Debug ()
 {
     pushd "${PROJECT_HOME}"
 	gradlew build
 	gradlew :Fit-Import-Lib:test
 	gradlew :Fit-Import-App:installDebug
+	adb shell am start -n "com.krischik.fit_import/com.krischik.fit_import.MainActivity_"
     popd
 
     return
-} # Build-Debug
+} # Run-Debug
 
-Build-Debug "${@}"
+Run-Debug "${@}"
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :

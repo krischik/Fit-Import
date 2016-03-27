@@ -16,18 +16,19 @@
 #  along with this program.  If not, see http://www.gnu.org/licenses/
 ########################################################### }}}1 ###########
 
-function Build-Debug ()
+function Test-Debug ()
 {
     pushd "${PROJECT_HOME}"
-	gradlew build
-	gradlew :Fit-Import-Lib:test
-	gradlew :Fit-Import-App:installDebug
+	gradlew assembleDebug assembleDebugAndroidTest
+	gradlew test
+	gradlew installDebug  installDebugAndroidTest
+	gradlew connectedAndroidTestDebug
     popd
 
     return
-} # Build-Debug
+} # Test-Debug
 
-Build-Debug "${@}"
+Test-Debug "${@}"
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :
