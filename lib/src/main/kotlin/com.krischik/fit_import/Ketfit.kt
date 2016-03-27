@@ -58,8 +58,8 @@ data class Ketfit(
     * First we calculate the total revolutions from the average revolution per minute and the
     * the time of session.    * We consider one revolution to be one step.
     */
-   public val steps: Float
-      get() = stepMin * durationInMinutes
+   public val steps: Int
+      get() = (stepMin * durationInMinutes).toInt ()
 
    /**
     * <p>Training duration ins minutes</p>

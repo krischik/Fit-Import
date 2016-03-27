@@ -1,4 +1,4 @@
-#!/bin/echo usage: typeset -x -f -u
+#!/bin/echo usage: typeset -x -f -u 
 ########################################################### {{{1 ###########
 #  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
 ###########################################################################
@@ -16,26 +16,18 @@
 #  along with this program.  If not, see http://www.gnu.org/licenses/
 ########################################################### }}}1 ###########
 
-function Test-Debug ()
+function Build-Debug ()
 {
     pushd "${PROJECT_HOME}"
-	gradlew assembleDebug assembleDebugAndroidTest
-	gradlew test
-	#gradlew installDebug  installDebugAndroidTest
-	#gradlew connectedAndroidTestDebug
-
-	pushd "app/build/outputs/apk"
-	    adb install -r "Fit-Import-App-debug.apk"
-	    adb install -r "Fit-Import-App-debug-androidTest-unaligned.apk"
-	popd
-
-	adb shell am instrument -w "com.krischik.fit_import.test/com.android.test.runner.MultiDexTestRunner"
+	gradlew idea
+	grm Fit-Import.ipr
+	grm Fit-Import.iws
     popd
 
     return
-} # Test-Debug
+} # Build-Debug
 
-Test-Debug "${@}"
+Build-Debug "${@}"
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :

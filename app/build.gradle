@@ -47,16 +47,6 @@ android {
        exclude 'LICENSE.txt'
    } // packagingOptions
 
-   applicationVariants.all { variant ->
-      variant.outputs.each { output ->
-	 def name = output.outputFile.name
-	    .replace (".apk", "-${variant.versionName}.apk")
-	    .replace (project.name, "Fit-Import")
-
-	 output.outputFile = new File (output.outputFile.parent, name)
-      } // variant.outputs
-   } // applicationVariants
-
    signingConfigs {
       debug {
 	 storeFile file (System.getenv ("KEY_STORE"))
