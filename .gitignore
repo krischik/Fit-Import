@@ -28,7 +28,10 @@ proguard/
 *.logcat
 
 #vim
-.DS_Store
 .backups/
 *.swp
 .idea/
+
+# shell temporary files
+*.zwc
+.DS_Store

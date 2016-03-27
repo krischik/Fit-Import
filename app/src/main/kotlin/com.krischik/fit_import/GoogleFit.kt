@@ -453,6 +453,21 @@ public class GoogleFit(
 
             field.setFloat(ketfit.meter);
          }))
+      requestBuilder.addDataSet (createDataSet(
+         dataType = com.google.android.gms.fitness.data.DataType.TYPE_STEP_COUNT_DELTA,
+         sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
+         sourceName = "Ketfit training",
+         device = Kettler_Trainer,
+         startTime = ketfit.start,
+         endTime = ketfit.end,
+         setValues =
+         {
+            Data_Point ->
+
+            val field = Data_Point.getValue(com.google.android.gms.fitness.data.Field.FIELD_STEPS)
+
+            field.setFloat(ketfit.steps);
+         }))
 
       val request = requestBuilder.build();
       val Result = com.google.android.gms.fitness.Fitness.SessionsApi.insertSession (googleAPI, request)

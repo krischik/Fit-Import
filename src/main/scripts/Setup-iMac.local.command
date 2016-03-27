@@ -23,7 +23,7 @@
 #  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Setup.command $
 ########################################################### }}}1 ###########
 
-pushd /Work
+pushd "/Work"
     typeset -g -x WORK=$(pwd -P)
 popd
 typeset -g -x		     opt="/opt/local"
@@ -34,12 +34,13 @@ typeset -g -x	   MACPORTS_HOME="${opt}/share/java"
 typeset -g -x		 M2_HOME="${MACPORTS_HOME}/maven3"
 typeset -g -x		SVN_HOME="/opt/local"
 typeset -g -x		ANT_HOME="${MACPORTS_HOME}/apache-ant"
-typeset -g -x		JDK_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home"
-typeset -g -x	       JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home"
+typeset -g -x		JDK_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home"
+typeset -g -x	       JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home"
+typeset -g -x	        IDEA_JDK="/Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk"
 typeset -g -x	       Workspace="${WORK}/Workspaces/Fit-Import"
 typeset -g -x	      SCALA_HOME="${opt}/share/scala-2.11"
 typeset -g -x	    ANDROID_HOME="${MACPORTS_HOME}/android-sdk-macosx"
-typeset -g -x	   INTELLIJ_HOME="${Developer}/IntelliJ IDEA 15 CE.app"
+typeset -g -x	   INTELLIJ_HOME="${Developer}/IntelliJ IDEA CE.app"
 typeset -g -x	   PROGUARD_HOME="${MACPORTS_HOME}"
 
 typeset -g -x	    PROJECT_NAME="Fit-Import"
@@ -61,15 +62,20 @@ fpath=(${PROJECT_HOME}/src/main/scripts ${fpath})
 typeset -x -g     CALCULATOR_VERSION=6.7.6
 typeset -x -g CALCULATOR_SCALASCRIPT="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
 
-alias			 PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
-alias			mvn="${M2_HOME}/bin/mvn"
+alias	  PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
+alias	 mvn="${M2_HOME}/bin/mvn"
 
-typeset -f -u Git-Commit
-typeset -f -u Maven
-typeset -f -u Diff_2_3
-typeset -f -u Device-Activate-Logging 
-typeset -f -u Device-Deactivate-Logging
-typeset -f -u Device-Set-Logging
+for I in			\
+    "Build-Debug"		\
+    "Clean"			\
+    "Device-Activate-Logging"	\
+    "Device-Deactivate-Logging"	\
+    "Device-Set-Logging"	\
+    "Git-Commit"
+do
+    zcompile "${PROJECT_HOME}/src/main/scripts/${I}"
+    typeset -f -u "${I}"
+done; unset I;
 
 function lxpm ()
 {

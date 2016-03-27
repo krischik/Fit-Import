@@ -16,19 +16,18 @@
 #  along with this program.  If not, see http://www.gnu.org/licenses/
 ########################################################### }}}1 ###########
 
-function Device-Activate-Logging ()
-    {
+function Build-Debug ()
+{
     pushd "${PROJECT_HOME}"
-	scala							\
-	    -Dfile.encoding=UTF-8				\
-	    -classpath "${CALCULATOR_SCALASCRIPT}"		\
-	    -save "src/main/scripts/Device-Activate-Logging.cmd"
+	gradlew build
+	gradlew :Fit-Import-Lib:test
+	gradlew :Fit-Import-App:connectedAndroidTest
     popd
 
     return
-    } # Device-Activate-Logging
+} # Build-Debug
 
-Device-Activate-Logging "${@}"
+Build-Debug "${@}"
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :

@@ -16,19 +16,16 @@
 #  along with this program.  If not, see http://www.gnu.org/licenses/
 ########################################################### }}}1 ###########
 
-function Device-Activate-Logging ()
-    {
+function Clean ()
+{
     pushd "${PROJECT_HOME}"
-	scala							\
-	    -Dfile.encoding=UTF-8				\
-	    -classpath "${CALCULATOR_SCALASCRIPT}"		\
-	    -save "src/main/scripts/Device-Activate-Logging.cmd"
+	gradlew clean build
     popd
 
     return
-    } # Device-Activate-Logging
+} # Clean
 
-Device-Activate-Logging "${@}"
+Clean "${@}"
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :

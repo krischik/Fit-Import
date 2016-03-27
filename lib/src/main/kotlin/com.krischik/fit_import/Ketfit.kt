@@ -16,6 +16,7 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
+
 /**
  * <p>
  * </p>
@@ -46,24 +47,30 @@ data class Ketfit(
    public val meter: Float
       get() = km.toFloat() * 1000.0f
 
+   /**
+    * <p>Steps per minute. One cycle is two steps.</p>
+    */
+   public val stepMin: Float
+      get() = uMin * 2.0f
+
    /*
     * <p>Google fit stores the steps for cross trainer.
     * First we calculate the total revolutions from the average revolution per minute and the
     * the time of session.    * We consider one revolution to be one step.
     */
    public val steps: Float
-      get() = uMin * durationInMinutes * 2.0f
+      get() = stepMin * durationInMinutes
 
    /**
     * <p>Training duration ins minutes</p>
     */
-   private val durationInMinutes : Float
+   public val durationInMinutes: Float
       get () = durationInSeconds / 60.0f
 
    /**
     * <p>Training duration ins seconds</p>
     */
-   private val durationInSeconds : Float
+   public val durationInSeconds: Float
       get () = (end.time - start.time).toFloat() / 1000.0f
 }
 // vim: set nowrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :

@@ -32,7 +32,7 @@ public class GoogleFIT_Test :
    /**
     * Logging tag
     */
-   private val TAG = com.krischik.Log.getLogTag(GoogleFIT_Test::class.javaClass);
+   private val TAG = com.krischik.Log.getLogTag(GoogleFIT_Test::class.java);
    /**
     * Randim number generator
     */
@@ -43,6 +43,7 @@ public class GoogleFIT_Test :
     */
    @android.test.suitebuilder.annotation.Smoke
    @android.test.suitebuilder.annotation.SmallTest
+   @hugo.weaving.DebugLog
    public fun test_00_Insert_Weight()
    {
       com.krischik.Log.d (TAG, "+ test_00_Insert_Weight")
@@ -71,6 +72,7 @@ public class GoogleFIT_Test :
     */
    @android.test.suitebuilder.annotation.Smoke
    @android.test.suitebuilder.annotation.SmallTest
+   @hugo.weaving.DebugLog
    public fun test_01_Insert_Training()
    {
       com.krischik.Log.d (TAG, "+ test_01_Insert_Training")
@@ -107,6 +109,7 @@ public class GoogleFIT_Test :
     */
    @android.test.suitebuilder.annotation.Smoke
    @android.test.suitebuilder.annotation.SmallTest
+   @hugo.weaving.DebugLog
    public fun test_02_Insert_Weights()
    {
       com.krischik.Log.d (TAG, "+ test_02_Insert_Weights")
@@ -144,6 +147,7 @@ public class GoogleFIT_Test :
     */
    @android.test.suitebuilder.annotation.Smoke
    @android.test.suitebuilder.annotation.SmallTest
+   @hugo.weaving.DebugLog
    public fun test_03_Insert_Trainings()
    {
       com.krischik.Log.d (TAG, "+ test_03_Insert_Trainings")

@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
  * @version 1.0
  * @since 1.0
  */
-@SuppressWarnings ("HardcodedLineSeparator")
+@SuppressWarnings ({"HardcodedLineSeparator"})
 @org.androidannotations.annotations.EFragment (R.layout.main_fragment)
 public class MainFragment
    extends android.support.v4.app.Fragment

@@ -16,19 +16,19 @@
 #  along with this program.  If not, see http://www.gnu.org/licenses/
 ########################################################### }}}1 ###########
 
-function Device-Activate-Logging ()
-    {
+function logcat ()
+{
+    setopt Multi_OS
+
     pushd "${PROJECT_HOME}"
-	scala							\
-	    -Dfile.encoding=UTF-8				\
-	    -classpath "${CALCULATOR_SCALASCRIPT}"		\
-	    -save "src/main/scripts/Device-Activate-Logging.cmd"
+	adb logcat -c
+	adb logcat -v "time" 1>&1 2>&2 &>~/Library/Logs/logcat.log
     popd
 
     return
-    } # Device-Activate-Logging
+} # logcat
 
-Device-Activate-Logging "${@}"
+logcat "${@}"
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :

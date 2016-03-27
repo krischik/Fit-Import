@@ -16,13 +16,11 @@
  **********************************************************}}}1 **********/
 
 include ':lib'
-project (":lib").name = "Fit-Import-Lib"
-
 include ':AndroidLib'
-
 include ':AndroidTestLib'
-
 include ':app'
+
+project (":lib").name = "Fit-Import-Lib"
 project (":app").name = "Fit-Import-App"
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :

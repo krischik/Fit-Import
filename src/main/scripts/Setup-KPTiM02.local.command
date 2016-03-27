@@ -48,8 +48,8 @@ typeset -g -x	     FIT_VERSION=1.0.0
 typeset -x -g	       JAVA_OPTS="-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms256m -Xmx1g"
 typeset -x -g	      MAVEN_OPTS="-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms256m -Xmx1g"
 typeset -x -g	     GRADLE_OPTS="-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Xms256m -Xmx1g"
-typeset -x -g	    MAVEN_DEPLOY="file://${HOME}/Work/HomePage/uiq3/htdocs/Repository"
-typeset -x -g	   MAVEN_INSTALL="file://${HOME}/Work/Repositories/Local/"
+typeset -x -g	    MAVEN_DEPLOY="file:///Work/HomePage/uiq3/htdocs/Repository"
+typeset -x -g	   MAVEN_INSTALL="file:///Work/Repositories/Local/"
 typeset -x -g -U -T CLASSPATH classpath ":"
 
 path=("${JAVA_HOME}/bin" ${path})

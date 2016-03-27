@@ -45,9 +45,12 @@ public class Ketfit_Test : org.jetbrains.spek.api.Spek()
 
       given ("A Ketfit instance")
       {
+	 val start = java.util.Date ()
+	 val end = java.util.Date (start.time + 60 * 1000);
+
 	 val ketfit = Ketfit (
-	    /* start  => */java.util.Date (),
-	    /* end    => */java.util.Date (),
+	    /* start  => */start,
+	    /* end    => */end,
 	    /* Watt   => */130,
 	    /* puls   => */160,
 	    /* Umin   => */70,
@@ -62,6 +65,15 @@ public class Ketfit_Test : org.jetbrains.spek.api.Spek()
 	    it ("should be 1000 times the distance in km")
 	    {
 	       assertThat(test, equalTo(3000.0f))
+	    } // it
+	 } // on
+	 on ("getting the the steps")
+	 {
+	    val test = ketfit.steps
+
+	    it ("should be twice the umin (for this specific test setup).")
+	    {
+	       assertThat(test, equalTo(140.0f))
 	    } // it
 	 } // on
       } // given
