@@ -49,8 +49,10 @@ repositories {
    mavenCentral ()
 }
 sourceSets {
-   main.java.srcDirs += 'src/main/kotlin'
+   main {
+      java.srcDirs += 'src/main/kotlin'
+      output.resourcesDir = "build/classes/main"
+   } // main
 } // dependencies
-
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :
 // vim: set textwidth=0 filetype=groovy foldmethod=marker nospell :

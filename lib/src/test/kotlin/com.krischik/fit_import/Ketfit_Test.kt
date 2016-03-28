@@ -73,7 +73,7 @@ public class Ketfit_Test : org.jetbrains.spek.api.Spek()
 
 	    it ("should be twice the umin (for this specific test setup).")
 	    {
-	       assertThat(test, equalTo(140.0f))
+	       assertThat(test, equalTo(140))
 	    } // it
 	 } // on
       } // given

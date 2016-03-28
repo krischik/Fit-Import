@@ -96,48 +96,48 @@ public class ReadKetfit(val dataStream: java.io.InputStream) : AutoCloseable
 
       val retval: Ketfit? = if (line != null)
       {
-         val fields = line.split(';')
+	 val fields = line.split(';')
 
-         val date = java.util.GregorianCalendar();
-         val time = java.util.GregorianCalendar();
-         val duration = java.util.GregorianCalendar();
+	 val date = java.util.GregorianCalendar();
+	 val time = java.util.GregorianCalendar();
+	 val duration = java.util.GregorianCalendar();
 
-         date.setTime(Date_Format.parse(fields[0]))
-         time.setTime(Time_Format.parse(fields[1]))
-         duration.setTime(Duration_Format.parse(fields[2]))
+	 date.time = Date_Format.parse(fields[0])
+	 time.time = Time_Format.parse(fields[1])
+	 duration.time = Duration_Format.parse(fields[2])
 
-         val start = java.util.GregorianCalendar (
-            /* year         => */date.get(Calendar.YEAR),
-            /* month        => */date.get(Calendar.MONTH),
-            /* dayOfMonth   => */date.get(Calendar.DAY_OF_MONTH),
-            /* hourOfDay    => */time.get(Calendar.HOUR_OF_DAY),
-            /* minute       => */time.get(Calendar.MINUTE),
-            /* second       => */time.get(Calendar.SECOND));
-         val end = start.clone() as java.util.GregorianCalendar
+	 val start = java.util.GregorianCalendar (
+	    /* year         => */date.get(Calendar.YEAR),
+	    /* month        => */date.get(Calendar.MONTH),
+	    /* dayOfMonth   => */date.get(Calendar.DAY_OF_MONTH),
+	    /* hourOfDay    => */time.get(Calendar.HOUR_OF_DAY),
+	    /* minute       => */time.get(Calendar.MINUTE),
+	    /* second       => */time.get(Calendar.SECOND));
+	 val end = start.clone() as java.util.GregorianCalendar
 
-         end.add (Calendar.SECOND, duration.get(Calendar.SECOND));
-         end.add (Calendar.MINUTE, duration.get(Calendar.MINUTE));
-         end.add (Calendar.SECOND, duration.get(Calendar.SECOND));
+	 end.add (Calendar.HOUR, duration.get(Calendar.HOUR));
+	 end.add (Calendar.MINUTE, duration.get(Calendar.MINUTE));
+	 end.add (Calendar.SECOND, duration.get(Calendar.SECOND));
 
-         val watt = java.lang.Integer.parseInt (fields [3]);
-         val puls = java.lang.Integer.parseInt (fields [4]);
-         val uMin = java.lang.Integer.parseInt (fields [5]);
-         val kCal = java.lang.Integer.parseInt (fields [6]);
-         val km = java.lang.Integer.parseInt (fields [7]);
+	 val watt = java.lang.Integer.parseInt (fields [3]);
+	 val puls = java.lang.Integer.parseInt (fields [4]);
+	 val uMin = java.lang.Integer.parseInt (fields [5]);
+	 val kCal = java.lang.Integer.parseInt (fields [6]);
+	 val km = java.lang.Integer.parseInt (fields [7]);
 
-         Ketfit(
-            start = start.getTime(),
-            end = end.getTime(),
-            watt = watt,
-            puls = puls,
-            uMin = uMin,
-            kCal = kCal,
-            km = km,
-            ω = 0)
+	 Ketfit(
+	    start = start.time,
+	    end = end.time,
+	    watt = watt,
+	    puls = puls,
+	    uMin = uMin,
+	    kCal = kCal,
+	    km = km,
+	    ω = 0)
       }
       else
       {
-         null
+	 null
       } // if
 
       logger.exiting(TAG, "read", retval)

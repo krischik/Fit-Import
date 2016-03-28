@@ -66,25 +66,44 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
       given ("a stream with test data")
       {
 	 val testData = ReadKetfit_Test::class.java.getResourceAsStream("/ketfit.csv")
+	 val test = ReadKetfit (testData)
 
 	 on ("reading first data")
 	 {
-	    val test = ReadKetfit (testData)
 	    val info = test.read();
 
-	    it ("should return the exceed value")
+	    it ("should return the expected value")
 	    {
 	       assertThat(info, notNullValue())
 	       assertThat(info?.start, sameInstant (2014, Months.FEBRUARY, 2, 18, 42, 0, 0))
 	       assertThat(info?.end, sameInstant (2014, Months.FEBRUARY, 2, 19, 22, 0, 0))
-	       assertThat(info?.watt, equalTo(88))
 	       assertThat(info?.puls, equalTo(118))
 	       assertThat(info?.uMin, equalTo(48))
 	       assertThat(info?.kCal, equalTo(294))
+	       assertThat(info?.watt, equalTo(88))
 	       assertThat(info?.km, equalTo(6))
 	       assertThat(info?.ω, equalTo(0))
 	    } // it
+	 } // on
+	 on ("reading second data")
+	 {
+	    val info = test.read();
 
+	    it ("should return the expected value")
+	    {
+	       assertThat(info, notNullValue())
+	       assertThat(info?.start, sameInstant (2014, Months.FEBRUARY, 3, 18, 29, 0, 0))
+	       assertThat(info?.end, sameInstant (2014, Months.FEBRUARY, 3, 19, 9, 0, 0))
+	       assertThat(info?.puls, equalTo(94))
+	       assertThat(info?.uMin, equalTo(61))
+	       assertThat(info?.kCal, equalTo(294))
+	       assertThat(info?.watt, equalTo(88))
+	       assertThat(info?.km, equalTo(6))
+	       assertThat(info?.ω, equalTo(0))
+	    } // it
+	 } // on
+	 on ("closing the data stream")
+	 {
 	    test.close ()
 	 } // on
       } // given

@@ -18,6 +18,10 @@
 
 function Run-Debug ()
 {
+    pushd /Volumes/Boxcryptor/Dropbox/Secure
+	adb push "Withings - Gewicht Martin.csv" "/storage/extSdCard/Android/data/com.krischik.fit_import/files"
+    popd
+
     pushd "${PROJECT_HOME}"
 	gradlew build
 	gradlew :Fit-Import-Lib:test

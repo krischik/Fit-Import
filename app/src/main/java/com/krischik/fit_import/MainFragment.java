@@ -136,13 +136,20 @@ public class MainFragment
 
       if (googleFit != null && activity != null)
       {
-         final java.io.File dir = activity.getExternalFilesDir (null);
+         // OK, some kind of file selector is missing here.
+         // final java.io.File dir = activity.getExternalFilesDir (null);
+         @SuppressWarnings ("HardcodedFileSeparator")
+         final java.io.File dir = new java.io.File ("/storage/extSdCard/Android/data/com.krischik.fit_import/files");
 
+         //noinspection ConstantConditions
          if (dir != null)
          {
+            //noinspection ResultOfMethodCallIgnored
+            dir.mkdirs ();
+
             final java.io.File file = new java.io.File (
                dir,
-               "kettfit_01_01_2014-31_12_2015.csv");
+               "kettfit_01_01_2014-29_02_2016.csv");
 
             if (file.exists ())
             {
@@ -207,8 +214,12 @@ public class MainFragment
 
       if (googleFit != null && activity != null)
       {
-         final java.io.File dir = activity.getExternalFilesDir (null);
+         // OK, some kind of file selector is missing here.
+         // final java.io.File dir = activity.getExternalFilesDir (null);
+         @SuppressWarnings ("HardcodedFileSeparator")
+         final java.io.File dir = new java.io.File ("/storage/extSdCard/Android/data/com.krischik.fit_import/files");
 
+         //noinspection ConstantConditions
          if (dir != null)
          {
             final java.io.File file = new java.io.File (dir, "Withings - Gewicht Martin.csv");
