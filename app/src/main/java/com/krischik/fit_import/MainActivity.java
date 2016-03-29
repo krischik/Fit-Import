@@ -27,7 +27,9 @@ import org.jetbrains.annotations.Nullable;
  * @version 1.0
  * @since 1.0
  */
-@org.androidannotations.annotations.EActivity (R.layout.main_activity)
+@SuppressWarnings ("WeakerAccess")
+@org.androidannotations.annotations.EActivity
+   (R.layout.main_activity)
 public class MainActivity
    extends android.support.v7.app.ActionBarActivity
    implements IMainFragment,
@@ -42,6 +44,7 @@ public class MainActivity
     */
    @NotNull
    private GoogleFit googleFit;
+
    /**
     * <p> Calculator fragment </p>
     */

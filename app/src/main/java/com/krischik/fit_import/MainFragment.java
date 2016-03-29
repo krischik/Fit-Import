@@ -6,11 +6,11 @@
  * or (at your option) any later version.
  * <p/>
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * the GNU General Public License for more details.
  * <p/>
- * You should have received a copy of the GNU General Public License along with this program.
- * If not, see http://www.gnu.org/licenses/
+ * You should have received a copy of the GNU General Public License along with this program. If
+ * not, see http://www.gnu.org/licenses/
  * *********************************************************
  * }}}1
  **********/
@@ -27,12 +27,21 @@ import org.jetbrains.annotations.Nullable;
  * @version 1.0
  * @since 1.0
  */
-@SuppressWarnings ({"HardcodedLineSeparator"})
+@SuppressWarnings ({"HardcodedLineSeparator", "WeakerAccess"})
 @org.androidannotations.annotations.EFragment (R.layout.main_fragment)
 public class MainFragment
    extends android.support.v4.app.Fragment
    implements IMainFragment
 {
+   /**
+    * <p>the app is not finished and some things are still not there. Like the file
+    * picker.</p>
+    */
+   @android.annotation.SuppressLint ("SdCardPath")
+   @SuppressWarnings ("HardcodedFileSeparator")
+   public static final String SD_Card_Path =
+      "/sdcard/Android/data/com.krischik.fit_import";
+//    "/storage/extSdCard/Android/data/com.krischik.fit_import/files";
    /**
     * <p> TAG as class name for logging </p>
     */
@@ -41,6 +50,20 @@ public class MainFragment
     * <p>Google FIT Model</p>
     */
    private GoogleFit googleFit;
+
+   @Override
+   public void onCreate (@Nullable final android.os.Bundle savedInstanceState)
+   {
+      handler = new GoogleFitHandler ();
+
+      return;
+   }
+
+   /**
+    * <p>hander for long running jobs.</p>
+    */
+   @NotNull
+   private GoogleFitHandler handler;
    /**
     * <p>Import Withings CVS button</p>
     */
@@ -139,7 +162,7 @@ public class MainFragment
          // OK, some kind of file selector is missing here.
          // final java.io.File dir = activity.getExternalFilesDir (null);
          @SuppressWarnings ("HardcodedFileSeparator")
-         final java.io.File dir = new java.io.File ("/storage/extSdCard/Android/data/com.krischik.fit_import/files");
+         final java.io.File dir = new java.io.File (SD_Card_Path);
 
          //noinspection ConstantConditions
          if (dir != null)
@@ -153,30 +176,13 @@ public class MainFragment
 
             if (file.exists ())
             {
-               final ReadKetfit records = new ReadKetfit (file);
-
-               Read_Records:
-               while (true)
-               {
-                  final Ketfit record = records.read ();
-
-                  if (record == null)
-                  {
-                     break Read_Records;
-                  } // if
-
-                  com.krischik.Log.v (TAG, "Read Record: %1$s", record);
-
-                  try
-                  {
-                     googleFit.insertTraining (record);
-                  }
-                  catch (Exception exception)
-                  {
-                     errorText.append (exception.getMessage () + '\n');
-                     com.krischik.Log.e (TAG, "LOG00060:Insert error!", exception);
-                  } // try
-               } // while
+               final android.os.Message Keyboard_Message = this.handler.obtainMessage ();
+               Keyboard_Message.obj = new GoogleFitHandler.Command (
+               /* Type       => */ GoogleFitHandler.Type.Ketfit,
+               /* File       => */ file,
+               /* Error_Text => */ errorText,
+               /* GoogleFit  => */ googleFit);
+               this.handler.sendMessage (Keyboard_Message);
             }
             else
             {
@@ -197,7 +203,7 @@ public class MainFragment
       } // if
 
       return;
-   } // doConnect
+   } // doKetfitButton
 
    /**
     * <p>the import Withings button has been clicked.</p>
@@ -217,7 +223,7 @@ public class MainFragment
          // OK, some kind of file selector is missing here.
          // final java.io.File dir = activity.getExternalFilesDir (null);
          @SuppressWarnings ("HardcodedFileSeparator")
-         final java.io.File dir = new java.io.File ("/storage/extSdCard/Android/data/com.krischik.fit_import/files");
+         final java.io.File dir = new java.io.File (SD_Card_Path);
 
          //noinspection ConstantConditions
          if (dir != null)
@@ -226,30 +232,13 @@ public class MainFragment
 
             if (file.exists ())
             {
-               final ReadWithings records = new ReadWithings (file);
-
-               Read_Records:
-               while (true)
-               {
-                  final Withings record = records.read ();
-
-                  if (record == null)
-                  {
-                     break Read_Records;
-                  }
-
-                  com.krischik.Log.v (TAG, "Read Record: %1$s", record);
-
-                  try
-                  {
-                     googleFit.insertWeight (record);
-                  }
-                  catch (Exception exception)
-                  {
-                     errorText.append (exception.getMessage () + '\n');
-                     com.krischik.Log.e (TAG, "LOG00060:Insert error!", exception);
-                  } // try
-               } // while
+               final android.os.Message Keyboard_Message = this.handler.obtainMessage ();
+               Keyboard_Message.obj = new GoogleFitHandler.Command (
+               /* Type       => */ GoogleFitHandler.Type.Withings,
+               /* File       => */ file,
+               /* Error_Text => */ errorText,
+               /* GoogleFit  => */ googleFit);
+               this.handler.sendMessage (Keyboard_Message);
             }
             else
             {
@@ -270,7 +259,7 @@ public class MainFragment
       } // if
 
       return;
-   } // doConnect
+   } // doWithingsButton
 
    public void setGoogleFit (@NotNull GoogleFit googleFit)
    {

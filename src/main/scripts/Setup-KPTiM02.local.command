@@ -36,6 +36,7 @@ typeset -g -x		SVN_HOME="/opt/local"
 typeset -g -x		ANT_HOME="${MACPORTS_HOME}/apache-ant"
 typeset -g -x		JDK_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home"
 typeset -g -x	       JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home"
+typeset -g -x		IDEA_JDK="/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk"
 typeset -g -x	       Workspace="${WORK}/Workspaces/Fit-Import"
 typeset -g -x	      SCALA_HOME="${opt}/share/scala-2.11"
 typeset -g -x	    ANDROID_HOME="${MACPORTS_HOME}/android-sdk-macosx"
@@ -65,15 +66,35 @@ fpath=(${PROJECT_HOME}/src/main/scripts ${fpath})
 typeset -x -g     CALCULATOR_VERSION=6.7.6
 typeset -x -g CALCULATOR_SCALASCRIPT="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
 
-alias			 PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
-alias			mvn="${M2_HOME}/bin/mvn"
+alias	 PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
+alias	mvn="${M2_HOME}/bin/mvn"
 
-typeset -f -u Git-Commit
-typeset -f -u Maven
-typeset -f -u Diff_2_3
-typeset -f -u Device-Activate-Logging 
-typeset -f -u Device-Deactivate-Logging
-typeset -f -u Device-Set-Logging
+for I in			\
+    "Build-Debug"		\
+    "Clean"			\
+    "Device-Activate-Logging"	\
+    "Device-Deactivate-Logging"	\
+    "Device-Set-Logging"	\
+    "Git-Commit"		\
+    "logcat"			\
+    "Run-Debug"			\
+    "Test-Debug"			
+do
+    zcompile "${PROJECT_HOME}/src/main/scripts/${I}"
+    typeset -f -u "${I}"
+done; unset I;
+
+for I in			\
+    "Change-Java"		\
+    "Create_Images"		\
+    "Pretty_Print"		\
+    "Setup-KPTiM02.local"	\
+    "Setup-KonyMac01.local"	\
+    "Setup-iMac.local"		\
+    "Start-IntelliJ"
+do
+    zcompile "${PROJECT_HOME}/src/main/scripts/${I}.command"
+done; unset I;
 
 function lxpm ()
 {

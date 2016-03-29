@@ -19,7 +19,8 @@
 function Clean ()
 {
     pushd "${PROJECT_HOME}"
-	gradlew clean build
+	gradlew clean 
+	gradlew test
     popd
 
     return

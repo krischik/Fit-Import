@@ -51,7 +51,6 @@ repositories {
 sourceSets {
    main {
       java.srcDirs += 'src/main/kotlin'
-      output.resourcesDir = "build/classes/main"
    } // main
 } // dependencies
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :

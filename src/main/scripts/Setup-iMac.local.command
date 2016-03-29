@@ -62,8 +62,8 @@ fpath=(${PROJECT_HOME}/src/main/scripts ${fpath})
 typeset -x -g	  CALCULATOR_VERSION=6.7.6
 typeset -x -g CALCULATOR_SCALASCRIPT="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
 
-alias	  PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
-alias	 mvn="${M2_HOME}/bin/mvn"
+alias	 PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
+alias	mvn="${M2_HOME}/bin/mvn"
 
 for I in			\
     "Build-Debug"		\

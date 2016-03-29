@@ -18,13 +18,13 @@
 
 function Run-Debug ()
 {
-    pushd /Volumes/Boxcryptor/Dropbox/Secure
-	adb push "Withings - Gewicht Martin.csv" "/storage/extSdCard/Android/data/com.krischik.fit_import/files"
-    popd
+    #pushd /Volumes/Boxcryptor/Dropbox/Secure
+	#adb push "Withings - Gewicht Martin.csv" "/storage/extSdCard/Android/data/com.krischik.fit_import/files"
+    #popd
 
     pushd "${PROJECT_HOME}"
 	gradlew build
-	gradlew :Fit-Import-Lib:test
+	gradlew test
 	gradlew :Fit-Import-App:installDebug
 	adb shell am start -n "com.krischik.fit_import/com.krischik.fit_import.MainActivity_"
     popd

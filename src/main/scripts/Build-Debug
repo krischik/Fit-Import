@@ -20,8 +20,8 @@ function Build-Debug ()
 {
     pushd "${PROJECT_HOME}"
 	gradlew build
-	gradlew :Fit-Import-Lib:test
-	gradlew :Fit-Import-App:installDebug
+	gradlew test
+	gradlew installDebug
     popd
 
     return

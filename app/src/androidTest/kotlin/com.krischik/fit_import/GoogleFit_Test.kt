@@ -26,13 +26,13 @@ import org.hamcrest.core.IsEqual.equalTo
  * @version 1.0
  * @since 1.0
  */
-public class GoogleFIT_Test :
+public class GoogleFit_Test :
    android.test.ActivityInstrumentationTestCase2<MainActivity_>(MainActivity_::class.java)
 {
    /**
     * Logging tag
     */
-   private val TAG = com.krischik.Log.getLogTag(GoogleFIT_Test::class.java);
+   private val TAG = com.krischik.Log.getLogTag(GoogleFit_Test::class.java);
    /**
     * Randim number generator
     */
@@ -120,7 +120,7 @@ public class GoogleFIT_Test :
 	 timeout = com.krischik.test.Utilities.seconds(30.0f))
 
       val Google_Fit = activity?.googleFit
-      val testData = GoogleFIT_Test::class.java.getResourceAsStream("/Withings.csv")
+      val testData = GoogleFit_Test::class.java.getResourceAsStream("/Withings.csv")
       val test = ReadWithings (testData)
       var recordCount = 0;
 
@@ -158,7 +158,7 @@ public class GoogleFIT_Test :
 	 timeout = com.krischik.test.Utilities.seconds(30.0f))
 
       val Google_Fit = activity?.googleFit
-      val testData = GoogleFIT_Test::class.java.getResourceAsStream("/ketfit.csv")
+      val testData = GoogleFit_Test::class.java.getResourceAsStream("/ketfit.csv")
       val test = ReadKetfit (testData)
       var recordCount = 0;
 
