@@ -17,12 +17,28 @@
 #}
 
 -keepattributes *Annotation*
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.app.Fragment
+-keep public class * extends android.app.FragmentActivity
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.preference.Preference
+-keep public class * extends android.support.v4.app.Fragment
+-keep public class * extends android.support.v4.app.FragmentActivity
+-keep public class * extends android.support.v7.app.ActionBarActivity
+-keep public class * extends android.widget.TabHost.TabContentFactory
+-keep class android.support.test.runner.MultiDexTestRunner	{ *; }
+-keep class com.android.test.runner.MultiDexTestRunner		{ *; }
 
--keep public class com.krischik.fit_import.GoogleFit 			{ *; }
--keep public class android.support.test.runner.MultiDexTestRunner	{ *; }
--keep public class com.android.test.runner.MultiDexTestRunner		{ *; }
+########## Projekt ##########################################################
 
-########## Android Test #########################################################
+-keep class com.krischik.fit_import.GoogleFit 			{ *; }
+-keep class com.krischik.fit_import.MainFragment_ 	        { *; }
+
+########## Android Test #####################################################
 
 -keepclassmembers public class ** {
    public *** Test_* ();

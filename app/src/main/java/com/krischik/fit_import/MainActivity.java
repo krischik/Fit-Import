@@ -1,19 +1,19 @@
-/********************************************************** {{{1 ***********
- *  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
- ***************************************************************************
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see http://www.gnu.org/licenses/
- ********************************************************** }}}1 **********/
+/**********************************************************
+ * {{{1 *********** Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
+ * ************************************************************************** This program is
+ * free software: you can redistribute it and/or modify it under the terms of the GNU General
+ * Public License as published by the Free Software Foundation, either version 3 of the License,
+ * or (at your option) any later version.
+ * <p>
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License along with this program.
+ * If not, see http://www.gnu.org/licenses/
+ * *********************************************************
+ * }}}1
+ **********/
 
 package com.krischik.fit_import;
 
@@ -28,12 +28,11 @@ import org.jetbrains.annotations.Nullable;
  * @since 1.0
  */
 @SuppressWarnings ("WeakerAccess")
-@org.androidannotations.annotations.EActivity
-   (R.layout.main_activity)
+@org.androidannotations.annotations.EActivity (R.layout.main_activity)
 public class MainActivity
    extends android.support.v7.app.ActionBarActivity
    implements IMainFragment,
-	      IMainActivity
+              IMainActivity
 {
    /**
     * <p> TAG as class name for logging </p>
@@ -44,7 +43,6 @@ public class MainActivity
     */
    @NotNull
    private GoogleFit googleFit;
-
    /**
     * <p> Calculator fragment </p>
     */
@@ -57,7 +55,7 @@ public class MainActivity
    {
       if (mainFragment != null)
       {
-	 mainFragment.setGoogleFit (googleFit);
+         mainFragment.setGoogleFit (googleFit);
       } // if
 
       return;
@@ -75,7 +73,7 @@ public class MainActivity
    {
       if (mainFragment != null)
       {
-	 mainFragment.doConnect (connected);
+         mainFragment.doConnect (connected);
       } // if
 
       return;
@@ -106,7 +104,7 @@ public class MainActivity
    {
       if (mainFragment != null)
       {
-	 mainFragment.doKetfitButton ();
+         mainFragment.doKetfitButton ();
       } // if
 
       return;
@@ -122,7 +120,7 @@ public class MainActivity
    {
       if (mainFragment != null)
       {
-	 mainFragment.doWithingsButton ();
+         mainFragment.doWithingsButton ();
       } // if
 
       return;
@@ -161,11 +159,14 @@ public class MainActivity
 
    @hugo.weaving.DebugLog
    @Override
-   protected void onActivityResult (int requestCode, int resultCode, android.content.Intent data)
+   protected void onActivityResult (
+      int requestCode,
+      int resultCode,
+      android.content.Intent data)
    {
       if (requestCode == GoogleFit.Request_OAuth)
       {
-	 googleFit.doConnect (resultCode);
+         googleFit.doConnect (resultCode);
       } // if
 
       return;
@@ -179,7 +180,8 @@ public class MainActivity
 
       boolean authInProgress;
 
-      authInProgress = savedInstanceState != null && savedInstanceState.getBoolean (GoogleFit.Auth_Pending);
+      authInProgress = savedInstanceState != null &&
+         savedInstanceState.getBoolean (GoogleFit.Auth_Pending);
 
       googleFit = new GoogleFit (this, authInProgress);
 

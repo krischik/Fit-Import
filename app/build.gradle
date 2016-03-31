@@ -26,39 +26,39 @@ buildscript {
    }
    dependencies {
       classpath (
-	 [group: 'com.android.tools.build', name: 'gradle', version: '1.5.0'],
-	 [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.8'],
-	 [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
-	 [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: Kotlin_Version]
+         [group: 'com.android.tools.build', name: 'gradle', version: Gradle_Tools_Version],
+         [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
+         [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.8'],
+         [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: Kotlin_Version],
       ) // classpath
    } // dependencies
 } // buildscript
 
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.jakewharton.hugo'
-apply plugin: 'android-apt'
 
 android {
    compileSdkVersion Compile_Sdk_Version
    buildToolsVersion Built_Tools_Version
 
    packagingOptions {
-       exclude 'LICENSE.txt'
+      exclude 'LICENSE.txt'
    } // packagingOptions
 
    signingConfigs {
       debug {
-	 storeFile file (System.getenv ("KEY_STORE"))
-	 storePassword System.getenv ("KEY_STOREPASS")
-	 keyAlias System.getenv ("KEY_ALIAS")
-	 keyPassword System.getenv ("KEY_KEYPASS")
+         storeFile file (System.getenv ("KEY_STORE"))
+         storePassword System.getenv ("KEY_STOREPASS")
+         keyAlias System.getenv ("KEY_ALIAS")
+         keyPassword System.getenv ("KEY_KEYPASS")
       } // debug
       release {
-	 storeFile file (System.getenv ("KEY_STORE"))
-	 storePassword System.getenv ("KEY_STOREPASS")
-	 keyAlias System.getenv ("KEY_ALIAS")
-	 keyPassword System.getenv ("KEY_KEYPASS")
+         storeFile file (System.getenv ("KEY_STORE"))
+         storePassword System.getenv ("KEY_STOREPASS")
+         keyAlias System.getenv ("KEY_ALIAS")
+         keyPassword System.getenv ("KEY_KEYPASS")
       } // release
    } // signingConfigs
 
@@ -76,22 +76,24 @@ android {
    }
    buildTypes {
       release {
-	 signingConfig signingConfigs.release
-	 minifyEnabled false
-	 proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'src/main/config/proguard-release.pro'
+         signingConfig signingConfigs.release
+         minifyEnabled false
+         proguardFiles getDefaultProguardFile ('proguard-android.txt'),
+                       'src/main/config/proguard-release.pro'
       }
       debug {
-	 signingConfig signingConfigs.debug
-	 minifyEnabled false
-	 proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'src/main/config/proguard-debug.pro'
+         signingConfig signingConfigs.debug
+//         minifyEnabled false
+//         proguardFiles getDefaultProguardFile ('proguard-android.txt'),
+//                       'src/main/config/proguard-debug.pro'
       }
    }
    sourceSets {
       main {
-	 java.srcDirs += 'src/main/kotlin'
+         java.srcDirs += 'src/main/kotlin'
       } // main
       androidTest {
-	 java.srcDirs += 'src/androidTest/kotlin'
+         java.srcDirs += 'src/androidTest/kotlin'
       } // androidTest
    } // sourceSets
    compileOptions {
@@ -124,7 +126,7 @@ dependencies {
       [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.5.3'],
       [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9'],
       ) // androidTestCompile
-   androidTestCompile ('com.android.support:multidex-instrumentation:1.0.1' ) {
+   androidTestCompile ('com.android.support:multidex-instrumentation:1.0.1') {
       exclude group: 'com.android.support', module: 'multidex'
    }
 } // dependencies

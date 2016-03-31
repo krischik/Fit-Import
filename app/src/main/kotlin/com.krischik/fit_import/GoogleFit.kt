@@ -67,7 +67,7 @@ public class GoogleFit(
 	 /* manufacturer => */"Kettler",
 	 /* model        => */"UNIX S",
 	 /* uid          => */"ABC123",
-	 /* type         => */com.google.android.gms.fitness.`data`.Device.TYPE_SCALE)
+	 /* type         => */com.google.android.gms.fitness.`data`.Device.TYPE_CHEST_STRAP)
    } // companion object
 
    /**

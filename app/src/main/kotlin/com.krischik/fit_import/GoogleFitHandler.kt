@@ -67,8 +67,6 @@ public class GoogleFitHandler :
       {
 	 val record = records.read() ?: break@Read_Records
 
-	 // if
-
 	 com.krischik.Log.v(TAG, "Read Record: %1\$s", record)
 
 	 try

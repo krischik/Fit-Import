@@ -77,7 +77,6 @@ for I in			\
     "Device-Set-Logging"	\
     "Git-Commit"		\
     "logcat"			\
-    "Run-Debug"			\
     "Test-Debug"			
 do
     zcompile "${PROJECT_HOME}/src/main/scripts/${I}"
@@ -88,12 +87,14 @@ for I in			\
     "Change-Java"		\
     "Create_Images"		\
     "Pretty_Print"		\
-    "Setup-KPTiM02.local"	\
-    "Setup-KonyMac01.local"	\
+    "Run-Debug"			\
     "Setup-iMac.local"		\
+    "Setup-KonyMac01.local"	\
+    "Setup-KPTiM02.local"	\
     "Start-IntelliJ"
 do
     zcompile "${PROJECT_HOME}/src/main/scripts/${I}.command"
+    alias "${I}"="${PROJECT_HOME}/src/main/scripts/${I}.command"
 done; unset I;
 
 function lxpm ()

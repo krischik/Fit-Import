@@ -1,4 +1,4 @@
-#!/bin/echo usage: typeset -x -f -u 
+#!/opt/local/bin/zsh
 ########################################################### {{{1 ###########
 #  Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
 ###########################################################################
@@ -16,23 +16,19 @@
 #  along with this program.  If not, see http://www.gnu.org/licenses/
 ########################################################### }}}1 ###########
 
-function Run-Debug ()
-{
-    #pushd /Volumes/Boxcryptor/Dropbox/Secure
-	#adb push "Withings - Gewicht Martin.csv" "/storage/extSdCard/Android/data/com.krischik.fit_import/files"
-    #popd
+setopt Err_Exit;
+setopt No_XTrace;
 
-    pushd "${PROJECT_HOME}"
-	gradlew build
-	gradlew test
-	gradlew :Fit-Import-App:installDebug
-	adb shell am start -n "com.krischik.fit_import/com.krischik.fit_import.MainActivity_"
-    popd
+#pushd /Volumes/Boxcryptor/Dropbox/Secure
+    #adb push "Withings - Gewicht Martin.csv" "/storage/extSdCard/Android/data/com.krischik.fit_import/files"
+#popd
 
-    return
-} # Run-Debug
-
-Run-Debug "${@}"
+pushd "${PROJECT_HOME}"
+    gradlew build
+    gradlew test
+    gradlew :Fit-Import-App:installDebug
+    adb shell am start -n "com.krischik.fit_import/com.krischik.fit_import.MainActivity_"
+popd
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :
