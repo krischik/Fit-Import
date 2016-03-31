@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-dontwarn com.google.android.**
+
 -keepattributes *Annotation*
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
@@ -37,7 +39,6 @@
 
 -keep class com.krischik.fit_import.GoogleFit 			{ *; }
 -keep class com.krischik.fit_import.MainFragment_ 	        { *; }
-
 
 # vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 noexpandtab :
 # vim: set textwidth=0 filetype=cfg foldmethod=marker nospell :

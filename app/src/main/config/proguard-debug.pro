@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-dontwarn com.google.android.**
+
 -keepattributes *Annotation*
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application

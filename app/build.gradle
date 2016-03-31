@@ -65,27 +65,25 @@ android {
    defaultConfig {
       applicationId "com.krischik.fit_import"
       minSdkVersion Min_Sdk_Version
-      multiDexEnabled true
+      multiDexEnabled false
       targetSdkVersion Target_Sdk_Version
       testApplicationId 'com.krischik.fit_import.test'
-      testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
-//    testInstrumentationRunner "android.support.test.runner.MultiDexTestRunner"
-//    testInstrumentationRunner "android.test.InstrumentationTestRunner"
+      testInstrumentationRunner "android.test.InstrumentationTestRunner"
       versionCode 10000
       versionName "1.0.0"
    }
    buildTypes {
       release {
          signingConfig signingConfigs.release
-         minifyEnabled false
+         minifyEnabled true
          proguardFiles getDefaultProguardFile ('proguard-android.txt'),
                        'src/main/config/proguard-release.pro'
       }
       debug {
          signingConfig signingConfigs.debug
-//         minifyEnabled false
-//         proguardFiles getDefaultProguardFile ('proguard-android.txt'),
-//                       'src/main/config/proguard-debug.pro'
+         minifyEnabled true
+         proguardFiles getDefaultProguardFile ('proguard-android.txt'),
+                       'src/main/config/proguard-debug.pro'
       }
    }
    sourceSets {
