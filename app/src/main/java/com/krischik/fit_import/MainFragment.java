@@ -39,8 +39,7 @@ public class MainFragment
     */
    @android.annotation.SuppressLint ("SdCardPath")
    @SuppressWarnings ("HardcodedFileSeparator")
-   public static final String SD_Card_Path =
-      "/sdcard/Android/data/com.krischik.fit_import";
+   public static final String SD_Card_Path = "/sdcard/Android/data/com.krischik.fit_import";
 //    "/storage/extSdCard/Android/data/com.krischik.fit_import/files";
    /**
     * <p> TAG as class name for logging </p>
@@ -54,6 +53,8 @@ public class MainFragment
    @Override
    public void onCreate (@Nullable final android.os.Bundle savedInstanceState)
    {
+      super.onCreate (savedInstanceState);
+
       handler = new GoogleFitHandler ();
 
       return;

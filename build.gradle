@@ -53,6 +53,12 @@ allprojects {
       maven {
          url "http://uiq3.sourceforge.net/Repository"
       } // maven
+      maven {
+         url "https://oss.sonatype.org/content/groups/public"
+      } // maven
+      maven {
+         url "https://oss.sonatype.org/content/repositories/releases"
+      } // maven
    } // repositories
 
    buildscript {
@@ -65,6 +71,12 @@ allprojects {
          } // maven
          maven {
             url "http://uiq3.sourceforge.net/Repository"
+         } // maven
+         maven {
+            url "https://oss.sonatype.org/content/groups/public"
+         } // maven
+         maven {
+            url "https://oss.sonatype.org/content/repositories/releases"
          } // maven
       } // repositories
 
