@@ -365,7 +365,7 @@ public class GoogleFit(
 
       requestBuilder.setSession (session)
       requestBuilder.addDataSet (createDataSet(
-	 dataType = com.google.android.gms.fitness.data.DataType.TYPE_ACTIVITY_SAMPLE,
+	 dataType = com.google.android.gms.fitness.data.DataType.TYPE_ACTIVITY_SEGMENT,
 	 sourceType = com.google.android.gms.fitness.data.DataSource.TYPE_RAW,
 	 sourceName = "Ketfit training",
 	 device = Kettler_Trainer,
