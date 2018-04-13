@@ -23,10 +23,11 @@ buildscript {
    repositories {
       mavenCentral ()
       mavenLocal ()
+      google()
    }
    dependencies {
       classpath (
-         [group: 'com.android.tools.build', name: 'gradle', version: Gradle_Tools_Version],
+         [version: '3.1.1', group: 'com.android.tools.build', name: 'gradle'],
 //       [group: 'com.google.gms', name: 'google-services', version: '1.5.0'],
          [group: 'com.jakewharton.hugo', name: 'hugo-plugin', version: '1.2.1'],
          [group: 'com.neenbedankt.gradle.plugins', name: 'android-apt', version: '1.8'],
@@ -42,8 +43,8 @@ apply plugin: 'com.jakewharton.hugo'
 //apply plugin: 'com.google.gms.google-services'
 
 android {
-   compileSdkVersion Compile_Sdk_Version
-   buildToolsVersion Built_Tools_Version
+   compileSdkVersion 26
+   buildToolsVersion '27.0.3'
 
    packagingOptions {
       exclude 'LICENSE.txt'
@@ -102,29 +103,30 @@ android {
 } // android
 
 dependencies {
-   apt (
-      [group: 'org.androidannotations', name: 'androidannotations', version: Androidannotations_Version]
-   )
-   // apt
-   compile (
-      project (':Fit-Import-Lib'),
-      project (':AndroidLib'),
-      [group: 'com.android.support', name: 'appcompat-v7', version: Androidsupport_Version],
-      [group: 'com.android.support', name: 'support-v4', version: Androidsupport_Version],
-      [group: 'com.google.android.gms', name: 'play-services', version: '8.3.0'],
-      [group: 'org.androidannotations', name: 'androidannotations-api', version: Androidannotations_Version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version]
-   )
-   // compile
-   androidTestCompile (
-      project (':AndroidTestLib'),
-      [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.5.3'],
-      [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9'],
-      ) // androidTestCompile
-   androidTestCompile ('com.android.support:multidex-instrumentation:1.0.1') {
-      exclude group: 'com.android.support', module: 'multidex'
-   }
+    apt(
+            [group: 'org.androidannotations', name: 'androidannotations', version: Androidannotations_Version]
+    )
+    // apt
+    compile(
+            project(':Fit-Import-Lib'),
+            project(':AndroidLib'),
+            [group: 'com.android.support', name: 'appcompat-v7', version: Androidsupport_Version],
+            [group: 'com.android.support', name: 'support-v4', version: Androidsupport_Version],
+            [group: 'com.google.android.gms', name: 'play-services', version: '8.3.0'],
+            [group: 'org.androidannotations', name: 'androidannotations-api', version: Androidannotations_Version],
+            [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version],
+            [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version]
+    )
+    // compile
+    androidTestCompile(
+            project(':AndroidTestLib'),
+            [group: 'com.jayway.android.robotium', name: 'robotium-solo', version: '5.5.3'],
+            [group: 'com.github.rtyley', name: 'android-screenshot-celebrity', version: '1.9'],
+    )
+    // androidTestCompile
+    androidTestCompile('com.android.support:multidex-instrumentation:1.0.1') {
+        exclude group: 'com.android.support', module: 'multidex'
+    }
 } // dependencies
 
 apt {

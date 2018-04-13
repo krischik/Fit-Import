@@ -18,7 +18,7 @@
 buildscript {
    dependencies {
       classpath (
-         [group: 'com.android.tools.build', name: 'gradle', version: Gradle_Tools_Version],
+         [version: '3.1.1' group: 'com.android.tools.build', name: 'gradle'],
          [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: Kotlin_Version],
       ) // classpath
    } // dependencies
@@ -28,8 +28,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-   compileSdkVersion Compile_Sdk_Version
-   buildToolsVersion Built_Tools_Version
+   compileSdkVersion 26
+   buildToolsVersion '27.0.3'
 
    packagingOptions {
       exclude 'LICENSE.txt'
@@ -50,17 +50,21 @@ android {
          java.srcDirs += 'src/androidTest/kotlin'
       } // androidTest
    } // sourceSets
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 } // android
 
 dependencies {
-   compile (
-      [group: 'org.hamcrest', name: 'hamcrest-core', version: Hamcrest_Version],
-      [group: 'org.hamcrest', name: 'hamcrest-integration', version: Hamcrest_Version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: Kotlin_Version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version],
-      )
-   // compile
+    compile(
+            [group: 'org.hamcrest', name: 'hamcrest-core', version: Hamcrest_Version],
+            [group: 'org.hamcrest', name: 'hamcrest-integration', version: Hamcrest_Version],
+            [group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: Kotlin_Version],
+            [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version],
+            [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version],
+    )
+    // compile
 }
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :
