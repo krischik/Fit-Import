@@ -1,6 +1,6 @@
-include ':app', ':lib', ':AndroidLib', ':AndroidTestLib', ':JavaLib'
+include ':app', ':JavaLib', ':AndroidLib', ':AndroidTestLib'
 
 project (":AndroidTestLib").name = "Android-TestLib"
 project (":AndroidLib").name = "Android-Lib"
+project (":JavaLib").name = "Java-Lib"
 project (":app").name = "FitImport-App"
-project (":lib").name = "FitImport-Lib"
