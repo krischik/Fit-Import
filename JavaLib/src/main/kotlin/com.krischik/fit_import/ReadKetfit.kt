@@ -16,7 +16,6 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
-import android.annotation.SuppressLint
 import java.util.Calendar
 
 /**
@@ -43,17 +42,14 @@ public class ReadKetfit(val dataStream: java.io.InputStream) : AutoCloseable
       /**
        * <p>format of the start date<p>
        */
-      @SuppressLint("SimpleDateFormat")
       private val Date_Format = java.text.SimpleDateFormat("dd.MM.yyyy");
       /**
        * <p>format of the start time. Strangely the start time has no seconds</p>
        */
-      @SuppressLint("SimpleDateFormat")
       private val Time_Format = java.text.SimpleDateFormat("HH:mm");
       /**
        * <p>format of the duration. which has seconds</p>
        */
-      @SuppressLint("SimpleDateFormat")
       private val Duration_Format = java.text.SimpleDateFormat("HH:mm:ss");
    } // object
 

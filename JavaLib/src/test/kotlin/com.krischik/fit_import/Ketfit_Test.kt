@@ -18,6 +18,9 @@ package com.krischik.fit_import
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
+import org.jetbrains.spek.api.dsl.given
+import org.jetbrains.spek.api.dsl.it
+import org.jetbrains.spek.api.dsl.on
 
 /**
  * <p>
@@ -28,19 +31,17 @@ import org.hamcrest.core.IsEqual.equalTo
  * @version 1.0
  * @since 1.0
  */
-public class Ketfit_Test : org.jetbrains.spek.api.Spek()
+public class Ketfit_Test : org.jetbrains.spek.api.Spek(
 {
    /**
     * <p>logging tag</p>
     */
-   private val TAG = ReadKetfit_Test::class.qualifiedName
+   val TAG = ReadKetfit_Test::class.qualifiedName
    /**
     * <p>logger</p>
     */
-   private val logger = java.util.logging.Logger.getLogger (TAG);
+   val logger = java.util.logging.Logger.getLogger (TAG);
 
-   init
-   {
       Utilities.Init_Logger ()
 
       given ("A Ketfit instance")
@@ -76,9 +77,8 @@ public class Ketfit_Test : org.jetbrains.spek.api.Spek()
 	       assertThat(test, equalTo(140))
 	    } // it
 	 } // on
-      } // given
    } // init
-} // ReadKetfit_Test
+}) // ReadKetfit_Test
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
 // vim: set fileencoding=utf-8 filetype=kotlin foldmethod=syntax spell spelllang=en_gb :

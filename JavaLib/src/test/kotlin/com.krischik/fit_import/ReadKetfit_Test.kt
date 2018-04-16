@@ -21,6 +21,9 @@ import org.exparity.hamcrest.date.Months
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
 import org.hamcrest.core.IsNull.notNullValue
+import org.jetbrains.spek.api.dsl.given
+import org.jetbrains.spek.api.dsl.it
+import org.jetbrains.spek.api.dsl.on
 
 /**
  * <p>
@@ -31,19 +34,17 @@ import org.hamcrest.core.IsNull.notNullValue
  * @version 1.0
  * @since 1.0
  */
-public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
+public class ReadKetfit_Test : org.jetbrains.spek.api.Spek(
 {
    /**
     * <p>logging tag</p>
     */
-   private val TAG = ReadKetfit_Test::class.qualifiedName
+   val TAG = ReadKetfit_Test::class.qualifiedName
    /**
     * <p>logger</p>
     */
-   private val logger = java.util.logging.Logger.getLogger (TAG);
+   val logger = java.util.logging.Logger.getLogger (TAG);
 
-   init
-   {
       Utilities.Init_Logger ()
 
       given ("a stream with header")
@@ -132,8 +133,7 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek()
 	    test.close ()
 	 } // on
       } // given
-   } // init
-} // ReadKetfit_Test
+}) // ReadKetfit_Test
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
 // vim: set fileencoding=utf-8 filetype=kotlin foldmethod=syntax spell spelllang=en_gb :

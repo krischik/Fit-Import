@@ -16,13 +16,16 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
-import org.exparity.hamcrest.date.IsSameInstant.sameInstant
-import org.exparity.hamcrest.date.Months
+import java.time.Month;
+
+import org.exparity.hamcrest.date.DateMatchers.isInstant
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
 import org.hamcrest.core.IsNull.notNullValue
 import org.hamcrest.number.IsCloseTo.closeTo
-import kotlin.test.fail
+import org.jetbrains.spek.api.dsl.given
+import org.jetbrains.spek.api.dsl.it
+import org.jetbrains.spek.api.dsl.on
 
 /**
  * <p>
@@ -33,19 +36,17 @@ import kotlin.test.fail
  * @version 1.0
  * @since 1.0
  */
-public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
+public class ReadWithings_Test : org.jetbrains.spek.api.Spek(
 {
    /**
     * <p>logging tag</p>
     */
-   private val TAG = ReadWithings_Test::class.qualifiedName
+   val TAG = ReadWithings_Test::class.qualifiedName
    /**
     * <p>logger</p>
     */
-   private val logger = java.util.logging.Logger.getLogger (TAG);
+   val logger = java.util.logging.Logger.getLogger (TAG);
 
-   init
-   {
       Utilities.Init_Logger ()
 
       given ("a stream with header")
@@ -77,7 +78,7 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
 	    it ("should return the expected 1st value")
 	    {
 	       assertThat(record_1, notNullValue())
-	       assertThat(record_1?.time, sameInstant (2014, Months.FEBRUARY, 13, 6, 4, 0, 0))
+	       assertThat(record_1?.time, isInstant (2014, Month.FEBRUARY, 13, 6, 4, 0, 0))
 	       assertThat(record_1?.weight?.toDouble(), closeTo(94.34, 0.001))
 	       assertThat(record_1?.fat?.toDouble(), closeTo(26.81, 0.001))
 	       assertThat(record_1?.noFat?.toDouble(), closeTo(68.43, 0.001))
@@ -89,7 +90,7 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
 	    it ("should return the expected 2nd value")
 	    {
 	       assertThat(record_2, notNullValue())
-	       assertThat(record_2?.time, sameInstant (2014, Months.DECEMBER, 18, 19, 6, 0, 0))
+	       assertThat(record_2?.time, isInstant (2014, Month.DECEMBER, 18, 19, 6, 0, 0))
 	       assertThat(record_2?.weight?.toDouble(), closeTo(96.77, 0.001))
 	       assertThat(record_2?.fat?.toDouble(), closeTo(0.0, 0.001))
 	       assertThat(record_2?.noFat?.toDouble(), closeTo(0.0, 0.001))
@@ -126,9 +127,8 @@ public class ReadWithings_Test : org.jetbrains.spek.api.Spek()
 	 } // on
       } // given
 
-      // fail ("unit test where executed")
-   } // init
-} // ReadWithings_Test
+      // kotlin.test.fail ("unit test where executed")
+}) // ReadWithings_Test
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :
 // vim: set fileencoding=utf-8 filetype=kotlin foldmethod=syntax spell spelllang=en_gb :
