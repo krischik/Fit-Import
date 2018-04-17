@@ -17,7 +17,6 @@
 package com.krischik.fit_import
 
 import java.time.Month;
-
 import org.exparity.hamcrest.date.DateMatchers.isInstant
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo

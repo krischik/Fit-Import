@@ -1,3 +1,20 @@
+/********************************************************** {{{1 ***********
+ *  Copyright © 2015 … 2018 "Martin Krischik" «krischik@users.sourceforge.net»
+ ***************************************************************************
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see http://www.gnu.org/licenses/
+ **********************************************************}}}1 **********/
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
@@ -12,6 +29,20 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+   signingConfigs {
+      debug {
+         storeFile file (System.getenv ("KEY_STORE"))
+         storePassword System.getenv ("KEY_STOREPASS")
+         keyAlias System.getenv ("KEY_ALIAS")
+         keyPassword System.getenv ("KEY_KEYPASS")
+      } // debug
+      release {
+         storeFile file (System.getenv ("KEY_STORE"))
+         storePassword System.getenv ("KEY_STOREPASS")
+         keyAlias System.getenv ("KEY_ALIAS")
+         keyPassword System.getenv ("KEY_KEYPASS")
+      } // release
+   } // signingConfigs
     sourceSets {
         main {
             java.srcDirs += 'src/main/kotlin'
@@ -20,12 +51,18 @@ android {
             java.srcDirs += 'src/androidTest/kotlin'
         } // androidTest
     } // sourceSets
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+   buildTypes {
+      release {
+         minifyEnabled false
+         proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'proguard-rules.pro'
+         debuggable false
+         signingConfig signingConfigs.release
+      }
+      debug {
+         debuggable true
+         signingConfig signingConfigs.debug
+      }
+   }
     buildToolsVersion '27.0.3'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -36,14 +73,14 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.31'
-    implementation 'org.jetbrains.kotlin:kotlin-runtime:1.2.31'
+   implementation fileTree (include: ['*.jar'], dir: 'libs')
+   implementation 'com.android.support:appcompat-v7:27.1.1'
+   testImplementation 'junit:junit:4.12'
+   androidTestImplementation 'com.android.support.test:runner:1.0.1'
+   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+   implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.31'
+   implementation 'org.jetbrains.kotlin:kotlin-runtime:1.2.31'
 }
-repositories {
-    mavenCentral()
-}
+
+// vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :
+// vim: set textwidth=0 filetype=groovy foldmethod=marker nospell :

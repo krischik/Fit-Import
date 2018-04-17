@@ -16,8 +16,8 @@
  ********************************************************** }}}1 **********/
 package com.krischik.fit_import
 
-import org.exparity.hamcrest.date.DateMatchers.sameInstant
-import org.exparity.hamcrest.date.Months
+import java.time.Month;
+import org.exparity.hamcrest.date.DateMatchers.isInstant
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
 import org.hamcrest.core.IsNull.notNullValue
@@ -76,8 +76,8 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek(
 	    it ("should return the expected value")
 	    {
 	       assertThat(info, notNullValue())
-	       assertThat(info?.start, sameInstant (2014, Months.FEBRUARY, 2, 18, 42, 0, 0))
-	       assertThat(info?.end, sameInstant (2014, Months.FEBRUARY, 2, 19, 22, 0, 0))
+	       assertThat(info?.start, isInstant (2014, Month.FEBRUARY, 2, 18, 42, 0, 0))
+	       assertThat(info?.end, isInstant (2014, Month.FEBRUARY, 2, 19, 22, 0, 0))
 	       assertThat(info?.puls, equalTo(118))
 	       assertThat(info?.uMin, equalTo(48))
 	       assertThat(info?.kCal, equalTo(294))
@@ -93,8 +93,8 @@ public class ReadKetfit_Test : org.jetbrains.spek.api.Spek(
 	    it ("should return the expected value")
 	    {
 	       assertThat(info, notNullValue())
-	       assertThat(info?.start, sameInstant (2014, Months.FEBRUARY, 3, 18, 29, 0, 0))
-	       assertThat(info?.end, sameInstant (2014, Months.FEBRUARY, 3, 19, 9, 0, 0))
+	       assertThat(info?.start, isInstant (2014, Month.FEBRUARY, 3, 18, 29, 0, 0))
+	       assertThat(info?.end, isInstant (2014, Month.FEBRUARY, 3, 19, 9, 0, 0))
 	       assertThat(info?.puls, equalTo(94))
 	       assertThat(info?.uMin, equalTo(61))
 	       assertThat(info?.kCal, equalTo(294))
