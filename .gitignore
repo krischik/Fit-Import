@@ -35,5 +35,6 @@ proguard/
 # shell temporary files
 *.zwc
 .DS_Store
+Icon?
 
 Documents/*.csv

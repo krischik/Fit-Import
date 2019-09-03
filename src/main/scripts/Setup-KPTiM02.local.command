@@ -23,12 +23,15 @@
 #  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Setup.command $
 ########################################################### }}}1 ###########
 
-pushd "/Work"
-    typeset -g -x WORK=$(pwd -P)
-popd
+function realFile ()
+{
+    local in_Link="${1}" 
+    greadlink --canonicalize "${in_Link}"
+}
+
 typeset -g -x		     opt="/opt/local"
+typeset -g -x		    WORK=$(realFile "/Work")
 typeset -g -x	       Developer="/Applications/Developer"
-typeset -g -x	    PROJECT_HOME="${WORK}/Projects/Fit-Import"
 typeset -g -x	   MACPORTS_HOME="${opt}/share/java"
 
 typeset -g -x		 M2_HOME="${MACPORTS_HOME}/maven3"
@@ -37,10 +40,11 @@ typeset -g -x		IDEA_JDK="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk"
 typeset -g -x		JDK_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home"
 typeset -g -x		SVN_HOME="/opt/local"
 typeset -g -x	       JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home"
-typeset -g -x	       Workspace="${WORK}/Workspaces/Fit-Import"
+typeset -g -x	       Workspace=$(realFile "${WORK}/Workspaces/Fit-Import")
 typeset -g -x	      SCALA_HOME="${opt}/share/scala-2.11"
 typeset -g -x	     STUDIO_HOME="${Developer}/Android Studio.app"
 typeset -g -x	    ANDROID_HOME="/opt/android-sdk-macosx"
+typeset -g -x	    PROJECT_HOME=$(realFile "${WORK}/Projects/Fit-Import")
 typeset -g -x	   INTELLIJ_HOME="${Developer}/IntelliJ IDEA CE.app"
 typeset -g -x	   PROGUARD_HOME="${MACPORTS_HOME}"
 
@@ -64,7 +68,7 @@ fpath=(${PROJECT_HOME}/src/main/scripts ${fpath})
     #-DrepoUrl=http://download.java.net/maven/2/ \
     #-Dartifact=robo-guice:robo-guice:0.4-SNAPSHOT
 
-typeset -x -g     CALCULATOR_VERSION=6.7.6
+typeset -x -g	  CALCULATOR_VERSION=6.7.6
 typeset -x -g CALCULATOR_SCALASCRIPT="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
 
 alias	 PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"

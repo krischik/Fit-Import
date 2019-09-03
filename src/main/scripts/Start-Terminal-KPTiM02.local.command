@@ -24,8 +24,8 @@
 
 tell application "Terminal"
 	set |Tab| to do script "
-cd \"/Work/Projects/Fit-Import\";
-source \"src/main/scripts/Setup-KPTiM02.local.command\""
+source \"/Work/Projects/Fit-Import/src/main/scripts/Setup-KPTiM02.local.command\";
+cd \"${PROJECT_HOME}\""
 	set background color of |Tab| to {52736, 61952, 61952}
 end tell
 

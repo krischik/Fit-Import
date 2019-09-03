@@ -26,9 +26,9 @@ package com.krischik.test
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.collection.IsCollectionWithSize.hasSize
 import org.hamcrest.core.IsNull.notNullValue
+import org.junit.Assert.fail
 import org.jetbrains.annotations.NotNull
 import java.util.logging.Logger
-import junit.framework.Assert.fail
 
 /**
  * Demonstration of the activity test

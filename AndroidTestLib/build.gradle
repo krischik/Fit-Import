@@ -18,10 +18,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion 24
+        targetSdkVersion 28
         versionCode 10000
         versionName '1.00.00'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -60,10 +60,10 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '29.0.2'
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     productFlavors {
     }
@@ -71,15 +71,14 @@ android {
 
 dependencies {
     implementation fileTree (include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.31'
-    implementation 'org.jetbrains.kotlin:kotlin-runtime:1.2.31'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.2.31'
-    implementation 'org.hamcrest:hamcrest-core:1.3'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.3.50'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.3.50'
+    implementation 'org.hamcrest:hamcrest-core:2.1'
     implementation 'org.hamcrest:hamcrest-integration:1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :
