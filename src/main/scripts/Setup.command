@@ -23,24 +23,25 @@
 #  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Setup.command $
 ########################################################### }}}1 ###########
 
-pushd "/Work"
-    typeset -g -x WORK=$(pwd -P)
-popd
+alias realFile="greadlink --canonicalize"
+
+
 typeset -g -x		     opt="/opt/local"
+typeset -g -x		    WORK=$(realFile "/Work")
 typeset -g -x	       Developer="/Applications/Developer"
-typeset -g -x	    PROJECT_HOME="${WORK}/Projects/Fit-Import"
+typeset -g -x	    PROJECT_HOME=$(realFile "${WORK}/Projects/Fit-Import")
 typeset -g -x	   MACPORTS_HOME="${opt}/share/java"
 
 typeset -g -x		 M2_HOME="${MACPORTS_HOME}/maven3"
 typeset -g -x		SVN_HOME="/opt/local"
 typeset -g -x		ANT_HOME="${MACPORTS_HOME}/apache-ant"
-typeset -g -x		JDK_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home"
-typeset -g -x	       JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home"
-typeset -g -x		IDEA_JDK="/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk"
-typeset -g -x	       Workspace="${WORK}/Workspaces/Fit-Import"
+typeset -g -x		JDK_HOME="$(/usr/libexec/java_home --version 1.8)"
+typeset -g -x	       JAVA_HOME="$(/usr/libexec/java_home --version 1.8)"
+typeset -g -x	       Workspace=$(realFile "${WORK}/Workspaces/Fit-Import")
 typeset -g -x	      SCALA_HOME="${opt}/share/scala-2.11"
 typeset -g -x	    ANDROID_HOME="${MACPORTS_HOME}/android-sdk-macosx"
-typeset -g -x	   INTELLIJ_HOME="${Developer}/IntelliJ IDEA CE.app"
+typeset -g -x	     STUDIO_HOME=$(realFile "${Developer}/Android Studio.app")
+typeset -g -x	   INTELLIJ_HOME=$(realFile "${Developer}/IntelliJ IDEA CE.app")
 typeset -g -x	   PROGUARD_HOME="${MACPORTS_HOME}"
 
 typeset -g -x	    PROJECT_NAME="Fit-Import"
@@ -63,12 +64,13 @@ fpath=(${PROJECT_HOME}/src/main/scripts ${fpath})
     #-DrepoUrl=http://download.java.net/maven/2/ \
     #-Dartifact=robo-guice:robo-guice:0.4-SNAPSHOT
 
-typeset -x -g     CALCULATOR_VERSION=6.7.6
-typeset -x -g CALCULATOR_SCALASCRIPT="${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar"
+typeset -x -g	  CALCULATOR_VERSION=7.0.0
+typeset -x -g CALCULATOR_SCALASCRIPT=$(realFile "${WORK}/Repositories/Local/net/sourceforge/uiq3/Calculator-Script/${CALCULATOR_VERSION}/Calculator-Script-${CALCULATOR_VERSION}.jar")
 
 alias	 PP="${PROJECT_HOME}/src/main/scripts/Pretty_Print.command"
 alias	mvn="${M2_HOME}/bin/mvn"
 
+#    "Run-Debug"			\
 for I in			\
     "Build-Debug"		\
     "Clean"			\
@@ -83,18 +85,8 @@ do
     typeset -f -u "${I}"
 done; unset I;
 
-for I in			\
-    "Change-Java"		\
-    "Create_Images"		\
-    "Pretty_Print"		\
-    "Run-Debug"			\
-    "Setup-iMac.local"		\
-    "Setup-KonyMac01.local"	\
-    "Setup-KPTiM02.local"	\
-    "Start-IntelliJ"
-do
-    zcompile "${PROJECT_HOME}/src/main/scripts/${I}.command"
-    alias "${I}"="${PROJECT_HOME}/src/main/scripts/${I}.command"
+for I in "${PROJECT_HOME}/src/main/scripts/"*.command; do
+    zcompile "${I}"
 done; unset I;
 
 function lxpm ()

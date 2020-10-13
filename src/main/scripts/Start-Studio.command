@@ -1,4 +1,4 @@
-#!/usr/bin/osascript
+#!/opt/local/bin/zsh
 ############################################################ {{{1 ###########
 #  Copyright (C) 2007,2008  Martin Krischik
 #############################################################################
@@ -16,19 +16,22 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #############################################################################
 #  $Author: krischik $
-#  $Revision: 6183 $
-#  $Date: 2013-06-27 08:43:02 +0200 (Do, 27. Jun 2013) $
-#  $Id: Start-Terminal.command 6183 2013-06-27 06:43:02Z krischik $
-#  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Start-Terminal.command $
+#  $Revision: 7106 $
+#  $Date: 2020-09-08 15:06:21 +0200 (Di, 08. Sep 2020) $
+#  $Id: Start-Studio.command 7106 2020-09-08 13:06:21Z krischik $
+#  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Utilities/Start-Studio.command $
 ############################################################ }}}1 ###########
 
-tell application "Terminal"
-	set |Tab| to do script "
-cd \"/Work/Projects/Fit-Import\";
-source \"src/main/scripts/Setup-KPTiM02.local.command\""
-	set background color of |Tab| to {52736, 61952, 61952}
-end tell
+source ${0:h}/Setup.command
+
+setopt Err_Exit;
+setopt XTrace;
+
+"${STUDIO_HOME}/Contents/MacOS/studio"		    \
+    "${PROJECT_HOME}"				    \
+    1>~/Library/Logs/${PROJECT_NAME}-${0:t:r}.out   \
+    2>~/Library/Logs/${PROJECT_NAME}-${0:t:r}.err   &
 
 ############################################################ {{{1 ###########
 # vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab :
-# vim: set textwidth=0 filetype=applescript foldmethod=marker nospell :
+# vim: set textwidth=0 filetype=zsh foldmethod=marker nospell :

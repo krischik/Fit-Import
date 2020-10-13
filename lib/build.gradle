@@ -32,18 +32,19 @@ apply plugin: 'java'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 dependencies {
-   compile (
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: Kotlin_Version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version]
-   ) // compile
+//   implementation (
+//      [group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: Kotlin_Version],
+//      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version]
+//   )
+   testImplementation group: 'junit', name: 'junit', version: '4.13.1'
+   testImplementation group: 'org.exparity', name: 'hamcrest-date', version: '2.0.7'
+   testImplementation group: 'org.hamcrest', name: 'hamcrest-core', version: Hamcrest_Version
+//   testImplementation group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version
+// compile
 
-   testCompile (
-      [group: 'junit', name: 'junit', version: '4.12'],
-      [group: 'org.exparity', name: 'hamcrest-date', version: '1.1.0'],
-      [group: 'org.hamcrest', name: 'hamcrest-core', version: Hamcrest_Version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version],
-      [group: 'org.jetbrains.spek', name: 'spek', version: '0.1.195']
-   ) // testCompile
+//   testImplementation (
+//      [group: 'org.jetbrains.spek', name: 'spek', version: '0.1.195']
+//   ) // testCompile
 }
 repositories {
    mavenCentral ()

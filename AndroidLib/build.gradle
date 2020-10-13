@@ -19,13 +19,12 @@ buildscript {
    dependencies {
       classpath (
          [group: 'com.android.tools.build', name: 'gradle', version: Gradle_Tools_Version],
-         [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: Kotlin_Version],
+//       [group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: Kotlin_Version],
       ) // classpath
    } // dependencies
 } // buildscript
 
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 android {
    compileSdkVersion Compile_Sdk_Version
@@ -49,14 +48,21 @@ android {
       androidTest {
          java.srcDirs += 'src/androidTest/kotlin'
       } // androidTest
+   }
+   compileOptions {
+      sourceCompatibility JavaVersion.VERSION_1_8
+      targetCompatibility JavaVersion.VERSION_1_8
    } // sourceSets
+   lintOptions {
+      abortOnError false
+   }
 } // android
 
 dependencies {
-   compile (
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version],
-      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version]
-   ) // compile
+//   implementation (
+//      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: Kotlin_Version],
+//      [group: 'org.jetbrains.kotlin', name: 'kotlin-runtime', version: Kotlin_Version]
+//   ) // compile
 }
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab :

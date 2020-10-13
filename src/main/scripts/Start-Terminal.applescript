@@ -22,10 +22,22 @@
 #  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Start-Terminal.command $
 ############################################################ }}}1 ###########
 
+set |Project Name| to (system attribute "PROJECT_NAME")
+set |Project Home| to (system attribute "PROJECT_HOME")
+
+if the length of |Project Name| = 0 then
+    set |Project Name| to "Fit-Import"
+end if
+
+if the length of |Project Home| = 0 then
+    set |Project Home| to "/Work/Projects/" & |Project Name|
+end if
+
 tell application "Terminal"
 	set |Tab| to do script "
-cd \"/Users/krma1/Work/Projects/Fit-Import\";
-source \"src/main/scripts/Setup-KonyMac01.local.command\""
+source \"" & |Project Home| & "/src/main/scripts/Setup.command\"
+cd \"${PROJECT_HOME}\";
+"
 	set background color of |Tab| to {52736, 61952, 61952}
 end tell
 
