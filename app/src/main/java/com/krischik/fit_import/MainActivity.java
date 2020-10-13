@@ -1,5 +1,5 @@
-/**********************************************************
- * {{{1 *********** Copyright © 2015 … 2016 "Martin Krischik" «krischik@users.sourceforge.net»
+/* ********************************************************** {{{1 **********
+ * Copyright © 2015 … 2019 "Martin Krischik" «krischik@users.sourceforge.net»
  * ************************************************************************** This program is
  * free software: you can redistribute it and/or modify it under the terms of the GNU General
  * Public License as published by the Free Software Foundation, either version 3 of the License,
@@ -11,9 +11,7 @@
  * <p>
  * You should have received a copy of the GNU General Public License along with this program.
  * If not, see http://www.gnu.org/licenses/
- * *********************************************************
- * }}}1
- **********/
+ * ********************************************************** }}}1 *********/
 
 package com.krischik.fit_import;
 
@@ -30,19 +28,21 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings ("WeakerAccess")
 @org.androidannotations.annotations.EActivity (R.layout.main_activity)
 public class MainActivity
-   extends android.support.v7.app.ActionBarActivity
+   extends android.support.v7.app.AppCompatActivity
    implements IMainFragment,
               IMainActivity
 {
    /**
     * <p> TAG as class name for logging </p>
     */
-   private final static String TAG = com.krischik.Log.getLogTag (MainActivity.class);
+   private static final String TAG = com.krischik.Log.getLogTag (MainActivity.class);
+
    /**
     * <p>Google FIT Model</p>
     */
    @NotNull
    private GoogleFit googleFit;
+
    /**
     * <p> Calculator fragment </p>
     */
@@ -69,7 +69,7 @@ public class MainActivity
     */
    @hugo.weaving.DebugLog
    @Override
-   public void doConnect (boolean connected)
+   public void doConnect (final boolean connected)
    {
       if (mainFragment != null)
       {
@@ -160,9 +160,9 @@ public class MainActivity
    @hugo.weaving.DebugLog
    @Override
    protected void onActivityResult (
-      int requestCode,
-      int resultCode,
-      android.content.Intent data)
+       final int requestCode,
+       final int resultCode,
+       final android.content.Intent data)
    {
       if (requestCode == GoogleFit.Request_OAuth)
       {
@@ -178,10 +178,8 @@ public class MainActivity
    {
       super.onCreate (savedInstanceState);
 
-      boolean authInProgress;
-
-      authInProgress = savedInstanceState != null &&
-         savedInstanceState.getBoolean (GoogleFit.Auth_Pending);
+      final boolean authInProgress = savedInstanceState != null &&
+          savedInstanceState.getBoolean (GoogleFit.Auth_Pending);
 
       googleFit = new GoogleFit (this, authInProgress);
 
@@ -190,7 +188,7 @@ public class MainActivity
 
    @hugo.weaving.DebugLog
    @Override
-   protected void onSaveInstanceState (@NotNull android.os.Bundle outState)
+   protected void onSaveInstanceState (@NotNull final android.os.Bundle outState)
    {
       super.onSaveInstanceState (outState);
 
@@ -222,6 +220,16 @@ public class MainActivity
 
       return;
    } // onStop
+
+   @hugo.weaving.DebugLog
+   @android.support.annotation.NonNull
+   @Override
+   public String toString () {
+      return "MainActivity{" +
+          "googleFit=" + googleFit +
+          ", mainFragment=" + mainFragment +
+          '}';
+   }
 } // MainActivity
 
 // vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab textwidth=96 :

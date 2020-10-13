@@ -15,12 +15,6 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-############################################################################
-#  $Author: krischik $
-#  $Revision: 6762 $
-#  $Date: 2015-01-16 15:19:00 +0100 (Fr, 16. Jan 2015) $
-#  $Id: Setup.command 6762 2015-01-16 14:19:00Z krischik $
-#  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Java/src/main/scripts/Setup.command $
 ########################################################### }}}1 ###########
 
 alias realFile="greadlink --canonicalize"

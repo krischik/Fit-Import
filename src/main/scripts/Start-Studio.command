@@ -15,14 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #############################################################################
-#  $Author: krischik $
-#  $Revision: 7106 $
-#  $Date: 2020-09-08 15:06:21 +0200 (Di, 08. Sep 2020) $
-#  $Id: Start-Studio.command 7106 2020-09-08 13:06:21Z krischik $
-#  $HeadURL: svn+ssh://krischik@svn.code.sf.net/p/uiq3/code/trunk/Utilities/Start-Studio.command $
-############################################################ }}}1 ###########
-
-source ${0:h}/Setup.command
+source ${0:h}/Setup-${HOST}.command
 
 setopt Err_Exit;
 setopt XTrace;

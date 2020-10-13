@@ -1,5 +1,5 @@
 /********************************************************** {{{1 ***********
- *  Copyright © 2015 "Martin Krischik" «krischik@users.sourceforge.net»
+ *  Copyright © 2015 … 2018 "Martin Krischik" «krischik@users.sourceforge.net»
  ***************************************************************************
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,10 +14,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see http://www.gnu.org/licenses/
  **********************************************************}}}1 **********/
-
-group = "com.krischik"
-version = "1.0.0"
-description = "Import KetFit and Withings exports into Google Fit — Android App"
 
 buildscript {
    repositories {
@@ -40,16 +36,24 @@ apply plugin: 'com.android.application'
 // apply plugin: 'android-apt'
 // apply plugin: 'kotlin-android'
 apply plugin: 'com.jakewharton.hugo'
-//apply plugin: 'com.google.gms.google-services'
 
 android {
-   compileSdkVersion Compile_Sdk_Version
-   buildToolsVersion Built_Tools_Version
-
-   packagingOptions {
-      exclude 'LICENSE.txt'
-   } // packagingOptions
-
+   compileSdkVersion 28
+   defaultConfig {
+      applicationId "com.krischik.fit_import"
+      minSdkVersion 24
+      targetSdkVersion 28
+      versionCode 10000
+      versionName "1.00.00"
+      testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+      javaCompileOptions {
+         annotationProcessorOptions {
+            arguments = [
+                "androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString()
+            ]
+         } // annotationProcessorOptions
+      } // javaCompileOptions
+   } // defaultConfig
    signingConfigs {
       debug {
          storeFile file (System.getenv ("KEY_STORE"))
@@ -64,28 +68,6 @@ android {
          keyPassword System.getenv ("KEY_KEYPASS")
       } // release
    } // signingConfigs
-
-   defaultConfig {
-      applicationId "com.krischik.fit_import"
-      minSdkVersion Min_Sdk_Version
-      targetSdkVersion Target_Sdk_Version
-      testApplicationId 'com.krischik.fit_import.test'
-      testInstrumentationRunner "android.test.InstrumentationTestRunner"
-      versionCode 10000
-      versionName "1.0.0"
-   }
-   buildTypes {
-      release {
-         signingConfig signingConfigs.release
-         minifyEnabled true
-         proguardFiles 'src/main/config/proguard-release.pro'
-      }
-      debug {
-         signingConfig signingConfigs.debug
-         minifyEnabled true
-         proguardFiles 'src/main/config/proguard-debug.pro'
-      }
-   }
    sourceSets {
       main {
          java.srcDirs += 'src/main/kotlin'
@@ -94,6 +76,19 @@ android {
          java.srcDirs += 'src/androidTest/kotlin'
       } // androidTest
    } // sourceSets
+   buildTypes {
+      release {
+         proguardFiles getDefaultProguardFile ('proguard-android.txt'), 'proguard-rules.pro'
+         debuggable false
+         signingConfig signingConfigs.release
+         minifyEnabled = true
+      } // release
+      debug {
+         debuggable true
+         signingConfig signingConfigs.debug
+      }
+   } // buildTypes
+   buildToolsVersion '29.0.2'
    compileOptions {
       sourceCompatibility JavaVersion.VERSION_1_8
       targetCompatibility JavaVersion.VERSION_1_8

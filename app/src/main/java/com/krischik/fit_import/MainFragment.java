@@ -44,7 +44,7 @@ public class MainFragment
    /**
     * <p> TAG as class name for logging </p>
     */
-   private final static String TAG = com.krischik.Log.getLogTag (MainFragment.class);
+   private static final String TAG = com.krischik.Log.getLogTag (MainFragment.class);
    /**
     * <p>Google FIT Model</p>
     */
@@ -98,7 +98,7 @@ public class MainFragment
     */
    @hugo.weaving.DebugLog
    @Override
-   public void doConnect (boolean connected)
+   public void doConnect (final boolean connected)
    {
       if (ketfitButton != null)
       {
@@ -162,7 +162,6 @@ public class MainFragment
       {
          // OK, some kind of file selector is missing here.
          // final java.io.File dir = activity.getExternalFilesDir (null);
-         @SuppressWarnings ("HardcodedFileSeparator")
          final java.io.File dir = new java.io.File (SD_Card_Path);
 
          //noinspection ConstantConditions
@@ -223,7 +222,6 @@ public class MainFragment
       {
          // OK, some kind of file selector is missing here.
          // final java.io.File dir = activity.getExternalFilesDir (null);
-         @SuppressWarnings ("HardcodedFileSeparator")
          final java.io.File dir = new java.io.File (SD_Card_Path);
 
          //noinspection ConstantConditions
@@ -262,7 +260,7 @@ public class MainFragment
       return;
    } // doWithingsButton
 
-   public void setGoogleFit (@NotNull GoogleFit googleFit)
+   public void setGoogleFit (@NotNull final GoogleFit googleFit)
    {
       // API 19, activate again at a later time
       // java.util.Objects.requireNonNull (googleFit);
